@@ -1,6 +1,6 @@
 # What do the things do?
 ## 1. Label class and labelInst.createLabel(Function)
-Instanciate a Label object to create a label (See goto(LabelInstance) for use). Then create a label with 'labelInst'.createLabel(Function).
+Instanciate a Label object to create a label (See [goto(LabelInstance)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript(ProtoType)#2-gotolabelinstance) for use). Then create a label with 'labelInst'.createLabel(Function).
 
 **SidGautam: let 'labelInst' = new Label()<br>**
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**'labelInst'.createLabel(click())**
