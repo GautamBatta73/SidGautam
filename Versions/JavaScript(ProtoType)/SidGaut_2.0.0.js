@@ -10,8 +10,6 @@ function though(x, callback) {
 		throw new Error(`x must be a boolean statement in though(x)`);
 	else if (typeof callback !== `function`)
 		throw new Error(`Body was not correctly defined in though(x)`);
-	else if (typeof callback() !== `boolean`)
-		throw new Error(`Body must return a boolean value in though(x)`);
 	else {
 		while (!x)
 			x = callback();
