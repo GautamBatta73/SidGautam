@@ -12,7 +12,7 @@ Instanciate a Label object to create a label (See [goto(LabelInstance)](https://
 **JavaScript: _N/A_**
 
 ## 2. goto(LabelInstance)
-It calls the block of code that was created using createLabel, with an instance of Label as the parameter.
+It calls the block of code that was created using createLabel(Function), with an instance of Label as the parameter.
 
 **SidGautam: 'labelInst'.createLabel(click())<br>**
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**goto('labelInst')**
