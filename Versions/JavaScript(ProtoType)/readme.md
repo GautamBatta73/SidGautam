@@ -57,4 +57,6 @@ It executes the code in 'Fuction' once, then continues until 'start' becomes 'en
 
 **SidGautam: until(click(), 0, 5, 1)**
 
-**JavaScript: let i = 0 do{click() i += 1} while(i < 5)**
+**JavaScript: let i = 0 <br>**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**do{**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**click() i += 1} while(i < 5)**
