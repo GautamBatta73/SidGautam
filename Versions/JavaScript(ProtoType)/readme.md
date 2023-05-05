@@ -51,3 +51,10 @@ It executes the code in 'Fuction', until 'start' becomes 'end', by incrementing 
 **SidGautam: until(0, 5, 1, click())**
 
 **JavaScript: for(let i = 0; i < 5; i += 1) {click()}**
+
+## 6. doUntil(start, end, increment)
+It executes the code in 'Fuction' once, then continues until 'start' becomes 'end', by incrementing 'start' by 'increment'. It is a basically a do{...}while, but a do{...}for.
+
+**SidGautam: until(click(), 0, 5, 1)**
+
+**JavaScript: let i = 0 do{click() i += 1} while(i < 5)**
