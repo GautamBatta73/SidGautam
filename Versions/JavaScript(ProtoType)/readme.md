@@ -8,7 +8,7 @@ _<script src="ht<span>tps://raw.githack.</span>com/GautamBatta73/SidGautam/main/
 <br>
 
 ## 1. Label class and labelInst.createLabel(Function)
-Instanciate a Label object to create a label (See [goto(LabelInstance)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript(ProtoType)#2-gotolabelinstance) for use). Then create a label with 'labelInst'.createLabel(Function).
+Instanciate a Label object to create a label (See [goto(LabelInstance)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript(ProtoType)#3-gotolabelinstance) for use). Then create a label with 'labelInst'.createLabel(Function).
 
 **SidGautam: let 'labelInst' = new Label()<br>**
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**'labelInst'.createLabel(click())**
@@ -16,7 +16,7 @@ Instanciate a Label object to create a label (See [goto(LabelInstance)](https://
 **JavaScript: _N/A_**
 
 ## 2. Label class and labelInst.createLabel(Function) **_Combined_**
-Instanciate a Label object and create a label (See [goto(LabelInstance)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript(ProtoType)#2-gotolabelinstance) for use) in one line, using the Label class' constructor.
+Instanciate a Label object and create a label (See [goto(LabelInstance)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript(ProtoType)#3-gotolabelinstance) for use) in one line, using the Label class' constructor.
 
 **SidGautam: let 'labelInst' = new Label(click())**
 
