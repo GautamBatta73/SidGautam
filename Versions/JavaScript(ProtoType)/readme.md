@@ -15,7 +15,14 @@ Instanciate a Label object to create a label (See [goto(LabelInstance)](https://
 
 **JavaScript: _N/A_**
 
-## 2. goto(LabelInstance)
+## 2. Label class and labelInst.createLabel(Function) **_Combined_**
+Instanciate a Label object and create a label (See [goto(LabelInstance)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript(ProtoType)#2-gotolabelinstance) for use) in one line, using the Label class' constructor.
+
+**SidGautam: let 'labelInst' = new Label(click())**
+
+**JavaScript: _N/A_**
+
+## 3. goto(LabelInstance)
 It calls the block of code that was created using createLabel(Function), with an instance of Label as the parameter.
 
 **SidGautam: 'labelInst'.createLabel(click())<br>**
@@ -23,7 +30,7 @@ It calls the block of code that was created using createLabel(Function), with an
 
 **JavaScript: _N/A_**
 
-## 3. though(bool, Function)
+## 4. though(bool, Function)
 It executes the code in 'Fuction', while 'bool' is false. It is a whileNot. **It must return a boolean, else it will crash your web page.**
 
 **SidGautam: though(false, () => {<br>**
@@ -36,7 +43,7 @@ It executes the code in 'Fuction', while 'bool' is false. It is a whileNot. **It
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**x = false**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**}**
 
-## 4. doThough(Function, bool)
+## 5. doThough(Function, bool)
 It executes the code in 'Fuction' once, then continues while 'bool' is false. It is a do{...}whileNot. **It must return a boolean, else it will crash your web page.**
 
 **SidGautam: doThough(() => {<br>**
@@ -49,14 +56,14 @@ It executes the code in 'Fuction' once, then continues while 'bool' is false. It
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**x = false**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**} while(x)**
 
-## 5. until(start, end, increment, Function)
+## 6. until(start, end, increment, Function)
 It executes the code in 'Fuction', until 'start' becomes 'end', by incrementing 'start' by 'increment'. It is a basically a for.
 
 **SidGautam: until(0, 5, 1, click())**
 
 **JavaScript: for(let i = 0; i < 5; i += 1) {click()}**
 
-## 6. doUntil(start, end, increment)
+## 7. doUntil(start, end, increment)
 It executes the code in 'Fuction' once, then continues until 'start' becomes 'end', by incrementing 'start' by 'increment'. It is a basically a do{...}while, but a do{...}for.
 
 **SidGautam: until(click(), 0, 5, 1)**
@@ -66,3 +73,49 @@ It executes the code in 'Fuction' once, then continues until 'start' becomes 'en
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**click()**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**i += 1**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**} while(i < 5)**
+
+## 8. repeat(number, Function)
+It executes the code in 'Fuction' a certain amount of times (determined by 'number'). It is like a for.
+
+**SidGautam: repeat(10, click())**
+
+**JavaScript: for(let i = 0; i < 10; i += 1) {click()}**
+
+## 9. showln(x)
+It prints the value of 'x', regardless of what it is, to the web-page in an existing \<p>. Then it creates a new \<p> to write to. If no parameter is put (showln()), it will add a line-break (\<br>). It works like System.out.println(x) in Java.
+
+**SidGautam: showln("Hello World!")**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**showln()**
+
+**JavaScript: _N/A_**
+  
+## 10. show(x)
+It appends the value of 'x', regardless of what it is, to the web-page in an existing \<p>. It works like System.out.print(x) in Java.
+
+**SidGautam: show("Hello ")**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**show("World!")**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**showln()**
+
+**JavaScript: _N/A_**
+
+## 11. showErr(x)
+Same as [showln(x)](https://github.com/GautamBatta73/SidGautam/edit/main/Versions/JavaScript(ProtoType)#9-showlnx), except the printed \<p> is red. **You must have a value in 'x'!**
+
+**SidGautam: showErr("Error!")**
+
+**JavaScript: _N/A_**
+
+## 12. print(x)
+Prints value of 'x' in the console. It is console.log(x).
+
+**SidGautam: print("Hello World!")**
+
+**JavaScript: console.log("Hello World!")**
+
+## 12. printErr(x)
+Prints value of 'x' in the console, as an error. It is console.error(x).
+
+**SidGautam: printErr("Error!")**
+
+**JavaScript: console.error(Error!")**
+
