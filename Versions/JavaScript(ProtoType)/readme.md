@@ -8,7 +8,7 @@ _<script src="ht<span>tps://raw.githack.</span>com/GautamBatta73/SidGautam/main/
 <br>
 
 ## 1. Label class and labelInst.createLabel(Function)
-Instanciate a Label object to create a label (See [goto(LabelInstance)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript(ProtoType)#3-gotolabelinstance) for use). Then create a label with 'labelInst'.createLabel(Function).
+Instantiate a Label object to create a label (See [goto(LabelInstance)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript(ProtoType)#3-gotolabelinstance) for use). Then create a label with 'labelInst'.createLabel(Function).
 
 **SidGautam: let 'labelInst' = new Label()<br>**
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**'labelInst'.createLabel(click())**
@@ -16,7 +16,7 @@ Instanciate a Label object to create a label (See [goto(LabelInstance)](https://
 **JavaScript: _N/A_**
 
 ## 2. Label class and labelInst.createLabel(Function) **_Combined_**
-Instanciate a Label object and create a label (See [goto(LabelInstance)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript(ProtoType)#3-gotolabelinstance) for use) in one line, using the Label class' constructor.
+Instantiate a Label object and create a label (See [goto(LabelInstance)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript(ProtoType)#3-gotolabelinstance) for use) in one line, using the Label class' constructor.
 
 **SidGautam: let 'labelInst' = new Label(click())**
 
@@ -31,7 +31,7 @@ It calls the block of code that was created using createLabel(Function), with an
 **JavaScript: _N/A_**
 
 ## 4. though(bool, Function)
-It executes the code in 'Fuction', while 'bool' is false. It is a whileNot. **It must return a boolean, else it will crash your web page.**
+It executes the code in 'Function', while 'bool' is false. It is a whileNot. **It must return a boolean, else it will crash your web page.**
 
 **SidGautam: though(false, () => {<br>**
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**click()**<br>
@@ -44,7 +44,7 @@ It executes the code in 'Fuction', while 'bool' is false. It is a whileNot. **It
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**}**
 
 ## 5. doThough(Function, bool)
-It executes the code in 'Fuction' once, then continues while 'bool' is false. It is a do{...}whileNot. **It must return a boolean, else it will crash your web page.**
+It executes the code in 'Function' once, then continues while 'bool' is false. It is a do{...}whileNot. **It must return a boolean, else it will crash your web page.**
 
 **SidGautam: doThough(() => {<br>**
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**click()**<br>
@@ -57,14 +57,14 @@ It executes the code in 'Fuction' once, then continues while 'bool' is false. It
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**} while(x)**
 
 ## 6. until(start, end, increment, Function)
-It executes the code in 'Fuction', until 'start' becomes 'end', by incrementing 'start' by 'increment'. It is a basically a for.
+It executes the code in 'Fuction', until 'start' becomes 'end', by incrementing 'start' by 'increment'. It is basically a for.
 
 **SidGautam: until(0, 5, 1, click())**
 
 **JavaScript: for(let i = 0; i < 5; i += 1) {click()}**
 
 ## 7. doUntil(start, end, increment)
-It executes the code in 'Fuction' once, then continues until 'start' becomes 'end', by incrementing 'start' by 'increment'. It is a basically a do{...}while, but a do{...}for.
+It executes the code in 'Function' once, then continues until 'start' becomes 'end', by incrementing 'start' by 'increment'. It is basically a do{...}while, but a do{...}for.
 
 **SidGautam: until(click(), 0, 5, 1)**
 
@@ -75,7 +75,7 @@ It executes the code in 'Fuction' once, then continues until 'start' becomes 'en
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**} while(i < 5)**
 
 ## 8. repeat(number, Function)
-It executes the code in 'Fuction' a certain amount of times (determined by 'number'). It is like a for.
+It executes the code in 'Function' a certain amount of times (determined by 'number'). It is like a for.
 
 **SidGautam: repeat(10, click())**
 
@@ -120,7 +120,7 @@ Prints value of 'x' in the console, as an error. It is console.error(x).
 **JavaScript: console.error(Error!")**
 
 ## 15. getEl(element, index)
-This function allows for the manipulation of the styles of 'element'. 'element' is a string containg the name of a HTML element; 'index' (starts from 0) is an optional parameter if there are multiple of the same element, and a specific one is to be selected. If there are multiple of the same element, and no index is put, it will select all the same elements. It is like document.querySelector(element) and document.querySelectorAll(element).
+This function allows for the manipulation of the styles of 'element'. 'element' is a string containing the name of an HTML element; 'index' (starts from 0) is an optional parameter if there are multiple of the same element, and a specific one is to be selected. If there are multiple of the same element, and no index is put, it will select all the same elements. It is like document.querySelector(element) and document.querySelectorAll(element).
 
 **SidGautam: getEL("p") (All \<p> elements)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEL("p", 0) (The first \<p> element)**
