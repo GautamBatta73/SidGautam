@@ -122,7 +122,7 @@ Prints value of 'x' in the console, as an error. It is console.error(x).
 ## 15. getEl(element, index)
 This function allows for the manipulation of the styles of 'element'. 'element' is a string containing the name of an HTML element; 'index' (starts from 0) is an optional parameter if there are multiple of the same element, and a specific one is to be selected. If there are multiple of the same element, and no index is put, it will select all the same elements. It is like document.querySelector(element) and document.querySelectorAll(element).
 
-**SidGautam: getEL("p") (All \<p> elements)**<br>
+**SidGautam: getEL("p") (All \<p> elements)**<br> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEL("p", 0) (The first \<p> element)**
 
 **JavaScript: document.querySelectorAll("p") (All \<p> elements)**<br>
