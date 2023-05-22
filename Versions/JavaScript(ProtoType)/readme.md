@@ -112,10 +112,25 @@ Prints value of 'x' in the console. It is console.log(x).
 
 **JavaScript: console.log("Hello World!")**
 
-## 12. printErr(x)
+## 13. printErr(x)
 Prints value of 'x' in the console, as an error. It is console.error(x).
 
 **SidGautam: printErr("Error!")**
 
 **JavaScript: console.error(Error!")**
 
+## 15. getEl(element, index)
+This function allows for the manipulation of the styles of 'element'. 'element' is a string containg the name of a HTML element; 'index' (starts from 0) is an optional parameter if there are multiple of the same element, and a specific one is to be selected. If there are multiple of the same element, and no index is put, it will select all the same elements. It is like document.querySelector(element) and document.querySelectorAll(element).
+
+**SidGautam: getEL("p") (All \<p> elements)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEL("p", 0) (The first \<p> element)**
+
+**JavaScript: document.querySelectorAll("p") (All \<p> elements)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p") (The first \<p> element)**
+
+## 15. element.css(property, value)
+'element' is a selected element. This function allows for the manipulation of the styles of 'element'. 'property' is the name of the CSS property; 'value' is the value of the CSS property.
+
+**SidGautam: getEL("p", 0).css("color", "black")**
+
+**JavaScript: document.querySelector("p").style.color = "black"**
