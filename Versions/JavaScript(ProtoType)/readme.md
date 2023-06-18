@@ -166,5 +166,5 @@ This function allows for the creation and appending of an HTML element. 'element
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Hi," \<br> "My Name is " \<span>Gautam\</span> )**
 
 **JavaScript: document.querySelector("p").innerText = "Hi, My Name is Gautam" (Sets body of \<p> element to "Hi, My Name is Gautam")**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("main").innerHTML = "Hi, \<br> My Name is \<span>Gautam\</span>" ( Sets body of \<p> element to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p").innerHTML = "Hi, \<br> My Name is \<span>Gautam\</span>" ( Sets body of \<p> element to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Hi," \<br> "My Name is " \<span>Gautam\</span> )**
