@@ -122,8 +122,8 @@ Prints value of 'x' in the console, as an error. It is console.error(x).
 ## 14. getEl(element, index)
 This function allows for the selection of an HTML element. 'element' is a string containing the name of an HTML element; 'index' (starts from 0) is an optional parameter if there are multiple of the same element, and a specific one is to be selected. If there are multiple of the same element, and no index is put, it will select all the same elements. It is like document.querySelector(element) and document.querySelectorAll(element).
 
-**SidGautam: getEL("p") (All \<p> elements)**<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEL("p", 0) (The first \<p> element)**
+**SidGautam: getEl("p") (All \<p> elements)**<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEl("p", 0) (The first \<p> element)**
 
 **JavaScript: document.querySelectorAll("p") (All \<p> elements)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p") (The first \<p> element)**
@@ -131,21 +131,21 @@ This function allows for the selection of an HTML element. 'element' is a string
 ## 15. element.css(property, value)
 'element' is a selected element. This function allows for the manipulation of the styles of 'element'. 'property' is the name of the CSS property; 'value' is the value of the CSS property. **Can be applied to multiple of the same element by using the same syntax.**
 
-**SidGautam: getEL("p", 0).css("color", "black") _OR_ getEL("p").css("color", "black")**
+**SidGautam: getEl("p", 0).css("color", "black") _OR_ getEl("p").css("color", "black")**
 
 **JavaScript: document.querySelector("p").style.color = "black"  _OR_ _N/A_**
 
 ## 16. element.setVal(value)
 'element' is a selected input element (\<input>). This function allows the value of an input element to be changed to 'value'. It is like document.querySelector("input").value = "\[stuff]".
 
-**SidGautam: getEL("input", 0).setVal("Hello")**
+**SidGautam: getEl("input", 0).setVal("Hello")**
 
 **JavaScript: document.querySelector(input).value = "Hello"**
 
 ## 17. getVal(element)
 'element' is a selected input element (\<input>). This function returns the value of an input element. It is like document.querySelector("input").value.
 
-**SidGautam: getVal( getEL("input", 0) )**
+**SidGautam: getVal( getEl("input", 0) )**
 
 **JavaScript: document.querySelector(input).value**
 
@@ -161,8 +161,8 @@ This function allows for the creation and appending of an HTML element. 'element
 ## 19. element.setText(text, html)
 'element' is a selected HTML element that can have a body of text (\<p>, \<span>, \<div>, etc.). This function allows the text within an HTML element to be changed to 'text'. 'html' is an optional boolean parameter, which is false by default, that asks if 'text' is plain text or includes HTML: ( "Hi, \<br> My Name is \<span>Gautam\</span>" ). It is like document.querySelector("p").textContent = "\[stuff]" or document.querySelector("p").innerHTML = "\[stuff]".
 
-**SidGautam: getEL("p", 0).setText("Hi, My Name is Gautam") (Sets body of \<p> element to "Hi, My Name is Gautam")**<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEL("p").setText("Hi, \<br> My Name is \<span>Gautam\</span>", true) ( Sets body of \<p> element to<br>
+**SidGautam: getEl("p", 0).setText("Hi, My Name is Gautam") (Sets body of \<p> element to "Hi, My Name is Gautam")**<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEl("p").setText("Hi, \<br> My Name is \<span>Gautam\</span>", true) ( Sets body of \<p> element to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Hi," \<br> "My Name is " \<span>Gautam\</span> )**
 
 **JavaScript: document.querySelector("p").innerText = "Hi, My Name is Gautam" (Sets body of \<p> element to "Hi, My Name is Gautam")**<br>
