@@ -122,11 +122,11 @@ Prints value of 'x' in the console, as an error. It is console.error(x).
 ## 14. getEl(element, index)
 This function allows for the selection of an HTML element. 'element' is a string containing the name of an HTML element; 'index' (starts from 0) is an optional parameter if there are multiple of the same element, and a specific one is to be selected. If there are multiple of the same element, and no index is put, it will select all the same elements. It is like document.querySelector(element) and document.querySelectorAll(element).
 
-**SidGautam: getEl("p") (All \<p> elements)**<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEl("p", 0) (The first \<p> element)**
+**SidGautam: getEl("p")&nbsp;&nbsp;&nbsp;_Returns All \<p> elements_**<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEl("p", 0)&nbsp;&nbsp;&nbsp;_Returns only the first \<p> element_**
 
-**JavaScript: document.querySelectorAll("p") (All \<p> elements)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p") (The first \<p> element)**
+**JavaScript: document.querySelectorAll("p")&nbsp;&nbsp;&nbsp;_Returns All \<p> elements_**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p")&nbsp;&nbsp;&nbsp;_Returns the first \<p> element_**
 
 ## 15. element.css(property, value)
 'element' is a selected element. This function allows for the manipulation of the styles of 'element'. 'property' is the name of the CSS property; 'value' is the value of the CSS property.
@@ -152,62 +152,76 @@ This function allows for the selection of an HTML element. 'element' is a string
 ## 18. addEl(element, parent)
 This function allows for the creation and appending of an HTML element. 'element' is a string containing the name of an HTML element; 'parent' is an optional parameter for the parent of where you want the element to be appended to, and it is also a string name of an HTML element. If 'parent' is not specified it will simply return the element without appending it to the DOM. It always returns the created element. It is like document.createElement(element) and document.createElement(parent).appendChild( document.createElement(element) ).
 
-**SidGautam: addEL("p") (Returns new \<p> element)**<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**addEL("p", "main") (Appends new \<p> to \<main> and returns new \<p> element)**
+**SidGautam: addEL("p")&nbsp;&nbsp;&nbsp;_Returns new \<p> element_**<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**addEL("p", "main")&nbsp;&nbsp;&nbsp;_Appends new \<p> to \<main> and returns new \<p> element_**
 
-**JavaScript: document.createElement("p") (Returns new \<p> element)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.createElement("main").appendChild( document.createElement("p") ) (Appends new \<p> to \<main>)**
+**JavaScript: document.createElement("p")&nbsp;&nbsp;&nbsp;_Returns new \<p> element_**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.createElement("main").appendChild( document.createElement("p") )&nbsp;&nbsp;&nbsp;_Appends new \<p> to \<main>_**
 
 ## 19. element.setText(text, html)
 'element' is a selected HTML element that can have a body of text (\<p>, \<span>, \<div>, etc.). This function allows the text within an HTML element to be changed to 'text'. 'html' is an optional boolean parameter, which is false by default, that asks if 'text' is plain text or includes HTML: ( "Hi, \<br> My Name is \<span>Gautam\</span>" ). It is like document.querySelector("p").textContent = "\[stuff]" or document.querySelector("p").innerHTML = "\[stuff]".
 
-**SidGautam: getEl("p", 0).setText("Hi, My Name is Gautam") (Sets body of \<p> element to "Hi, My Name is Gautam")**<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEl("p").setText("Hi, \<br> My Name is \<span>Gautam\</span>", true) ( Sets body of \<p> element to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Hi," \<br> "My Name is " \<span>Gautam\</span> )**
+**SidGautam: getEl("p", 0).setText("Hi, My Name is Gautam")&nbsp;&nbsp;&nbsp;_Sets body of \<p> element to "Hi, My Name is Gautam"_**<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEl("p").setText("Hi, \<br> My Name is \<span>Gautam\</span>", true)&nbsp;&nbsp;&nbsp;_Sets body of \<p> element<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to "Hi," \<br> "My Name is " \<span>Gautam\</span>_**
 
-**JavaScript: document.querySelector("p").innerText = "Hi, My Name is Gautam" (Sets body of \<p> element to "Hi, My Name is Gautam")**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p").innerHTML = "Hi, \<br> My Name is \<span>Gautam\</span>" ( Sets body of \<p> element to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Hi," \<br> "My Name is " \<span>Gautam\</span> )**
+**JavaScript: document.querySelector("p").innerText = "Hi, My Name is Gautam"&nbsp;&nbsp;&nbsp;_Sets body of \<p> element to "Hi, My Name is Gautam"_**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p").innerHTML = "Hi, \<br> My Name is \<span>Gautam\</span>"&nbsp;&nbsp;&nbsp;_Sets body of \<p> element<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to "Hi," \<br> "My Name is " \<span>Gautam\</span>_**
 
 ## 20. element.appendText(text, html)
 'element' is a selected HTML element that can have a body of text (\<p>, \<span>, \<div>, etc.). This function allows the text within an HTML element to have 'text' appeded to it. 'html' is an optional boolean parameter, which is false by default, that asks if 'text' is plain text or includes HTML: ( "Hi, \<br> My Name is \<span>Gautam\</span>" ). It is like document.querySelector("p").textContent += "\[stuff]" or document.querySelector("p").innerHTML += "\[stuff]".
 
-**SidGautam: getEl("p", 0).appendText("My Name is Gautam") (Adds "My Name is Gautam" to the body of \<p> element)**<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEl("p").appendText("\<br> My Name is \<span>Gautam\</span>", true) (Adds<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br> "My Name is " \<span>Gautam\</span> to the body of \<p> element)**
+**SidGautam: getEl("p", 0).appendText("My Name is Gautam")&nbsp;&nbsp;&nbsp;_Adds "My Name is Gautam" to the body of \<p> element_**<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEl("p").appendText("\<br> My Name is \<span>Gautam\</span>", true)&nbsp;&nbsp;&nbsp;_Adds<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br> "My Name is " \<span>Gautam\</span> to the body of \<p> element_**
 
-**JavaScript: document.querySelector("p").innerText += "My Name is Gautam" (Adds "My Name is Gautam" to the body of \<p> element)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p").innerHTML += "\<br> My Name is \<span>Gautam\</span>" (Adds<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br> "My Name is " \<span>Gautam\</span> to the body of \<p> element)**
+**JavaScript: document.querySelector("p").innerText += "My Name is Gautam"&nbsp;&nbsp;&nbsp;_Adds "My Name is Gautam" to the body of \<p> element_**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p").innerHTML += "\<br> My Name is \<span>Gautam\</span>"&nbsp;&nbsp;&nbsp;_Adds<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br> "My Name is " \<span>Gautam\</span> to the body of \<p> element_**
 
-## 21. element(s).delEl()
+## 21. getText(element, html)
+'element' is a selected HTML element that can have a body of text (\<p>, \<span>, \<div>, etc.). This function returns the text within an HTML element. 'html' is an optional boolean parameter, which is false by default, that asks if the plain text should be returned, or if the text should be returned as HTML: ( "Hi, \<br> My Name is \<span>Gautam\</span>" ). It is like document.querySelector("p").textContent or document.querySelector("p").innerHTML.
+
+**SidGautam: getText( getEl("p", 0) )&nbsp;&nbsp;&nbsp;_Returns the body of \<p> element: "Hi, My Name is Gautam"_**<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getText( getEl("p", 0), true )&nbsp;&nbsp;&nbsp;_Returns the body of \<p> element as HTML: "Hi," \<br> "My Name is " \<span>Gautam\</span>_**
+
+**JavaScript: document.querySelector("p").innerText&nbsp;&nbsp;&nbsp;_Returns the body of \<p> element: "Hi, My Name is Gautam"_**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p").innerHTML&nbsp;&nbsp;&nbsp;_Returns the body of \<p> element as HTML: "Hi," \<br> "My Name is "<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<span>Gautam\</span>_**<be>
+
+## 22. element(s).delEl()
 'element(s)' is a selected element (or multiple). This function allows for the removal of 'element(s)'. It is like document.querySelector("p").remove() or document.querySelectorAll("p").forEach((el) => el.remove()).
 
 **SidGautam: getEl("p", 0).delEl() _OR_ getEl("p").delEl()**
 
 **JavaScript: document.querySelector("p").remove()  _OR_ document.querySelectorAll("p").forEach((el) => el.remove())**
 
-## 22. getText(element, html)
-'element' is a selected HTML element that can have a body of text (\<p>, \<span>, \<div>, etc.). This function returns the text within an HTML element. 'html' is an optional boolean parameter, which is false by default, that asks if the plain text should be returned, or if the text should be returned as HTML: ( "Hi, \<br> My Name is \<span>Gautam\</span>" ). It is like document.querySelector("p").textContent or document.querySelector("p").innerHTML.
-
-**SidGautam: getText( getEl("p", 0) ) (Returns the body of \<p> element: "Hi, My Name is Gautam")**<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getText( getEl("p", 0), true ) (Returns the body of \<p> element as HTML: "Hi," \<br> "My Name is " \<span>Gautam\</span>)**<br>
-
-**JavaScript: document.querySelector("p").innerText (Returns the body of \<p> element: "Hi, My Name is Gautam")**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p").innerHTML (Returns the body of \<p> element as HTML: "Hi," \<br> "My Name is "<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<span>Gautam\</span>)**<be>
-
 ## 23. element(s).setClass(class)
-'element(s)' is a selected element (or multiple). This function adds 'class' as a class on 'element(s)'. It is like document.querySelector("p").className = 'class' or document.querySelectorAll("p").forEach((el) => className = 'class1').
+'element(s)' is a selected element (or multiple). This function adds 'class' as a class on 'element(s)'. It is like document.querySelector("p").className = class or document.querySelectorAll("p").forEach((el) => className = class1).
 
 **SidGautam: getEl("p", 0).setClass("class1") _OR_ getEl("p")..setClass("class1")**
 
-**JavaScript: document.querySelector("p").className = 'class1' _OR_ document.querySelectorAll("p").forEach((el) => className = 'class1')**
+**JavaScript: document.querySelector("p").className = "class1" _OR_ document.querySelectorAll("p").forEach((el) => className = "class1")**
 
 ## 24. getClass( element(s) )
 'element(s)' is a selected element (or multiple). This function returns the class assigned to 'element(s)'. If one element is selected it returns the class as a string; If there are multiple elements selected, it returns the classes as an array of strings. It is like document.querySelector("p").className.
 
-**SidGautam: getClass( getEl("p", 0) ) Returns "class1"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getClass( getEl("p") ) Returns \["class1", "class2", "class3", ...]**
+**SidGautam: getClass( getEl("p", 0) )&nbsp;&nbsp;&nbsp;_Returns "class1"_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getClass( getEl("p") )&nbsp;&nbsp;&nbsp;_Returns \["class1", "class2", "class3", ...]_**
 
-**JavaScript: document.querySelector("p").className**
+**JavaScript: document.querySelector("p").className&nbsp;&nbsp;&nbsp;_Returns "class1"_**
+
+## 25. element.setID(idName)
+'element' is a selected element. This function adds 'idName' as an id on 'element'. It is like document.querySelector("p").id = idName.
+
+**SidGautam: getEl("p", 0).setID("main")**
+
+**JavaScript: document.querySelector("p").id = "main"**
+
+## 26. getID(element)
+'element' is a selected element. This function returns the id assigned to 'element'. It is like document.querySelector("p").id.
+
+**SidGautam: getID( getEl("p", 0) )&nbsp;&nbsp;&nbsp;_Returns "main"_**
+
+**JavaScript: document.querySelector("p").id&nbsp;&nbsp;&nbsp;_Returns "main"_**
