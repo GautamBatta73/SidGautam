@@ -158,6 +158,13 @@ This function allows for the creation and appending of an HTML element. 'element
 **JavaScript: document.createElement("p")&nbsp;&nbsp;&nbsp;_Returns new \<p> element_**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.createElement("main").appendChild( document.createElement("p") )&nbsp;&nbsp;&nbsp;_Appends new \<p> to \<main>_**
 
+## 22. element(s).delEl()
+'element(s)' is a selected element (or multiple). This function allows for the removal of 'element(s)'. It is like document.querySelector("p").remove() or document.querySelectorAll("p").forEach((el) => el.remove()).
+
+**SidGautam: getEl("p", 0).delEl() _OR_ getEl("p").delEl()**
+
+**JavaScript: document.querySelector("p").remove()  _OR_ document.querySelectorAll("p").forEach((el) => el.remove())**
+
 ## 19. element.setText(text, html)
 'element' is a selected HTML element that can have a body of text (\<p>, \<span>, \<div>, etc.). This function allows the text within an HTML element to be changed to 'text'. 'html' is an optional boolean parameter, which is false by default, that asks if 'text' is plain text or includes HTML: ( "Hi, \<br> My Name is \<span>Gautam\</span>" ). It is like document.querySelector("p").textContent = "\[stuff]" or document.querySelector("p").innerHTML = "\[stuff]".
 
@@ -189,13 +196,6 @@ This function allows for the creation and appending of an HTML element. 'element
 **JavaScript: document.querySelector("p").innerText&nbsp;&nbsp;&nbsp;_Returns the body of \<p> element: "Hi, My Name is Gautam"_**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p").innerHTML&nbsp;&nbsp;&nbsp;_Returns the body of \<p> element as HTML: "Hi," \<br> "My Name is "<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<span>Gautam\</span>_**<be>
-
-## 22. element(s).delEl()
-'element(s)' is a selected element (or multiple). This function allows for the removal of 'element(s)'. It is like document.querySelector("p").remove() or document.querySelectorAll("p").forEach((el) => el.remove()).
-
-**SidGautam: getEl("p", 0).delEl() _OR_ getEl("p").delEl()**
-
-**JavaScript: document.querySelector("p").remove()  _OR_ document.querySelectorAll("p").forEach((el) => el.remove())**
 
 ## 23. element(s).setClass(class)
 'element(s)' is a selected element (or multiple). This function adds 'class' as a class on 'element(s)'. It is like document.querySelector("p").className = class or document.querySelectorAll("p").forEach((el) => className = class1).
