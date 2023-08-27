@@ -365,7 +365,7 @@ NodeList.prototype.notOn = function(listener, func, capture) {
 	});
 
 	if (!(allValid))
-		throw new Error(`\'Element(s)\' must be a valid set of EventTarget elements, for Element(s).whenOn(listener, function, capture).`);
+		throw new Error(`\'Element(s)\' must be a valid set of EventTarget elements, for Element(s).notnOn(listener, function, capture).`);
 	else if (typeof listener !== `string`)
 		throw new Error(`\'listener\' must be a string for Element.notOn(listener, function).`);
 	else if (typeof func !== `function`)
