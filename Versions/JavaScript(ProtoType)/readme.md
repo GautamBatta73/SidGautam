@@ -128,12 +128,12 @@ This function allows for the selection of an HTML element. 'element' is a string
 **JavaScript: document.querySelectorAll("p")&nbsp;&nbsp;&nbsp;_Returns All \<p> elements_**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p")&nbsp;&nbsp;&nbsp;_Returns the first \<p> element_**
 
-## 15. element.css(property, value)
-'element' is a selected element. This function allows for the manipulation of the styles of 'element'. 'property' is the name of the CSS property; 'value' is the value of the CSS property.
+## 15. element(s).css(property, value)
+'element(s)' is a selected element (or multiple). This function allows for the manipulation of the styles of 'element(s)'. 'property' is the name of the CSS property; 'value' is the value of the CSS property.
 
-**SidGautam: getEl("p", 0).css("color", "black")
+**SidGautam: getEl("p", 0).css("color", "black") _OR_ getEl("p").css("color", "black")**
 
-**JavaScript: document.querySelector("p").style.color = "black"
+**JavaScript: document.querySelector("p").style.color = "black" _OR_ document.querySelectorAll("p").forEach((el) => el.style.color = "black")**
 
 ## 16. element.setVal(value)
 'element' is a selected input element (\<input>). This function allows the value of an input element to be changed to 'value'. It is like document.querySelector("input").value = "\[stuff]".
@@ -202,7 +202,7 @@ This function allows for the creation and appending of an HTML element. 'element
 
 **SidGautam: getEl("p", 0).setClass("class1") _OR_ getEl("p")..setClass("class1")**
 
-**JavaScript: document.querySelector("p").className = "class1" _OR_ document.querySelectorAll("p").forEach((el) => className = "class1")**
+**JavaScript: document.querySelector("p").className = "class1" _OR_ document.querySelectorAll("p").forEach((el) => el.className = "class1")**
 
 ## 24. getClass( element(s) )
 'element(s)' is a selected element (or multiple). This function returns the class assigned to 'element(s)'. If one element is selected it returns the class as a string; If there are multiple elements selected, it returns the classes as an array of strings. It is like document.querySelector("p").className.
@@ -225,3 +225,61 @@ This function allows for the creation and appending of an HTML element. 'element
 **SidGautam: getID( getEl("p", 0) )&nbsp;&nbsp;&nbsp;_Returns "main"_**
 
 **JavaScript: document.querySelector("p").id&nbsp;&nbsp;&nbsp;_Returns "main"_**
+
+## 27. element(s).whenOn(listener, function, capture)
+'element(s)' is a selected element (or multiple). This adds an event handler to 'element(s)'. 'listener' is a string which is the name for an event listener (click, focus, blur, etc.), and when the event occurs, the code in 'function' is executed. 'capture' is an optional boolean value that is false by default, and it asks if the handler should use capture or not. It is like document.querySelector("p").addEventListener(listener, function, capture).
+
+**SidGautam: getEl("p", 0).whenOn( "click", (e) => e.currentTarget.delEl() )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getEl("p").whenOn( "mouseover", (e) => e.currentTarget.css("color", "red"), true )**
+
+**JavaScript: document.querySelector("p").addEventListener( "click", (e) => e.currentTarget.remove(), false ) _OR_ _N/A_**
+
+## 28. element(s).notOn(listener, function, capture)
+'element(s)' is a selected element (or multiple). This removes an event handler from 'element(s)'. 'listener' is a string which is the name for the originally added event listener (click, focus, blur, etc.). 'function' is the original callback function used as the event handler (It must be a named function, in both the element(s).whenOn() and here. See [Anonymous functions do not work with remove event listener](https://www.semicolonandsons.com/code_diary/javascript/anonymous-functions-do-not-work-with-remove-event-listener)). 'capture' must be the same boolean value that was originally set. It is like document.querySelector("p").removeEventListener(listener, function, capture).
+
+**SidGautam: getEl("p", 0).notOn("click", deleteEl)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getEl("p").notOn("mouseover", deleteEl, true)**
+
+**JavaScript: document.querySelector("p").removeEventListener("click", deleteEl, false) _OR_ _N/A_**
+
+## 29. unless(bool, body, elseBody)
+'bool' is a boolean statement, 'body' is a function, and 'elseBody' is an optional function. It executes the code in 'body', if 'bool' is false; Then, If 'bool' is true and 'elseBody' is defined, It executes the code in 'elseBody'. It is an ifNot.
+
+**SidGautam: unless(false, () => {<br>**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**print("executed")**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**}, () => {**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**print("not executed")**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**})**<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**unless(false, () => {**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**print("executed again")**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**})**
+
+**JavaScript: if(x) {<br>**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**console.log("executed")**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**} else**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**console.log("not executed")**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**}**<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**if(x) {**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**console.log("executed again")**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**}**
+
+## 30. dont()
+_DON'T EXECUTE THIS FUNCTION!_
+
+**SidGautam: dont()**
+
+**JavaScript: _N/A_**
+
+## 31. DoNot()
+DoNot() is a function, which stands for "Do Nothing". It does nothing.
+
+**SidGautam: DoNot()**
+
+**JavaScript: _N/A_**
+
+## 32. delay(secs, function)
+'secs' is a number. It executes the code in 'function', after 'secs' seconds. It returns a "delayID", which can be used to remove the delayed function from the queue (See **_Under Developement_**). It is like setTimeout( () => console.log("hi"), 5000 ).
+
+**SidGautam: delay(2, click())**
+
+**JavaScript: setTimeout(click(), 2000)&nbsp;&nbsp;&nbsp;_setTimeout uses milliseconds instead of seconds_**
