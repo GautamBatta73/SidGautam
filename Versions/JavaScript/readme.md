@@ -295,7 +295,7 @@ table() is a function, which summons a magical table. The table has an input fie
 **JavaScript: _N/A_**
 
 ## 34. delay(secs, function)
-'secs' is a number. It executes the code in 'function', after 'secs' seconds. It returns a "delayID", which can be used to remove the delayed function from the queue (See [removeDelay(delayID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#35-removeDelay(delayID))). It is like setTimeout(function, secs).
+'secs' is a number. It executes the code in 'function', after 'secs' seconds. It returns a "delayID", which can be used to remove the delayed function from the queue (See [removeDelay(delayID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#35-removeDelaydelayID)). It is like setTimeout(function, secs).
 
 **SidGautam: delay(2, click())**
 
