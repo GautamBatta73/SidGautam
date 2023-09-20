@@ -8,7 +8,7 @@ _<script src="ht<span>tps://raw.githack.</span>com/GautamBatta73/SidGautam/main/
 <br>
 
 ## 1. Label class and labelInst.createLabel(Function)
-Instantiate a Label object to create a label (See [goto(LabelInstance)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript(ProtoType)#3-gotolabelinstance) for use). Then create a label with 'labelInst'.createLabel(Function).
+Instantiate a Label object to create a label (See [goto(LabelInstance)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#3-gotolabelinstance) for use). Then create a label with 'labelInst'.createLabel(Function).
 
 **SidGautam: let 'labelInst' = new Label()<br>**
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**'labelInst'.createLabel(click())**
@@ -16,7 +16,7 @@ Instantiate a Label object to create a label (See [goto(LabelInstance)](https://
 **JavaScript: _N/A_**
 
 ## 2. Label class and labelInst.createLabel(Function) **_Combined_**
-Instantiate a Label object and create a label (See [goto(LabelInstance)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript(ProtoType)#3-gotolabelinstance) for use) in one line, using the Label class' constructor.
+Instantiate a Label object and create a label (See [goto(LabelInstance)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#3-gotolabelinstance) for use) in one line, using the Label class' constructor.
 
 **SidGautam: let 'labelInst' = new Label(click())**
 
@@ -99,7 +99,7 @@ It appends the value of 'x', regardless of what it is, to the web-page in an exi
 **JavaScript: _N/A_**
 
 ## 11. showErr(x)
-Same as [showln(x)](https://github.com/GautamBatta73/SidGautam/edit/main/Versions/JavaScript(ProtoType)#9-showlnx), except the printed \<p> is red. **You must have a value in 'x'!**
+Same as [showln(x)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#9-showlnx), except the printed \<p> is red. **You must have a value in 'x'!**
 
 **SidGautam: showErr("Error!")**
 
@@ -198,9 +198,9 @@ This function allows for the creation and appending of an HTML element. 'element
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<span>Gautam\</span>_**<be>
 
 ## 23. element(s).setClass(class)
-'element(s)' is a selected element (or multiple). This function adds 'class' as a class on 'element(s)'. It is like document.querySelector("p").className = class or document.querySelectorAll("p").forEach((el) => className = class1).
+'element(s)' is a selected element (or multiple). This function adds 'class' as a class on 'element(s)'. It is like document.querySelector("p").className = class or document.querySelectorAll("p").forEach((el) => el.className = class1).
 
-**SidGautam: getEl("p", 0).setClass("class1") _OR_ getEl("p")..setClass("class1")**
+**SidGautam: getEl("p", 0).setClass("class1") _OR_ getEl("p").setClass("class1")**
 
 **JavaScript: document.querySelector("p").className = "class1" _OR_ document.querySelectorAll("p").forEach((el) => el.className = "class1")**
 
@@ -242,7 +242,17 @@ This function allows for the creation and appending of an HTML element. 'element
 
 **JavaScript: document.querySelector("p").removeEventListener("click", deleteEl, false) _OR_ _N/A_**
 
-## 29. unless(bool, body, elseBody)
+## 29. element(s).addAttr(attr)
+'element(s)' is a selected element (or multiple). This function adds 'attr' as attributes (and the value) on 'element(s)'. It accepts as many valid attributes as you can apply. It is like document.querySelector("p").setAttribute(attribute, value) or <br>
+document.querySelectorAll("p").forEach((el) => el.setAttribute(attribute, value)).
+
+**SidGautam: getEl("a", 0).addAttr("href=index.html") _OR_ getEl("a").addAttr("href=index.html")**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEl("a", 0).addAttr("href=index.html", "target=_blank") _OR_ getEl("a").addAttr("href=index.html", "target=_blank")**
+
+**JavaScript: document.querySelector("p").setAttribute("href", "index.html") <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_OR_ document.querySelectorAll("p").forEach((el) => el.setAttribute("href", "index.html")**
+
+## 30. unless(bool, body, elseBody)
 'bool' is a boolean statement, 'body' is a function, and 'elseBody' is an optional function. It executes the code in 'body', if 'bool' is false; Then, If 'bool' is true and 'elseBody' is defined, It executes the code in 'elseBody'. It is an ifNot.
 
 **SidGautam: unless(false, () => {<br>**
@@ -263,23 +273,39 @@ This function allows for the creation and appending of an HTML element. 'element
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**console.log("executed again")**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**}**
 
-## 30. dont()
+## 31. dont()
 _DON'T EXECUTE THIS FUNCTION!_
 
 **SidGautam: dont()**
 
 **JavaScript: _N/A_**
 
-## 31. DoNot()
-DoNot() is a function, which stands for "Do Nothing". It does nothing.
+## 32. doNot()
+doNot() is a function, which stands for "Do Nothing". It does nothing.
 
-**SidGautam: DoNot()**
+**SidGautam: doNot()**
 
 **JavaScript: _N/A_**
 
-## 32. delay(secs, function)
-'secs' is a number. It executes the code in 'function', after 'secs' seconds. It returns a "delayID", which can be used to remove the delayed function from the queue (See **_Under Developement_**). It is like setTimeout( () => console.log("hi"), 5000 ).
+## 33. table()
+table() is a function, which summons a magical table. The table has an input field where one may ask the table questions; The table will respond.
+
+**SidGautam: table()**
+
+**JavaScript: _N/A_**
+
+## 34. delay(secs, function)
+'secs' is a number. It executes the code in 'function', after 'secs' seconds. It returns a "delayID", which can be used to remove the delayed function from the queue (See [removeDelay(delayID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#35-removeDelay(delayID))). It is like setTimeout(function, secs).
 
 **SidGautam: delay(2, click())**
 
 **JavaScript: setTimeout(click(), 2000)&nbsp;&nbsp;&nbsp;_setTimeout uses milliseconds instead of seconds_**
+
+## 35. removeDelay(delayID)
+'delayID' is a number returned by the delay() function (See **_Under Developement_**). This function removes the delayed method from the queue and stops it from executing. It is like clearTimeout(delayID).
+
+**SidGautam: let myVal = delay(2, click())**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;removeDelay(myVal)
+
+**JavaScript: let myVal = setTimeout(click(), 2000)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clearTimeout(myVal)
