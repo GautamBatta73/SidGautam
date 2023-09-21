@@ -311,7 +311,7 @@ table() is a function, which summons a magical table. The table has an input fie
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clearTimeout(myVal)
 
 ## 36. delayRepeat(secs, function)
-'secs' is a number. It executes the code in 'function', every 'secs' seconds. It returns a "delayRepID", which can be used to remove the delayed loop from the queue (See [removeDelayRepeat(delayRepID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#37-removedelayrepeatdelayRepID)). It is like setInterval(function, secs).
+'secs' is a number. It executes the code in 'function', every 'secs' seconds. It returns a "delayRepID", which can be used to remove the delayed loop from the queue (See [removeDelayRepeat(delayRepID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#37-removedelayrepeatdelayrepid)). It is like setInterval(function, secs).
 
 **SidGautam: delayRepeat(2, click())**
 
