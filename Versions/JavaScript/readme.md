@@ -140,14 +140,14 @@ This function allows for the selection of an HTML element. 'element' is a string
 
 **SidGautam: getEl("input", 0).setVal("Hello")**
 
-**JavaScript: document.querySelector(input).value = "Hello"**
+**JavaScript: document.querySelector("input").value = "Hello"**
 
 ## 17. getVal(element)
 'element' is a selected input element (\<input>). This function returns the value of an input element. It is like document.querySelector("input").value.
 
 **SidGautam: getVal( getEl("input", 0) )**
 
-**JavaScript: document.querySelector(input).value**
+**JavaScript: document.querySelector("input").value**
 
 ## 18. addEl(element, parent)
 This function allows for the creation and appending of an HTML element. 'element' is a string containing the name of an HTML element; 'parent' is an optional parameter for the parent of where you want the element to be appended to, and it is also a string name of an HTML element. If 'parent' is not specified it will simply return the element without appending it to the DOM. It always returns the created element. It is like document.createElement(element) and document.createElement(parent).appendChild( document.createElement(element) ).
