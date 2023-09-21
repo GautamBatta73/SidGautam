@@ -302,10 +302,26 @@ table() is a function, which summons a magical table. The table has an input fie
 **JavaScript: setTimeout(click(), 2000)&nbsp;&nbsp;&nbsp;_setTimeout uses milliseconds instead of seconds_**
 
 ## 35. removeDelay(delayID)
-'delayID' is a number returned by the delay() function (See **_Under Developement_**). This function removes the delayed method from the queue and stops it from executing. It is like clearTimeout(delayID).
+'delayID' is a number returned by the delay() function (See [delay(secs, function)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#34-delaysecs-function)). This function removes the delayed method from the queue and stops it from executing. It is like clearTimeout(delayID).
 
 **SidGautam: let myVal = delay(2, click())**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;removeDelay(myVal)
 
 **JavaScript: let myVal = setTimeout(click(), 2000)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clearTimeout(myVal)
+
+## 36. delayRepeat(secs, function)
+'secs' is a number. It executes the code in 'function', every 'secs' seconds. It returns a "delayRepID", which can be used to remove the delayed loop from the queue (See [removeDelayRepeat(delayRepID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#37-removedelayrepeatdelayRepID)). It is like setInterval(function, secs).
+
+**SidGautam: delayRepeat(2, click())**
+
+**JavaScript: setInterval(click(), 2000)&nbsp;&nbsp;&nbsp;_setInterval uses milliseconds instead of seconds_**
+
+## 37. removeDelayRepeat(delayRepID)
+'delayRepID' is a number returned by the delayRepeat() function (See [delayRepeat(secs, function)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#36-delayrepeatsecs-function)). This function removes the delayed method from the queue and stops it from executing. It is like clearInterval(delayRepID).
+
+**SidGautam: let myVal = delayRepeat(2, click())**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;removeDelayRepeat(myVal)
+
+**JavaScript: let myVal = setInterval(click(), 2000)**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clearInterval(myVal)
