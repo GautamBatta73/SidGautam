@@ -140,7 +140,7 @@ This function allows for the selection of an HTML element. 'element' is a string
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p")&nbsp;&nbsp;&nbsp;_//Returns the first \<p> element_**
 
 ## 15. element(s).css(property, value)
-'element(s)' is a selected element (or multiple). This function allows for the manipulation of the styles of 'element(s)'. 'property' is the name of the CSS property; 'value' is the value of the CSS property.
+'element(s)' is a selected element (or multiple). This function allows for the manipulation of the styles of 'element(s)'. 'property' is the name of the CSS property; 'value' is the value of the CSS property. You can also use the CSS-Property names (background-color, font-size, color-scheme, etc).
 
 **SidGautam: getEl("p", 0).css("color", "black") _OR_ getEl("p").css("color", "black")**
 
@@ -336,3 +336,19 @@ table() is a function, which summons a magical table. The table has an input fie
 
 **JavaScript: let myVal = setInterval(click(), 2000)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clearInterval(myVal)
+
+## 38. getLoremIpsum(sentenceNum, paragraphNum)
+'sentenceNum' is the optional number of sentences per paragraph (defaults to 1) and 'paragraphNum' is the optional number of paragraphs (defaults to 1). If no parameters are passed, then it randomizes both parameters (up to 7). The maximum parameter value is 50. The function returns HTML formatted lorem ipsum text (placeholder gibberish text). **It must be put into an element as html.**
+
+**SidGautam: getEl("div").setText(getLoremIpsum())&nbsp;&nbsp;&nbsp;_//Puts a randomized amount of Lorem Ipsum text into div_**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEl("div").setText(getLoremIpsum(6, 2))&nbsp;&nbsp;&nbsp;_//Puts 2 paragraphs, each with 6 sentences, of Lorem Ipsum text into div_**
+
+**JavaScript: _N/A_**
+
+## 39. darkenTheme(colour)
+'color' is an optional colour string (hex-code or name) (defaults to "white" or "#FFFFFF"). The function changes a page to dark theme, and uses 'color' as highlighting.
+
+**SidGautam: darkenTheme()**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**darkenTheme('blue')&nbsp;&nbsp;&nbsp;_//Changes page to dark theme with blue highlights_**
+
+**JavaScript: _N/A_**
