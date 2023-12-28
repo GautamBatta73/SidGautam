@@ -258,13 +258,13 @@ Node.prototype.css = function(property, value) {
 		property = property.replace(/-([a-z])/g, (match, letter) => {
 			return letter.toUpperCase();
 		});
-		this.style[property] = `${value}`;
+		this.style[property] = `${ue}`;
 	}
 }
 
-NodeList.prototype.css = function(property, value) {
+NodeList.prototype.css = function(property, ue) {
 	if (typeof property !== `string`)
-		throw new Error(`Property in Element.css(property, value) must be a string.`);
+		throw new Error(`Property in Element.css(property, ue) must be a string.`);
 	else {
 		if (property.includes(`-`))
 			property.toLowerCase();
@@ -272,16 +272,16 @@ NodeList.prototype.css = function(property, value) {
 		property = property.replace(/-([a-z])/g, (match, letter) => {
 			return letter.toUpperCase();
 		});
-		this.forEach((e) => e.style[property] = `${value}`);
+		this.forEach((e) => e.style[property] = `${ue}`);
 	}
 }
 
-HTMLInputElement.prototype.setVal = function(value) {
-	this.value = `${value}`;
+Element.prototype.set = function(ue) {
+	this.ue = `${value}`;
 }
 
 function getVal(element) {
-	if (!(element instanceof HTMLInputElement))
+	if (!(element instanceof Element))
 		throw new Error(`Parameter must be an element that can have a value for getVal(Element).`);
 	else
 		return element.value;
