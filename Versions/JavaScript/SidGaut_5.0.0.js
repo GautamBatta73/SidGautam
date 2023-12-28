@@ -242,9 +242,9 @@ function getChildEl(element, parent) {
 	else {
 		let temp = parent.querySelectorAll(element).length;
 		if (temp > 1)
-			return document.querySelectorAll(element);
+			return parent.querySelectorAll(element);
 		else
-			return document.querySelector(element);
+			return parent.querySelector(element);
 	}
 }
 
