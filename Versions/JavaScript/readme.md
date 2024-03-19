@@ -208,14 +208,21 @@ This function allows for the creation and appending of an HTML element. 'element
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**document.querySelector("p").innerHTML&nbsp;&nbsp;&nbsp;_//Returns the body of \<p> element as HTML: "Hi," \<br> "My Name is "<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<span>Gautam\</span>_**<be>
 
-## 23. element(s).setClass(class)
-'element(s)' is a selected element (or multiple). This function adds 'class' as a class on 'element(s)'. It is like document.querySelector("p").className = class or document.querySelectorAll("p").forEach((el) => el.className = class1).
+## 23. element(s).addClass(class)
+'element(s)' is a selected element (or multiple). This function adds 'class' as a class on 'element(s)'. It is like document.querySelector("p").classList.add(class) or document.querySelectorAll("p").forEach( (el) => el.classList.add(class) ).
 
-**SidGautamJS: getEl("p", 0).setClass("class1") _OR_ getEl("p").setClass("class1")**
+**SidGautamJS: getEl("p", 0).addClass("class1") _OR_ getEl("p").addClass("class1")**
 
-**JavaScript: document.querySelector("p").className = "class1" _OR_ document.querySelectorAll("p").forEach((el) => el.className = "class1")**
+**JavaScript: document.querySelector("p").classList.add("class1") = "class1" _OR_ document.querySelectorAll("p").forEach( (el) => el.classList.add("class1") )**
 
-## 24. getClass( element(s) )
+## 24. element(s).delClass(class)
+'element(s)' is a selected element (or multiple). This function removes 'class' as a class on 'element(s)'. It is like document.querySelector("p").classList.remove(class) or document.querySelectorAll("p").forEach( (el) => el.classList.remove(class) ).
+
+**SidGautamJS: getEl("p", 0).delClass("class1") _OR_ getEl("p").delClass("class1")**
+
+**JavaScript: document.querySelector("p").classList.remove("class1") = "class1" _OR_ document.querySelectorAll("p").forEach( (el) => el.classList.remove("class1") )**
+
+## 25. getClass( element(s) )
 'element(s)' is a selected element (or multiple). This function returns the class assigned to 'element(s)'. If one element is selected it returns the class as a string; If there are multiple elements selected, it returns the classes as an array of strings. It is like document.querySelector("p").className.
 
 **SidGautamJS: getClass( getEl("p", 0) )&nbsp;&nbsp;&nbsp;_//Returns "class1"_<br>
@@ -223,21 +230,21 @@ This function allows for the creation and appending of an HTML element. 'element
 
 **JavaScript: document.querySelector("p").className&nbsp;&nbsp;&nbsp;_//Returns "class1"_**
 
-## 25. element.setID(idName)
+## 26. element.setID(idName)
 'element' is a selected element. This function adds 'idName' as an id on 'element'. It is like document.querySelector("p").id = idName.
 
 **SidGautamJS: getEl("p", 0).setID("main")**
 
 **JavaScript: document.querySelector("p").id = "main"**
 
-## 26. getID(element)
+## 27. getID(element)
 'element' is a selected element. This function returns the id assigned to 'element'. It is like document.querySelector("p").id.
 
 **SidGautamJS: getID( getEl("p", 0) )&nbsp;&nbsp;&nbsp;_//Returns "main"_**
 
 **JavaScript: document.querySelector("p").id&nbsp;&nbsp;&nbsp;_//Returns "main"_**
 
-## 27. element(s).whenOn(listener, function, capture)
+## 28. element(s).whenOn(listener, function, capture)
 'element(s)' is a selected element (or multiple). This adds an event handler to 'element(s)'. 'listener' is a string which is the name for an event listener (click, focus, blur, etc.), and when the event occurs, the code in 'function' is executed. 'capture' is an optional boolean value that is false by default, and it asks if the handler should use capture or not. It is like document.querySelector("p").addEventListener(listener, function, capture).
 
 **SidGautamJS: getEl("p", 0).whenOn( "click", (e) => e.currentTarget.delEl() )<br>
@@ -245,7 +252,7 @@ This function allows for the creation and appending of an HTML element. 'element
 
 **JavaScript: document.querySelector("p").addEventListener( "click", (e) => e.currentTarget.remove(), false ) _OR_ _N/A_**
 
-## 28. element(s).notOn(listener, function, capture)
+## 29. element(s).notOn(listener, function, capture)
 'element(s)' is a selected element (or multiple). This removes an event handler from 'element(s)'. 'listener' is a string which is the name for the originally added event listener (click, focus, blur, etc.). 'function' is the original callback function used as the event handler (It must be a named function, in both the element(s).whenOn() and here. See [Anonymous functions do not work with remove event listener](https://www.semicolonandsons.com/code_diary/javascript/anonymous-functions-do-not-work-with-remove-event-listener)). 'capture' must be the same boolean value that was originally set. It is like document.querySelector("p").removeEventListener(listener, function, capture).
 
 **SidGautamJS: getEl("p", 0).notOn("click", deleteEl)<br>
@@ -253,7 +260,7 @@ This function allows for the creation and appending of an HTML element. 'element
 
 **JavaScript: document.querySelector("p").removeEventListener("click", deleteEl, false) _OR_ _N/A_**
 
-## 29. element(s).addAttr(attr)
+## 30. element(s).addAttr(attr)
 'element(s)' is a selected element (or multiple). This function adds 'attr' as attributes (and the value) on 'element(s)'. It accepts as many valid attributes as you can apply. It is like document.querySelector("p").setAttribute(attribute, value) or <br>
 document.querySelectorAll("p").forEach((el) => el.setAttribute(attribute, value)).
 
@@ -263,7 +270,7 @@ document.querySelectorAll("p").forEach((el) => el.setAttribute(attribute, value)
 **JavaScript: document.querySelector("p").setAttribute("href", "index.html") <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_OR_ document.querySelectorAll("p").forEach((el) => el.setAttribute("href", "index.html")**
 
-## 30. unless(bool, body, elseBody)
+## 31. unless(bool, body, elseBody)
 'bool' is a boolean statement, 'body' is a function, and 'elseBody' is an optional function. It executes the code in 'body', if 'bool' is false; Then, If 'bool' is true and 'elseBody' is defined, it executes the code in 'elseBody'. It is an ifNot.
 
 **SidGautamJS: unless(false, () => {<br>**
@@ -284,35 +291,35 @@ document.querySelectorAll("p").forEach((el) => el.setAttribute(attribute, value)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**console.log("executed again")**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**}**
 
-## 31. dont()
+## 32. dont()
 _DON'T EXECUTE THIS FUNCTION!_
 
 **SidGautamJS: dont()**
 
 **JavaScript: _N/A_**
 
-## 32. doNot()
+## 33. doNot()
 doNot() is a function, which stands for "Do Nothing". It does nothing.
 
 **SidGautamJS: doNot()**
 
 **JavaScript: _N/A_**
 
-## 33. table()
+## 34. table()
 table() is a function, which summons a magical table. The table has an input field where one may ask the table questions; The table will respond.
 
 **SidGautamJS: table()**
 
 **JavaScript: _N/A_**
 
-## 34. delay(secs, function)
+## 35. delay(secs, function)
 'secs' is a number. It executes the code in 'function', after 'secs' seconds. It returns a "delayID", which can be used to remove the delayed function from the queue (See [removeDelay(delayID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#35-removedelaydelayid)). It is like setTimeout(function, secs).
 
 **SidGautamJS: delay(2, click())**
 
 **JavaScript: setTimeout(click(), 2000)&nbsp;&nbsp;&nbsp;_//setTimeout uses milliseconds instead of seconds_**
 
-## 35. removeDelay(delayID)
+## 36. removeDelay(delayID)
 'delayID' is a number returned by the delay() function (See [delay(secs, function)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#34-delaysecs-function)). This function removes the delayed method from the queue and stops it from executing. It is like clearTimeout(delayID).
 
 **SidGautamJS: let myVal = delay(2, click())**<br>
@@ -321,14 +328,14 @@ table() is a function, which summons a magical table. The table has an input fie
 **JavaScript: let myVal = setTimeout(click(), 2000)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clearTimeout(myVal)
 
-## 36. delayRepeat(secs, function)
+## 37. delayRepeat(secs, function)
 'secs' is a number. It executes the code in 'function', every 'secs' seconds. It returns a "delayRepID", which can be used to remove the delayed loop from the queue (See [removeDelayRepeat(delayRepID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#37-removedelayrepeatdelayrepid)). It is like setInterval(function, secs).
 
 **SidGautamJS: delayRepeat(2, click())**
 
 **JavaScript: setInterval(click(), 2000)&nbsp;&nbsp;&nbsp;_//setInterval uses milliseconds instead of seconds_**
 
-## 37. removeDelayRepeat(delayRepID)
+## 38. removeDelayRepeat(delayRepID)
 'delayRepID' is a number returned by the delayRepeat() function (See [delayRepeat(secs, function)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#36-delayrepeatsecs-function)). This function removes the delayed method from the queue and stops it from executing. It is like clearInterval(delayRepID).
 
 **SidGautamJS: let myVal = delayRepeat(2, click())**<br>
@@ -337,7 +344,7 @@ table() is a function, which summons a magical table. The table has an input fie
 **JavaScript: let myVal = setInterval(click(), 2000)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clearInterval(myVal)
 
-## 38. getLoremIpsum(sentenceNum, paragraphNum)
+## 39. getLoremIpsum(sentenceNum, paragraphNum)
 'sentenceNum' is the optional number of sentences per paragraph (defaults to 1) and 'paragraphNum' is the optional number of paragraphs (defaults to 1). If no parameters are passed, then it randomizes both parameters (up to 7). The maximum parameter value is 50. The function returns HTML formatted lorem ipsum text (placeholder gibberish text). **It must be put into an element as html.**
 
 **SidGautamJS: getEl("div").setText(getLoremIpsum())&nbsp;&nbsp;&nbsp;_//Puts a randomized amount of Lorem Ipsum text into div_**<br>
@@ -345,7 +352,7 @@ table() is a function, which summons a magical table. The table has an input fie
 
 **JavaScript: _N/A_**
 
-## 39. darkenTheme(colour)
+## 40. darkenTheme(colour)
 'color' is an optional colour string (hex-code or name) (defaults to "white" or "#FFFFFF"). The function changes a page to dark theme, and uses 'color' as highlighting.
 
 **SidGautamJS: darkenTheme()**<br>
