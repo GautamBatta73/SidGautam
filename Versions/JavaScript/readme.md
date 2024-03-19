@@ -313,14 +313,14 @@ table() is a function, which summons a magical table. The table has an input fie
 **JavaScript: _N/A_**
 
 ## 35. delay(secs, function)
-'secs' is a number. It executes the code in 'function', after 'secs' seconds. It returns a "delayID", which can be used to remove the delayed function from the queue (See [removeDelay(delayID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#35-removedelaydelayid)). It is like setTimeout(function, secs).
+'secs' is a number. It executes the code in 'function', after 'secs' seconds. It returns a "delayID", which can be used to remove the delayed function from the queue (See [removeDelay(delayID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#36-removedelaydelayid)). It is like setTimeout(function, secs).
 
 **SidGautamJS: delay(2, click())**
 
 **JavaScript: setTimeout(click(), 2000)&nbsp;&nbsp;&nbsp;_//setTimeout uses milliseconds instead of seconds_**
 
 ## 36. removeDelay(delayID)
-'delayID' is a number returned by the delay() function (See [delay(secs, function)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#34-delaysecs-function)). This function removes the delayed method from the queue and stops it from executing. It is like clearTimeout(delayID).
+'delayID' is a number returned by the delay() function (See [delay(secs, function)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#35-delaysecs-function)). This function removes the delayed method from the queue and stops it from executing. It is like clearTimeout(delayID).
 
 **SidGautamJS: let myVal = delay(2, click())**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;removeDelay(myVal)
@@ -329,14 +329,14 @@ table() is a function, which summons a magical table. The table has an input fie
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clearTimeout(myVal)
 
 ## 37. delayRepeat(secs, function)
-'secs' is a number. It executes the code in 'function', every 'secs' seconds. It returns a "delayRepID", which can be used to remove the delayed loop from the queue (See [removeDelayRepeat(delayRepID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#37-removedelayrepeatdelayrepid)). It is like setInterval(function, secs).
+'secs' is a number. It executes the code in 'function', every 'secs' seconds. It returns a "delayRepID", which can be used to remove the delayed loop from the queue (See [removeDelayRepeat(delayRepID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#38-removedelayrepeatdelayrepid)). It is like setInterval(function, secs).
 
 **SidGautamJS: delayRepeat(2, click())**
 
 **JavaScript: setInterval(click(), 2000)&nbsp;&nbsp;&nbsp;_//setInterval uses milliseconds instead of seconds_**
 
 ## 38. removeDelayRepeat(delayRepID)
-'delayRepID' is a number returned by the delayRepeat() function (See [delayRepeat(secs, function)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#36-delayrepeatsecs-function)). This function removes the delayed method from the queue and stops it from executing. It is like clearInterval(delayRepID).
+'delayRepID' is a number returned by the delayRepeat() function (See [delayRepeat(secs, function)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#37-delayrepeatsecs-function)). This function removes the delayed method from the queue and stops it from executing. It is like clearInterval(delayRepID).
 
 **SidGautamJS: let myVal = delayRepeat(2, click())**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;removeDelayRepeat(myVal)
