@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles/index.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="images/icon.png" type="image/x-icon">
+    <title>SidGautamAI</title>
+</head>
+
+<body>
+    <header>
+		<div>
+			<img src="images/logo.png" alt="logo">
+			<h1>SidGautamAI</h1>
+		</div>
+        <button id="btnClearAll">Clear All</button>
+    </header>
+    <main>
+        <p style="display: none;"></p>
+        <div id="chatDiv">
+        </div>
+    </main>
+    <footer>
+        <form method="post">
+          <button id="btnHelp" title="Help" type="button">?</button>
+            <textarea id="userPrompt"></textarea>
+            <button type="submit" id="btnSend">
+              <img src="images/send.png" alt=">">
+          </button>
+        </form>
+    </footer>
+  <dialog>
+    <button id="btnCloseHelp">
+      <span>✖</span>
+    </button>
+    <div>
+      <h1>Common Issues and Fixes</h1>
+      <section>
+        <h3>"Internal Server Error"</h3>
+        <p>Refresh The Page</p>
+        <p>Restart your Web-Browser</p>
+        <p>Try a Different Web-Browser</p>
+        <p>Try a Different Device</p>
+      </section>
+      <section>
+        <h3>Other Issue/Still Busted?</h3>
+        <p>Open a Ticket!</p>
+        <a href="https://github.com/GautamBatta73/SidGautam/issues" target="_blank">GitHub Issues Page</a>
+      </section>
+    </div>
+  </dialog>
+	<script src="https://raw.githack.com/GautamBatta73/SidGautam/main/Versions/JavaScript/Minfied/SidGaut_5.0.0.min.js"></script>
+  <script src="scripts/index.js" type="application/javascript"></script>
+</body>
+
+</html>
