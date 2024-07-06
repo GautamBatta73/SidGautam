@@ -222,6 +222,16 @@ a:hover {
 	color: aqua;
 }
 
+div#copied {
+  border: 0.1em solid black;
+  position: absolute;
+  padding: 0.25em 0.5em;
+  display: none;
+  font-size: 1.5em;
+  font-weight: bold;
+  background-color: white;
+}
+
 @media all and (min-width: 768px) {
 	body {
 		grid-template-rows: 7em 76vh 5em;
