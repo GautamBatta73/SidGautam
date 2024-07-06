@@ -28,7 +28,16 @@ window.whenOn('load', () => {
 		});
 	});
   
-  getEl(".ai, .user").whenOn('click', e => navigator.clipboard.writeText(getText(e.target)));
+  getEl(".ai, .user").whenOn('click', (e) => {
+    navigator.clipboard.writeText(getText(e.target));
+    let copyDiv = getEl('div#copied');
+    let x = e.clientX;
+    let y = e.clientY;
+    copyDiv.style.left = `${x}px`;
+    copyDiv.style.top = `${y}px`;
+    copyDiv.style.display = 'block';
+    setTimeout(() => copyDiv.style.display = 'none', 500);
+  });
 
 	getEl('#btnClearAll').whenOn('click', () => {
 		chatBox.setText("", true);
@@ -103,7 +112,16 @@ function setupConvo(prompt) {
 	userEl.addClass("user");
   userEl.title = "Click to Copy";
 	userEl.setText(`${prompt}`);
-  userEl.whenOn('click', e => navigator.clipboard.writeText(getText(e.target)));
+  userEl.whenOn('click', (e) => {
+    navigator.clipboard.writeText(getText(e.target));
+    let copyDiv = getEl('div#copied');
+    let x = e.clientX;
+    let y = e.clientY;
+    copyDiv.style.left = `${x}px`;
+    copyDiv.style.top = `${y}px`;
+    copyDiv.style.display = 'block';
+    setTimeout(() => copyDiv.style.display = 'none', 500);
+  });
 
 	btnDel.addClass("delConvo");
 	btnDel.setText(`<img src="https://cdn.glitch.global/d8a2d8d1-6959-4a91-badd-90859a83dc87/delete.png?v=1705944823062" alt="Delete">`, true);
@@ -116,7 +134,16 @@ function setupConvo(prompt) {
 	aiEl.addClass("ai");
 	aiEl.css('display', 'none');
   aiEl.title = "Click to Copy";
-  aiEl.whenOn('click', e => navigator.clipboard.writeText(getText(e.target)));
+  aiEl.whenOn('click', (e) => {
+    navigator.clipboard.writeText(getText(e.target));
+    let copyDiv = getEl('div#copied');
+    let x = e.clientX;
+    let y = e.clientY;
+    copyDiv.style.left = `${x}px`;
+    copyDiv.style.top = `${y}px`;
+    copyDiv.style.display = 'block';
+    setTimeout(() => copyDiv.style.display = 'none', 500);
+  });
   
 	userEl.scrollIntoView({
 		behavior: "smooth"
