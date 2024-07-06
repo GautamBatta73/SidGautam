@@ -162,3 +162,5 @@ function sendConvo(AIRes, text) {
 	});
 	localStorage.setItem("chat", getText(chatBox, true));
 }
+
+
