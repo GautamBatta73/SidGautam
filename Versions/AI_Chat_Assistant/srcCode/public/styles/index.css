@@ -230,6 +230,18 @@ div#copied {
   font-size: 1.5em;
   font-weight: bold;
   background-color: white;
+  z-index: 4;
+}
+
+#disabledDiv {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  display: none;
+  cursor: wait;
 }
 
 @media all and (min-width: 768px) {
