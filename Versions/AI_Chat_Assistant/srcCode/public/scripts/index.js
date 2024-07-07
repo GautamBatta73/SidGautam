@@ -5,6 +5,7 @@ const chatBox = getEl("#chatDiv");
 const helpBtn = getEl("#btnHelp");
 const helpDialog = getEl("dialog");
 const closeBtn = getEl("#btnCloseHelp");
+const disableDiv = getEl("#disabledDiv");
 
 window.whenOn('load', () => {
 	if (localStorage.getItem("chat"))
@@ -28,16 +29,34 @@ window.whenOn('load', () => {
 		});
 	});
   
-  getEl(".ai, .user").whenOn('click', (e) => {
-    navigator.clipboard.writeText(getText(e.target));
-    let copyDiv = getEl('div#copied');
-    let x = e.clientX;
-    let y = e.clientY;
-    copyDiv.style.left = `${x}px`;
-    copyDiv.style.top = `${y}px`;
-    copyDiv.style.display = 'block';
-    setTimeout(() => copyDiv.style.display = 'none', 500);
-  });
+  
+  unless(!(getEl('.ai, .user')), () => {
+		unless(!(getEl('.ai, .user').length > 1), () => {
+			getEl('.ai, .user').forEach(el => {
+				el.whenOn('click', (e) => {
+					navigator.clipboard.writeText(getText(e.target));
+					let copyDiv = getEl('div#copied');
+					let x = e.clientX;
+					let y = e.clientY;
+					copyDiv.css('left', `${x}px`);
+					copyDiv.css('top', `${y}px`);
+					copyDiv.css('display', 'block');
+					delay(0.5, () => copyDiv.css('display', 'none'));
+				});
+			});
+		}, () => {
+			getEl(".ai, .user").whenOn('click', (e) => {
+				navigator.clipboard.writeText(getText(e.target));
+				let copyDiv = getEl('div#copied');
+				let x = e.clientX;
+				let y = e.clientY;
+				copyDiv.css('left', `${x}px`);
+				copyDiv.css('top', `${y}px`);
+				copyDiv.css('display', 'block');
+				delay(0.5, () => copyDiv.css('display', 'none'));
+			});
+		});
+	});
 
 	getEl('#btnClearAll').whenOn('click', () => {
 		chatBox.setText("", true);
@@ -67,8 +86,8 @@ form.whenOn(`submit`, (e) => {
 	let AIRes = setupConvo(uPrompt);
 
 	unless(!(uPrompt.length > 1), () => {
-		getEl(':root').css('cursor', 'wait');
-		sendBtn.disabled = true;
+		disableDiv.css('display', 'block');
+		sendBtn.addAttr("disabled");
 		let postAI = fetch(`/api`, {
 			method: "POST",
 			headers: {
@@ -110,17 +129,17 @@ function setupConvo(prompt) {
 	let aiEl = addEl('p', convoDiv);
 
 	userEl.addClass("user");
-  userEl.title = "Click to Copy";
+  userEl.addAttr("title=Click to Copy");
 	userEl.setText(`${prompt}`);
   userEl.whenOn('click', (e) => {
     navigator.clipboard.writeText(getText(e.target));
     let copyDiv = getEl('div#copied');
     let x = e.clientX;
     let y = e.clientY;
-    copyDiv.style.left = `${x}px`;
-    copyDiv.style.top = `${y}px`;
-    copyDiv.style.display = 'block';
-    setTimeout(() => copyDiv.style.display = 'none', 500);
+    copyDiv.css('left', `${x}px`);
+    copyDiv.css('top', `${y}px`);
+    copyDiv.css('display', 'block');
+    delay(0.5, () => copyDiv.css('display', 'none'));
   });
 
 	btnDel.addClass("delConvo");
@@ -133,16 +152,16 @@ function setupConvo(prompt) {
 
 	aiEl.addClass("ai");
 	aiEl.css('display', 'none');
-  aiEl.title = "Click to Copy";
+  aiEl.addAttr("title=Click to Copy");
   aiEl.whenOn('click', (e) => {
     navigator.clipboard.writeText(getText(e.target));
     let copyDiv = getEl('div#copied');
     let x = e.clientX;
     let y = e.clientY;
-    copyDiv.style.left = `${x}px`;
-    copyDiv.style.top = `${y}px`;
-    copyDiv.style.display = 'block';
-    setTimeout(() => copyDiv.style.display = 'none', 500);
+    copyDiv.css('left', `${x}px`);
+    copyDiv.css('top', `${y}px`);
+    copyDiv.css('display', 'block');
+    delay(0.5, () => copyDiv.css('display', 'none'));
   });
   
 	userEl.scrollIntoView({
@@ -155,12 +174,10 @@ function sendConvo(AIRes, text) {
 	AIRes.setText(`${text}`);
 	getChildEl('.delConvo', AIRes.parentElement).css('display', 'block');
 	AIRes.css('display', 'block');;
-	getEl(':root').css('cursor', 'initial');
-	sendBtn.disabled = false;
+	disableDiv.css('display', 'none');
+	sendBtn.delAttr('disabled');
 	AIRes.scrollIntoView({
 		behavior: "smooth"
 	});
 	localStorage.setItem("chat", getText(chatBox, true));
 }
-
-
