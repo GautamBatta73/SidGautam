@@ -270,7 +270,17 @@ document.querySelectorAll("p").forEach((el) => el.setAttribute(attribute, value)
 **JavaScript: document.querySelector("p").setAttribute("href", "index.html") <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_OR_ document.querySelectorAll("p").forEach((el) => el.setAttribute("href", "index.html")**
 
-## 31. unless(bool, body, elseBody)
+## 31. element(s).delAttr(attr)
+'element(s)' is a selected element (or multiple). This function removes 'attr' as attributes (and the value) on 'element(s)'. It accepts as many valid attributes as you can apply. It is like document.querySelector("p").removeAttribute(attribute) or <br>
+document.querySelectorAll("p").forEach((el) => el.removeAttribute(attribute)).
+
+**SidGautamJS: getEl("a", 0).delAttr("href") _OR_ getEl("a").delAttr("href")** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**getEl("a", 0).delAttr("href=index.html", "target=_blank") _OR_ getEl("a").delAttr("href", "target")**
+
+**JavaScript: document.querySelector("p").removeAttribute("href") <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_OR_ document.querySelectorAll("p").forEach((el) => el.removeAttribute("href")**
+
+## 32. unless(bool, body, elseBody)
 'bool' is a boolean statement, 'body' is a function, and 'elseBody' is an optional function. It executes the code in 'body', if 'bool' is false; Then, If 'bool' is true and 'elseBody' is defined, it executes the code in 'elseBody'. It is an ifNot.
 
 **SidGautamJS: unless(false, () => {<br>**
@@ -291,14 +301,14 @@ document.querySelectorAll("p").forEach((el) => el.setAttribute(attribute, value)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**console.log("executed again")**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**}**
 
-## 32. dont()
+## 33. dont()
 _DON'T EXECUTE THIS FUNCTION!_
 
 **SidGautamJS: dont()**
 
 **JavaScript: _N/A_**
 
-## 33. doNot()
+## 34. doNot()
 doNot() is a function, which stands for "Do Nothing". It does nothing.
 
 **SidGautamJS: doNot()**
@@ -312,15 +322,15 @@ table() is a function, which summons a magical table. The table has an input fie
 
 **JavaScript: _N/A_**
 
-## 35. delay(secs, function)
-'secs' is a number. It executes the code in 'function', after 'secs' seconds. It returns a "delayID", which can be used to remove the delayed function from the queue (See [removeDelay(delayID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#36-removedelaydelayid)). It is like setTimeout(function, secs).
+## 36. delay(secs, function)
+'secs' is a number. It executes the code in 'function', after 'secs' seconds. It returns a "delayID", which can be used to remove the delayed function from the queue (See [removeDelay(delayID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#37-removedelaydelayid)). It is like setTimeout(function, secs).
 
 **SidGautamJS: delay(2, click())**
 
 **JavaScript: setTimeout(click(), 2000)&nbsp;&nbsp;&nbsp;_//setTimeout uses milliseconds instead of seconds_**
 
-## 36. removeDelay(delayID)
-'delayID' is a number returned by the delay() function (See [delay(secs, function)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#35-delaysecs-function)). This function removes the delayed method from the queue and stops it from executing. It is like clearTimeout(delayID).
+## 37. removeDelay(delayID)
+'delayID' is a number returned by the delay() function (See [delay(secs, function)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#36-delaysecs-function)). This function removes the delayed method from the queue and stops it from executing. It is like clearTimeout(delayID).
 
 **SidGautamJS: let myVal = delay(2, click())**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;removeDelay(myVal)
@@ -328,15 +338,15 @@ table() is a function, which summons a magical table. The table has an input fie
 **JavaScript: let myVal = setTimeout(click(), 2000)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clearTimeout(myVal)
 
-## 37. delayRepeat(secs, function)
-'secs' is a number. It executes the code in 'function', every 'secs' seconds. It returns a "delayRepID", which can be used to remove the delayed loop from the queue (See [removeDelayRepeat(delayRepID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#38-removedelayrepeatdelayrepid)). It is like setInterval(function, secs).
+## 38. delayRepeat(secs, function)
+'secs' is a number. It executes the code in 'function', every 'secs' seconds. It returns a "delayRepID", which can be used to remove the delayed loop from the queue (See [removeDelayRepeat(delayRepID)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#39-removedelayrepeatdelayrepid)). It is like setInterval(function, secs).
 
 **SidGautamJS: delayRepeat(2, click())**
 
 **JavaScript: setInterval(click(), 2000)&nbsp;&nbsp;&nbsp;_//setInterval uses milliseconds instead of seconds_**
 
-## 38. removeDelayRepeat(delayRepID)
-'delayRepID' is a number returned by the delayRepeat() function (See [delayRepeat(secs, function)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#37-delayrepeatsecs-function)). This function removes the delayed method from the queue and stops it from executing. It is like clearInterval(delayRepID).
+## 39. removeDelayRepeat(delayRepID)
+'delayRepID' is a number returned by the delayRepeat() function (See [delayRepeat(secs, function)](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/JavaScript#38-delayrepeatsecs-function)). This function removes the delayed method from the queue and stops it from executing. It is like clearInterval(delayRepID).
 
 **SidGautamJS: let myVal = delayRepeat(2, click())**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;removeDelayRepeat(myVal)
@@ -344,7 +354,7 @@ table() is a function, which summons a magical table. The table has an input fie
 **JavaScript: let myVal = setInterval(click(), 2000)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clearInterval(myVal)
 
-## 39. getLoremIpsum(sentenceNum, paragraphNum)
+## 40. getLoremIpsum(sentenceNum, paragraphNum)
 'sentenceNum' is the optional number of sentences per paragraph (defaults to 1) and 'paragraphNum' is the optional number of paragraphs (defaults to 1). If no parameters are passed, then it randomizes both parameters (up to 7). The maximum parameter value is 50. The function returns HTML formatted lorem ipsum text (placeholder gibberish text). **It must be put into an element as html.**
 
 **SidGautamJS: getEl("div").setText(getLoremIpsum())&nbsp;&nbsp;&nbsp;_//Puts a randomized amount of Lorem Ipsum text into div_**<br>
@@ -352,7 +362,7 @@ table() is a function, which summons a magical table. The table has an input fie
 
 **JavaScript: _N/A_**
 
-## 40. darkenTheme(colour)
+## 41. darkenTheme(colour)
 'color' is an optional colour string (hex-code or name) (defaults to "white" or "#FFFFFF"). The function changes a page to dark theme, and uses 'color' as highlighting.
 
 **SidGautamJS: darkenTheme()**<br>
