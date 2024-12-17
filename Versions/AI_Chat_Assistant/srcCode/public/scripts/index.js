@@ -86,7 +86,7 @@ form.whenOn(`submit`, (e) => {
 	let AIRes = setupConvo(uPrompt);
 
 	unless(!(uPrompt.length > 1), () => {
-		disableDiv.css('display', 'block');
+		disableDiv.css('display', 'flex');
 		sendBtn.addAttr("disabled");
 		let postAI = fetch(`/api`, {
 			method: "POST",
@@ -97,17 +97,17 @@ form.whenOn(`submit`, (e) => {
 			credentials: "same-origin",
 			body: JSON.stringify(obj)
 		}).then(response => {
-			print('Response object: ', response);
+			//print('Response object: ', response);
 			return response.text();
 		}).then(text => {
-			print('text object: ', text);
+			//print('text object: ', text);
 			sendConvo(AIRes, text);
 		}).catch(error => {
-			printErr('Error:', error);
+			//printErr('Error:', error);
 			AIRes.addClass(`aiError`);
 			sendConvo(AIRes, "Internal Server Error.")
 		});
-		print(postAI);
+		//print(postAI);
 	});
 	userPrompt.setVal("");
 });

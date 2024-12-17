@@ -237,11 +237,19 @@ div#copied {
   width: 100%;
   height: 100%;
   position: fixed;
+  background-color: rgba(0, 0, 0, 0.25);
   top: 0;
   left: 0;
   z-index: 5;
-  display: none;
   cursor: wait;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#disabledDiv img {
+  display: block;
+  width: 50vmin;
 }
 
 @media all and (min-width: 768px) {
