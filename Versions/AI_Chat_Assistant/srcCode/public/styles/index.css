@@ -1,77 +1,91 @@
 * {
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0;
-}
-
-html {
+  }
+  
+  html {
 	height: 100%;
-}
-
-body {
+  }
+  
+  body {
 	min-height: 100%;
 	background-color: #aaaaaa;
 	display: grid;
 	grid-template-rows: 7em 75vh 5em;
-}
-
-img {
+  }
+  
+  img {
 	font-style: italic;
 	text-align: center;
-}
-
-main {
+  }
+  
+  main {
 	margin: 0 2vw;
 	background-color: white;
 	overflow-y: visible;
-}
-
-.user {
+  }
+  
+  .user {
 	background-color: #aadddd;
-  cursor: pointer;
-}
-
-.ai {
+	cursor: pointer;
+  }
+  
+  .ai {
 	background-color: #ffaabb;
-  cursor: pointer;
-}
-
-.ai.aiError {
+	cursor: pointer;
+  }
+  
+  .ai * {  
+	margin: revert;
+  }
+  
+  .ai.aiError {
 	background-color: #ff0000;
-}
-
-.user::before {
+  }
+  
+  .user::before {
 	font-weight: bold;
 	content: "User: ";
-}
-
-.ai::before {
+  }
+  
+  .ai::before {
 	font-weight: bold;
 	content: "AI: ";
-}
-
-#chatDiv p {
+  }
+  
+  #chatDiv > div > section {
 	font-size: 1.5em;
 	border: 0.1em solid black;
 	border-radius: 22px;
 	padding: 0.5em;
 	margin: 0.5em;
 	width: fit-content;
-}
-
-#chatDiv {
+  }
+  
+  .ai table {
+	margin: 1em;  
+	border-collapse: collapse;
+  }
+  
+  .ai table * {
+	border: 0.1em black solid;
+	padding: 0.3em;
+  }
+  
+  #chatDiv {
 	padding: 1em;
 	display: flex;
 	flex-direction: column;
 	height: 95%;
 	overflow-y: auto;
-}
-
-div[id^="convo"] {
+  }
+  
+  div[id^="convo"] {
 	display: grid;
 	grid-template-columns: auto auto;
-}
-
-.delConvo {
+  }
+  
+  .delConvo {
 	grid-row: 1/4;
 	grid-column: 2;
 	background-color: transparent;
@@ -79,125 +93,125 @@ div[id^="convo"] {
 	margin: 1.5em 0;
 	margin-left: 0.5em;
 	visibility: hidden;
-}
-
-div[id^="convo"]:hover>.delConvo {
+  }
+  
+  div[id^="convo"]:hover > .delConvo {
 	visibility: visible;
-}
-
-header img {
+  }
+  
+  header img {
 	height: 3em;
-}
-
-.delConvo img {
+  }
+  
+  .delConvo img {
 	width: 1.5em;
 	height: 1.5em;
-}
-
-textarea {
+  }
+  
+  textarea {
 	resize: none;
 	width: 100%;
-}
-
-#userPrompt {
+  }
+  
+  #userPrompt {
 	max-height: 10em;
-}
-
-form * {
+  }
+  
+  form * {
 	font-size: 1.5em;
-}
-
-header {
+  }
+  
+  header {
 	font-size: 2.5vmax;
 	padding: 1em 0;
 	display: grid;
 	grid-template-columns: 1fr 7em;
 	align-items: center;
 	justify-content: center;
-}
-
-header>div {
+  }
+  
+  header > div {
 	font-size: 2vmax;
 	text-align: center;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
-
-#btnClearAll {
+  }
+  
+  #btnClearAll {
 	font-size: 1.5em;
-}
-
-form {
+  }
+  
+  form {
 	background-color: #aaaaaa;
 	display: grid;
 	grid-template-columns: 4em 10fr 4.5em;
 	align-items: center;
 	justify-items: center;
 	padding: 1em 0;
-}
-
-button {
+  }
+  
+  button {
 	font-weight: bold;
 	font-size: 2em;
 	width: fit-content;
 	height: fit-content;
 	margin: 0 0.5em;
 	cursor: pointer;
-}
-
-button#btnSend {
+  }
+  
+  button#btnSend {
 	width: 1.5em;
 	height: 1.5em;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
-
-button#btnSend>img {
+  }
+  
+  button#btnSend > img {
 	width: 0.8em;
-}
-
-button#btnHelp {
+  }
+  
+  button#btnHelp {
 	font-size: 1.5em;
 	height: 1.5em;
 	width: 1.5em;
 	border-radius: 45px;
 	background-color: #5c72ff;
-}
-
-dialog {
+  }
+  
+  dialog {
 	margin: auto;
 	font-size: large;
-}
-
-dialog::backdrop {
+  }
+  
+  dialog::backdrop {
 	background: rgb(0 0 0 / 45%);
-}
-
-dialog h1 {
+  }
+  
+  dialog h1 {
 	text-align: center;
-}
-
-dialog section {
+  }
+  
+  dialog section {
 	margin: 1em 0;
-}
-
-dialog section * {
+  }
+  
+  dialog section * {
 	margin: 0.3em 0 0.3em 1em;
-}
-
-dialog h3 {
+  }
+  
+  dialog h3 {
 	text-decoration: underline;
 	margin-left: 0em;
 	font-size: 1.5em;
-}
-
-dialog>div {
+  }
+  
+  dialog > div {
 	padding: 1em;
-}
-
-button#btnCloseHelp {
+  }
+  
+  button#btnCloseHelp {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -211,62 +225,67 @@ button#btnCloseHelp {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
-
-a {
+  }
+  
+  a {
 	color: blue;
 	font-weight: bold;
-}
-
-a:hover {
+  }
+  
+  a:hover {
 	color: aqua;
-}
-
-div#copied {
-  border: 0.1em solid black;
-  position: absolute;
-  padding: 0.25em 0.5em;
-  display: none;
-  font-size: 1.5em;
-  font-weight: bold;
-  background-color: white;
-  z-index: 4;
-}
-
-#disabledDiv {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.25);
-  top: 0;
-  left: 0;
-  z-index: 5;
-  cursor: wait;
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-
-#disabledDiv img {
-  display: block;
-  width: 50vmin;
-}
-
-@media all and (min-width: 768px) {
+  }
+  
+  div#copied {
+	border: 0.1em solid black;
+	position: absolute;
+	padding: 0.25em 0.5em;
+	display: none;
+	font-size: 1.5em;
+	font-weight: bold;
+	background-color: white;
+	z-index: 4;
+  }
+  
+  #disabledDiv {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.25);
+	top: 0;
+	left: 0;
+	z-index: 5;
+	cursor: wait;
+	display: none;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  #disabledDiv img {
+	display: block;
+	width: 50vmin;
+  }
+  
+  #TEXTAREA--texthelp-mirror-div {
+	display: none !important;
+  }
+  
+  @media all and (min-width: 768px) {
 	body {
-		grid-template-rows: 7em 76vh 5em;
+	  grid-template-rows: 7em 76vh 5em;
 	}
-
+  
 	main {
-		overflow-y: visible;
+	  overflow-y: visible;
 	}
-
+  
 	header {
-		font-size: 1.2em;
+	  font-size: 1.2em;
 	}
-
-	header>div {
-		font-size: inherit;
-		margin-left: 10em;
+  
+	header > div {
+	  font-size: inherit;
+	  margin-left: 10em;
 	}
-}
+  }
+  

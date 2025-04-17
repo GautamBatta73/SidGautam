@@ -34,7 +34,7 @@ window.whenOn('load', () => {
 		unless(!(getEl('.ai, .user').length > 1), () => {
 			getEl('.ai, .user').forEach(el => {
 				el.whenOn('click', (e) => {
-					navigator.clipboard.writeText(getText(e.target));
+					navigator.clipboard.writeText(getText(el));
 					let copyDiv = getEl('div#copied');
 					let x = e.clientX;
 					let y = e.clientY;
@@ -43,10 +43,22 @@ window.whenOn('load', () => {
 					copyDiv.css('display', 'block');
 					delay(0.5, () => copyDiv.css('display', 'none'));
 				});
+        el.whenOn('contextmenu', (e) => {
+          e.preventDefault();
+					clipboardCopy(el);
+					let copyDiv = getEl('div#copied');
+					let x = e.clientX;
+					let y = e.clientY;
+					copyDiv.css('left', `${x}px`);
+					copyDiv.css('top', `${y}px`);
+					copyDiv.css('display', 'block');
+					delay(0.5, () => copyDiv.css('display', 'none'));
+          return false;
+				});
 			});
 		}, () => {
 			getEl(".ai, .user").whenOn('click', (e) => {
-				navigator.clipboard.writeText(getText(e.target));
+				navigator.clipboard.writeText(getText(e.target.closest(".ai, .user")));
 				let copyDiv = getEl('div#copied');
 				let x = e.clientX;
 				let y = e.clientY;
@@ -54,6 +66,18 @@ window.whenOn('load', () => {
 				copyDiv.css('top', `${y}px`);
 				copyDiv.css('display', 'block');
 				delay(0.5, () => copyDiv.css('display', 'none'));
+			});
+      getEl(".ai, .user").whenOn('contextmenu', (e) => {
+        e.preventDefault();
+				clipboardCopy(e.target.closest(".ai, .user"));
+				let copyDiv = getEl('div#copied');
+				let x = e.clientX;
+				let y = e.clientY;
+				copyDiv.css('left', `${x}px`);
+				copyDiv.css('top', `${y}px`);
+				copyDiv.css('display', 'block');
+				delay(0.5, () => copyDiv.css('display', 'none'));
+        return false;
 			});
 		});
 	});
@@ -124,15 +148,15 @@ function setupConvo(prompt) {
 	let convoDiv = addEl('div', chatBox);
 	convoDiv.setID(convoId);
 
-	let userEl = addEl('p', convoDiv);
+	let userEl = addEl('section', convoDiv);
 	let btnDel = addEl('button', convoDiv);
-	let aiEl = addEl('p', convoDiv);
+	let aiEl = addEl('section', convoDiv);
 
 	userEl.addClass("user");
   userEl.addAttr("title=Click to Copy");
 	userEl.setText(`${prompt}`);
-  userEl.whenOn('click', (e) => {
-    navigator.clipboard.writeText(getText(e.target));
+  userEl.whenOn('click', (e) => {    
+    navigator.clipboard.writeText(getText(userEl));
     let copyDiv = getEl('div#copied');
     let x = e.clientX;
     let y = e.clientY;
@@ -140,6 +164,18 @@ function setupConvo(prompt) {
     copyDiv.css('top', `${y}px`);
     copyDiv.css('display', 'block');
     delay(0.5, () => copyDiv.css('display', 'none'));
+  });
+  userEl.whenOn('contextmenu', (e) => {
+    e.preventDefault();
+    clipboardCopy(userEl);
+    let copyDiv = getEl('div#copied');
+    let x = e.clientX;
+    let y = e.clientY;
+    copyDiv.css('left', `${x}px`);
+    copyDiv.css('top', `${y}px`);
+    copyDiv.css('display', 'block');
+    delay(0.5, () => copyDiv.css('display', 'none'));
+    return false;
   });
 
 	btnDel.addClass("delConvo");
@@ -153,8 +189,8 @@ function setupConvo(prompt) {
 	aiEl.addClass("ai");
 	aiEl.css('display', 'none');
   aiEl.addAttr("title=Click to Copy");
-  aiEl.whenOn('click', (e) => {
-    navigator.clipboard.writeText(getText(e.target));
+  aiEl.whenOn('click', (e) => {    
+    navigator.clipboard.writeText(getText(aiEl));
     let copyDiv = getEl('div#copied');
     let x = e.clientX;
     let y = e.clientY;
@@ -162,6 +198,18 @@ function setupConvo(prompt) {
     copyDiv.css('top', `${y}px`);
     copyDiv.css('display', 'block');
     delay(0.5, () => copyDiv.css('display', 'none'));
+  });  
+  aiEl.whenOn('contextmenu', (e) => {
+    e.preventDefault()
+    clipboardCopy(aiEl);
+    let copyDiv = getEl('div#copied');
+    let x = e.clientX;
+    let y = e.clientY;
+    copyDiv.css('left', `${x}px`);
+    copyDiv.css('top', `${y}px`);
+    copyDiv.css('display', 'block');
+    delay(0.5, () => copyDiv.css('display', 'none'));
+    return false;
   });
   
 	userEl.scrollIntoView({
@@ -171,7 +219,7 @@ function setupConvo(prompt) {
 }
 
 function sendConvo(AIRes, text) {
-	AIRes.setText(`${text}`);
+	AIRes.setText(`${marked.parse(text)}`, true);
 	getChildEl('.delConvo', AIRes.parentElement).css('display', 'block');
 	AIRes.css('display', 'block');;
 	disableDiv.css('display', 'none');
@@ -180,4 +228,21 @@ function sendConvo(AIRes, text) {
 		behavior: "smooth"
 	});
 	localStorage.setItem("chat", getText(chatBox, true));
+}
+
+function clipboardCopy(el) {
+    const clipboardItem = new ClipboardItem({
+        "text/plain": new Blob(
+            [getText(el, true)], {
+                type: "text/plain"
+            }
+        ),
+        "text/html": new Blob(
+            [el.outerHTML], {
+                type: "text/html"
+            }
+        ),
+    });
+
+    navigator.clipboard.write([clipboardItem]);
 }
