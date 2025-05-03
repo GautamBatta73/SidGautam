@@ -7,6 +7,11 @@
 	height: 100%;
   }
   
+  think {
+	font-style: italic;
+	color: rgba(0, 0, 0, 0.2);
+  }
+  
   body {
 	min-height: 100%;
 	background-color: #aaaaaa;
@@ -17,6 +22,12 @@
   img {
 	font-style: italic;
 	text-align: center;
+  }
+  
+  #modelSelect {
+	margin: 0 0.5em;
+	display: none;
+	height: 75%;
   }
   
   main {
@@ -138,7 +149,7 @@
 	justify-content: center;
   }
   
-  #btnClearAll {
+  #btnClearAll, select {
 	font-size: 1.5em;
   }
   
@@ -281,11 +292,16 @@
   
 	header {
 	  font-size: 1.2em;
+	  grid-template-columns: 9.5em 1fr 7em;
+	}
+  
+	#modelSelect {
+	  display: block;
 	}
   
 	header > div {
 	  font-size: inherit;
-	  margin-left: 10em;
+	  margin-right: 2.5em;
 	}
   }
   

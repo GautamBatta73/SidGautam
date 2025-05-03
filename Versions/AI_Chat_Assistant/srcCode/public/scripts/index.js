@@ -6,10 +6,13 @@ const helpBtn = getEl("#btnHelp");
 const helpDialog = getEl("dialog");
 const closeBtn = getEl("#btnCloseHelp");
 const disableDiv = getEl("#disabledDiv");
+const aiModel = getEl("#modelSelect");
 
 window.whenOn('load', () => {
 	if (localStorage.getItem("chat"))
 		chatBox.setText(localStorage.getItem("chat"), true);
+	if (localStorage.getItem("model"))
+		aiModel.setVal(localStorage.getItem("model"));
 
 	unless(!(getEl('.delConvo')), () => {
 		unless(!(getEl('.delConvo').length > 1), () => {
@@ -27,6 +30,10 @@ window.whenOn('load', () => {
 				localStorage.setItem("chat", getText(chatBox, true));
 			});
 		});
+	});
+
+	aiModel.whenOn('change', () => {
+		localStorage.setItem("model", getVal(aiModel));
 	});
   
   
@@ -102,10 +109,13 @@ window.whenOn('load', () => {
 });
 
 form.whenOn(`submit`, (e) => {
+	userPrompt.css("height", "auto");
 	e.preventDefault();
 	let uPrompt = getVal(userPrompt).trim();
+	let rModel = getVal(aiModel);
 	let obj = {
-		prompt: `${uPrompt}`
+		prompt: `${uPrompt}`,
+		model: `${rModel}`,
 	};
 	let AIRes = setupConvo(uPrompt);
 
@@ -122,12 +132,15 @@ form.whenOn(`submit`, (e) => {
 			body: JSON.stringify(obj)
 		}).then(response => {
 			//print('Response object: ', response);
+			unless((response.status == 200), () => {
+				throw new Error(`${response.status}: ${response.statusText}`);
+			});
 			return response.text();
 		}).then(text => {
 			//print('text object: ', text);
 			sendConvo(AIRes, text);
 		}).catch(error => {
-			//printErr('Error:', error);
+			printErr('Error:', error);
 			AIRes.addClass(`aiError`);
 			sendConvo(AIRes, "Internal Server Error.")
 		});
