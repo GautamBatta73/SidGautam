@@ -35,9 +35,9 @@ window.whenOn('load', () => {
 	aiModel.whenOn('change', () => {
 		localStorage.setItem("model", getVal(aiModel));
 	});
-  
-  
-  unless(!(getEl('.ai, .user')), () => {
+
+
+	unless(!(getEl('.ai, .user')), () => {
 		unless(!(getEl('.ai, .user').length > 1), () => {
 			getEl('.ai, .user').forEach(el => {
 				el.whenOn('click', (e) => {
@@ -50,8 +50,8 @@ window.whenOn('load', () => {
 					copyDiv.css('display', 'block');
 					delay(0.5, () => copyDiv.css('display', 'none'));
 				});
-        el.whenOn('contextmenu', (e) => {
-          e.preventDefault();
+				el.whenOn('contextmenu', (e) => {
+					e.preventDefault();
 					clipboardCopy(el);
 					let copyDiv = getEl('div#copied');
 					let x = e.clientX;
@@ -60,7 +60,7 @@ window.whenOn('load', () => {
 					copyDiv.css('top', `${y}px`);
 					copyDiv.css('display', 'block');
 					delay(0.5, () => copyDiv.css('display', 'none'));
-          return false;
+					return false;
 				});
 			});
 		}, () => {
@@ -74,8 +74,8 @@ window.whenOn('load', () => {
 				copyDiv.css('display', 'block');
 				delay(0.5, () => copyDiv.css('display', 'none'));
 			});
-      getEl(".ai, .user").whenOn('contextmenu', (e) => {
-        e.preventDefault();
+			getEl(".ai, .user").whenOn('contextmenu', (e) => {
+				e.preventDefault();
 				clipboardCopy(e.target.closest(".ai, .user"));
 				let copyDiv = getEl('div#copied');
 				let x = e.clientX;
@@ -84,7 +84,7 @@ window.whenOn('load', () => {
 				copyDiv.css('top', `${y}px`);
 				copyDiv.css('display', 'block');
 				delay(0.5, () => copyDiv.css('display', 'none'));
-        return false;
+				return false;
 			});
 		});
 	});
@@ -113,15 +113,16 @@ form.whenOn(`submit`, (e) => {
 	e.preventDefault();
 	let uPrompt = getVal(userPrompt).trim();
 	let rModel = getVal(aiModel);
-	let obj = {
-		prompt: `${uPrompt}`,
-		model: `${rModel}`,
-	};
 	let AIRes = setupConvo(uPrompt);
 
 	unless(!(uPrompt.length > 1), () => {
 		disableDiv.css('display', 'flex');
 		sendBtn.addAttr("disabled");
+		let obj = {
+			messages: getMessages(uPrompt),
+			model: `${rModel}`,
+		};
+
 		let postAI = fetch(`/api`, {
 			method: "POST",
 			headers: {
@@ -166,30 +167,30 @@ function setupConvo(prompt) {
 	let aiEl = addEl('section', convoDiv);
 
 	userEl.addClass("user");
-  userEl.addAttr("title=Click to Copy");
+	userEl.addAttr("title=Click to Copy");
 	userEl.setText(`${prompt}`);
-  userEl.whenOn('click', (e) => {    
-    navigator.clipboard.writeText(getText(userEl));
-    let copyDiv = getEl('div#copied');
-    let x = e.clientX;
-    let y = e.clientY;
-    copyDiv.css('left', `${x}px`);
-    copyDiv.css('top', `${y}px`);
-    copyDiv.css('display', 'block');
-    delay(0.5, () => copyDiv.css('display', 'none'));
-  });
-  userEl.whenOn('contextmenu', (e) => {
-    e.preventDefault();
-    clipboardCopy(userEl);
-    let copyDiv = getEl('div#copied');
-    let x = e.clientX;
-    let y = e.clientY;
-    copyDiv.css('left', `${x}px`);
-    copyDiv.css('top', `${y}px`);
-    copyDiv.css('display', 'block');
-    delay(0.5, () => copyDiv.css('display', 'none'));
-    return false;
-  });
+	userEl.whenOn('click', (e) => {
+		navigator.clipboard.writeText(getText(userEl));
+		let copyDiv = getEl('div#copied');
+		let x = e.clientX;
+		let y = e.clientY;
+		copyDiv.css('left', `${x}px`);
+		copyDiv.css('top', `${y}px`);
+		copyDiv.css('display', 'block');
+		delay(0.5, () => copyDiv.css('display', 'none'));
+	});
+	userEl.whenOn('contextmenu', (e) => {
+		e.preventDefault();
+		clipboardCopy(userEl);
+		let copyDiv = getEl('div#copied');
+		let x = e.clientX;
+		let y = e.clientY;
+		copyDiv.css('left', `${x}px`);
+		copyDiv.css('top', `${y}px`);
+		copyDiv.css('display', 'block');
+		delay(0.5, () => copyDiv.css('display', 'none'));
+		return false;
+	});
 
 	btnDel.addClass("delConvo");
 	btnDel.setText(`<img src="https://cdn.glitch.global/d8a2d8d1-6959-4a91-badd-90859a83dc87/delete.png?v=1705944823062" alt="Delete">`, true);
@@ -201,30 +202,30 @@ function setupConvo(prompt) {
 
 	aiEl.addClass("ai");
 	aiEl.css('display', 'none');
-  aiEl.addAttr("title=Click to Copy");
-  aiEl.whenOn('click', (e) => {    
-    navigator.clipboard.writeText(getText(aiEl));
-    let copyDiv = getEl('div#copied');
-    let x = e.clientX;
-    let y = e.clientY;
-    copyDiv.css('left', `${x}px`);
-    copyDiv.css('top', `${y}px`);
-    copyDiv.css('display', 'block');
-    delay(0.5, () => copyDiv.css('display', 'none'));
-  });  
-  aiEl.whenOn('contextmenu', (e) => {
-    e.preventDefault()
-    clipboardCopy(aiEl);
-    let copyDiv = getEl('div#copied');
-    let x = e.clientX;
-    let y = e.clientY;
-    copyDiv.css('left', `${x}px`);
-    copyDiv.css('top', `${y}px`);
-    copyDiv.css('display', 'block');
-    delay(0.5, () => copyDiv.css('display', 'none'));
-    return false;
-  });
-  
+	aiEl.addAttr("title=Click to Copy");
+	aiEl.whenOn('click', (e) => {
+		navigator.clipboard.writeText(getText(aiEl));
+		let copyDiv = getEl('div#copied');
+		let x = e.clientX;
+		let y = e.clientY;
+		copyDiv.css('left', `${x}px`);
+		copyDiv.css('top', `${y}px`);
+		copyDiv.css('display', 'block');
+		delay(0.5, () => copyDiv.css('display', 'none'));
+	});
+	aiEl.whenOn('contextmenu', (e) => {
+		e.preventDefault()
+		clipboardCopy(aiEl);
+		let copyDiv = getEl('div#copied');
+		let x = e.clientX;
+		let y = e.clientY;
+		copyDiv.css('left', `${x}px`);
+		copyDiv.css('top', `${y}px`);
+		copyDiv.css('display', 'block');
+		delay(0.5, () => copyDiv.css('display', 'none'));
+		return false;
+	});
+
 	userEl.scrollIntoView({
 		behavior: "smooth"
 	});
@@ -244,18 +245,48 @@ function sendConvo(AIRes, text) {
 }
 
 function clipboardCopy(el) {
-    const clipboardItem = new ClipboardItem({
-        "text/plain": new Blob(
-            [getText(el, true)], {
-                type: "text/plain"
-            }
-        ),
-        "text/html": new Blob(
-            [el.outerHTML], {
-                type: "text/html"
-            }
-        ),
-    });
+	const clipboardItem = new ClipboardItem({
+		"text/plain": new Blob(
+			[getText(el, true)], {
+			type: "text/plain"
+		}
+		),
+		"text/html": new Blob(
+			[el.outerHTML], {
+			type: "text/html"
+		}
+		),
+	});
 
-    navigator.clipboard.write([clipboardItem]);
+	navigator.clipboard.write([clipboardItem]);
+}
+
+function getMessages(userInput) {
+	let convoDivs = Array.from(getEl('#chatDiv > div'));
+
+	convoDivs = convoDivs.filter(div => {
+		const user = getChildEl("section.user", div);
+		const ai = getText(getChildEl("section.ai", div)).trim();
+		const aiError = getChildEl("section.aiError", div);
+
+		return user && ai && !aiError;
+	});
+
+	const last5 = convoDivs.slice(Math.max(convoDivs.length - 10, 0));
+	let messages = [];
+
+	last5.forEach(div => {
+		const userEl = getChildEl("section.user", div);
+		const aiEl = getChildEl("section.ai", div);
+
+		unless((!(userEl)), () => {
+			messages.push({ role: "user", content: `${getText(userEl).trim()}` });
+		});
+		unless((!(aiEl)), () => {
+			messages.push({ role: "assistant", content: `${getText(aiEl).trim()}` });
+		});
+	});
+
+	messages.push({ role: "user", content: `${userInput}` });
+	return messages;
 }

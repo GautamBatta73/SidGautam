@@ -51,13 +51,12 @@ async function log(prompts) {
 }
 
 app.route("/api").post(async (req, res) => {
-    let prompts = ["", null]
+    let prompts = ["", null, "0"];
     try {
-      const userIn = JSON.stringify(req.body.prompt || "").slice(1, -1);
+      const history = req.body.messages || [];
       const userModel = req.body.model;
       let aiModel = "deepseek-ai/DeepSeek-V3-0324";
       let tokens = 1000;
-      //console.log("User Input: ", userIn);
   
       if (userModel == "1") {
           aiModel = "deepseek-ai/DeepSeek-R1";
@@ -65,33 +64,36 @@ app.route("/api").post(async (req, res) => {
       } else if (userModel == "2") {
           aiModel = "chutesai/Llama-4-Maverick-17B-128E-Instruct-FP8";
       }
+
+      const allMessages = [
+        {
+          role: "system",
+          content: `You are SidGautamAI: A helpful, respectful and honest chat assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature. If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you do not know the answer to a question, please do not share false information.`,
+      },
+        ...history
+      ];
+
+      let userIn = [...history].reverse().find(msg => msg.role === "user")?.content || "";
   
       prompts[0] = userIn;
       prompts[2] = aiModel;
     
       const API_URL = `${process.env.API_URL}`;
           const headers = {
-              "Authorization": `Bearer cpk_a72901369e414a5a8d5e6d46917f1292.1dd4bed2d1525512af428608f5f04e18.ajYfcq3clCgbfwKeC5KvD6sbOCcIEL4R`,
+              "Authorization": `Bearer ${process.env.API_KEY}`,
               "Content-Type": "application/json"
           };
           const body = JSON.stringify({
               model: aiModel,
-              messages: [
-                  {
-                      role: "system",
-                      content: `You are SidGautamAI: A helpful, respectful and honest chat assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature. If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you do not know the answer to a question, please do not share false information.`,
-                  },
-                  { role: "user", content: userIn },
-              ],
+              messages: allMessages,
               stream: false,
               max_tokens: tokens,
               temperature: 0.5
-          });
-  
+          });  
           
           const response = await fetch(API_URL, { method: "POST", headers, body });
           if (!response.ok) {
-              //console.error("API Error:", response.status, response.statusText);
+              console.error("API Error:", response.status, response.statusText);
               throw new Error(`API responded with status: ${response.status}`);
           }
   
@@ -106,7 +108,7 @@ app.route("/api").post(async (req, res) => {
           res.status(200).send(answer);
           prompts[1] = answer;
       } catch (error) {
-          //console.error("Server Error:", error.message);
+          console.error("Server Error:", error.message);
           res.status(500).send("Internal Server Error.");
           prompts[1] = error.message;
       }

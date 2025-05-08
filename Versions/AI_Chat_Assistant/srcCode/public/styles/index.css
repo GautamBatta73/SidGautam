@@ -46,7 +46,7 @@
 	cursor: pointer;
   }
   
-  .ai * {  
+  .ai * {
 	margin: revert;
   }
   
@@ -64,7 +64,7 @@
 	content: "AI: ";
   }
   
-  #chatDiv > div > section {
+  #chatDiv>div>section {
 	font-size: 1.5em;
 	border: 0.1em solid black;
 	border-radius: 22px;
@@ -74,7 +74,7 @@
   }
   
   .ai table {
-	margin: 1em;  
+	margin: 1em;
 	border-collapse: collapse;
   }
   
@@ -89,6 +89,10 @@
 	flex-direction: column;
 	height: 95%;
 	overflow-y: auto;
+  }
+  
+  .ai hr {
+	border-color: black
   }
   
   div[id^="convo"] {
@@ -106,7 +110,7 @@
 	visibility: hidden;
   }
   
-  div[id^="convo"]:hover > .delConvo {
+  div[id^="convo"]:hover>.delConvo {
 	visibility: visible;
   }
   
@@ -141,7 +145,7 @@
 	justify-content: center;
   }
   
-  header > div {
+  header>div {
 	font-size: 2vmax;
 	text-align: center;
 	display: flex;
@@ -149,7 +153,8 @@
 	justify-content: center;
   }
   
-  #btnClearAll, select {
+  #btnClearAll,
+  select {
 	font-size: 1.5em;
   }
   
@@ -179,7 +184,7 @@
 	justify-content: center;
   }
   
-  button#btnSend > img {
+  button#btnSend>img {
 	width: 0.8em;
   }
   
@@ -218,7 +223,7 @@
 	font-size: 1.5em;
   }
   
-  dialog > div {
+  dialog>div {
 	padding: 1em;
   }
   
@@ -299,9 +304,8 @@
 	  display: block;
 	}
   
-	header > div {
+	header>div {
 	  font-size: inherit;
 	  margin-right: 2.5em;
 	}
   }
-  
