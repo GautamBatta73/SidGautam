@@ -3,16 +3,27 @@ const sendBtn = getEl("#btnSend");
 const userPrompt = getEl("#userPrompt");
 const chatBox = getEl("#chatDiv");
 const helpBtn = getEl("#btnHelp");
-const helpDialog = getEl("dialog");
-const closeBtn = getEl("#btnCloseHelp");
+const helpDialog = getEl("#helpDialog");
+const helpCloseBtn = getEl("#btnCloseHelp");
+const menuBtn = getEl("#btnMenu");
+const menuDialog = getEl("#menuDialog");
+const menuCloseBtn = getEl("#btnCloseMenu");
 const disableDiv = getEl("#disabledDiv");
 const aiModel = getEl("#modelSelect");
 
 window.whenOn('load', () => {
 	if (localStorage.getItem("chat"))
 		chatBox.setText(localStorage.getItem("chat"), true);
-	if (localStorage.getItem("model"))
+	if (localStorage.getItem("model")) {
 		aiModel.setVal(localStorage.getItem("model"));
+		let currVal = getVal(aiModel);
+
+		document.title = (currVal == "3") ? "SinJautamAI" : "SidGautamAI";
+		getEl("header>div>h1").setText((currVal == "3") ? "SinJautamAI" : "SidGautamAI");
+		getEl("header>div>img").css("rotate", (currVal == "3") ? "180deg" : "0deg");
+
+		localStorage.setItem("model", getVal(aiModel));
+	}
 
 	unless(!(getEl('.delConvo')), () => {
 		unless(!(getEl('.delConvo').length > 1), () => {
@@ -33,6 +44,18 @@ window.whenOn('load', () => {
 	});
 
 	aiModel.whenOn('change', () => {
+		let oldVal = localStorage.getItem("model");
+		let currVal = getVal(aiModel);
+
+		unless((!(oldVal == "3" || currVal == "3")), () => {
+			chatBox.setText("", true);
+			localStorage.setItem("chat", getText(chatBox, true));
+		});
+
+		document.title = (currVal == "3") ? "SinJautamAI" : "SidGautamAI";
+		getEl("header>div>h1").setText((currVal == "3") ? "SinJautamAI" : "SidGautamAI");
+		getEl("header>div>img").css("rotate", (currVal == "3") ? "180deg" : "0deg");
+
 		localStorage.setItem("model", getVal(aiModel));
 	});
 
@@ -99,7 +122,15 @@ window.whenOn('load', () => {
 		userPrompt.css("height", (userPrompt.scrollHeight) + "px");
 	}, false);
 
-	closeBtn.whenOn('click', () => {
+	menuCloseBtn.whenOn('click', () => {
+		menuDialog.close();
+	}, false);
+
+	menuBtn.whenOn('click', () => {
+		menuDialog.showModal();
+	}, false);
+
+	helpCloseBtn.whenOn('click', () => {
 		helpDialog.close();
 	}, false);
 
@@ -113,39 +144,43 @@ form.whenOn(`submit`, (e) => {
 	e.preventDefault();
 	let uPrompt = getVal(userPrompt).trim();
 	let rModel = getVal(aiModel);
-	let AIRes = setupConvo(uPrompt);
 
 	unless(!(uPrompt.length > 1), () => {
-		disableDiv.css('display', 'flex');
-		sendBtn.addAttr("disabled");
-		let obj = {
-			messages: getMessages(uPrompt),
-			model: `${rModel}`,
-		};
+		const count = uPrompt.split(/\s+/).length;
 
-		let postAI = fetch(`/api`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			mode: "same-origin",
-			credentials: "same-origin",
-			body: JSON.stringify(obj)
-		}).then(response => {
-			//print('Response object: ', response);
-			unless((response.status == 200), () => {
-				throw new Error(`${response.status}: ${response.statusText}`);
+		unless((count > 1500), () => {
+			let AIRes = setupConvo(uPrompt);
+			disableDiv.css('display', 'flex');
+			sendBtn.addAttr("disabled");
+			let obj = {
+				messages: getMessages(uPrompt),
+				model: `${rModel}`,
+			};
+
+			let stat = 500;
+			let postAI = fetch(`/api`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				mode: "same-origin",
+				credentials: "same-origin",
+				body: JSON.stringify(obj)
+			}).then(response => {
+				stat = response.status;
+				return response.text();
+			}).then(text => {
+				unless((stat == 200), () => {
+					throw new Error(text);
+				});
+				sendConvo(AIRes, text);
+			}).catch(error => {
+				printErr('Error:', error.message);
+				AIRes.addClass(`aiError`);
+				sendConvo(AIRes, `${stat == 400 ? error.message : "Internal Server Error"}`);
 			});
-			return response.text();
-		}).then(text => {
-			//print('text object: ', text);
-			sendConvo(AIRes, text);
-		}).catch(error => {
-			printErr('Error:', error);
-			AIRes.addClass(`aiError`);
-			sendConvo(AIRes, "Internal Server Error.")
-		});
-		//print(postAI);
+			//print(postAI);
+		}, () => alert("Prompt too long. Must be 1500 words or less!"));
 	});
 	userPrompt.setVal("");
 });
@@ -233,7 +268,11 @@ function setupConvo(prompt) {
 }
 
 function sendConvo(AIRes, text) {
-	AIRes.setText(`${marked.parse(text)}`, true);
+	let parseText = parseThink(text);
+
+	AIRes.setText(`${parseText.thoughts}`, true);
+
+	AIRes.appendText(`${marked.parse(parseText.cleanedText)}`, true);
 	getChildEl('.delConvo', AIRes.parentElement).css('display', 'block');
 	AIRes.css('display', 'block');;
 	disableDiv.css('display', 'none');
@@ -290,3 +329,43 @@ function getMessages(userInput) {
 	messages.push({ role: "user", content: `${userInput}` });
 	return messages;
 }
+
+function parseThink(text) {
+	const thinkMatches = [...text.matchAll(/<think>([\s\S]*?)<\/think>/gi)];
+	let thoughts = thinkMatches.map(match => match[1].trim()).join("\n");
+	const cleanedText = text.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+
+	thoughts = `<think>${thoughts}</think>`;
+	return { thoughts, cleanedText };
+}
+
+function buildChatJson() {
+	const convoDivs = Array.from(getEl('#chatDiv > div'));
+	let chatData = [];
+
+	convoDivs.forEach(div => {
+		const userTxt = getText(getChildEl('.user', div)).trim();
+		const aiTxt = getText(getChildEl('.ai', div)).trim();
+		const aiError = getChildEl("section.aiError", div);
+
+		unless((!(userTxt && aiTxt && !aiError)), () => {
+			chatData.push({ user: userTxt, ai: aiTxt });
+		});
+	});
+
+	return chatData;
+}
+
+function downloadChatJson() {
+	const chat = buildChatJson();
+	const blob = new Blob([JSON.stringify(chat, null, 2)], { type: 'application/json' });
+	const url = URL.createObjectURL(blob);
+
+	const a = addEl('a', document.body);
+	a.addAttr(`href=${url}`, "download=chat_history.json");
+	a.click();
+	a.delEl();
+	URL.revokeObjectURL(url);
+}
+
+function _throw(m) { throw new Error(m); }

@@ -14,17 +14,12 @@
 
 <body>
 	<header>
-		<select title="Select an AI Model" name="modelSelect" id="modelSelect">
-			<option value="0" selected>Default (Faster)</option>
-			<option value="1">Advanced (Slower)</option>
-			<option value="2">Classic (Original)</option>
-		</select>
 		<div>
 			<img src="https://cdn.glitch.global/d8a2d8d1-6959-4a91-badd-90859a83dc87/logo.png?v=1705944822886"
 				alt="logo">
 			<h1>SidGautamAI</h1>
 		</div>
-		<button id="btnClearAll">Clear All</button>
+		<button id="btnMenu">Chat Menu</button>
 	</header>
 	<main>
 		<p style="display: none;"></p>
@@ -41,7 +36,7 @@
 			</button>
 		</form>
 	</footer>
-	<dialog>
+	<dialog id="helpDialog">
 		<button id="btnCloseHelp">
 			<span>✖</span>
 		</button>
@@ -59,6 +54,28 @@
 				<p>Open a Ticket!</p>
 				<a href="https://github.com/GautamBatta73/SidGautam/issues" rel="noopener noreferrer"
 					target="_blank">GitHub Issues Page</a>
+			</section>
+		</div>
+	</dialog>
+	<dialog id="menuDialog">
+		<button id="btnCloseMenu">
+			<span>✖</span>
+		</button>
+		<div>
+			<h1>Chat Menu/Options</h1>
+			<section>
+				<select title="Select an AI Model" name="modelSelect" id="modelSelect">
+					<option value="0" selected>Default (Faster)</option>
+					<option value="1">Advanced (Slower)</option>
+					<option value="2">Classic (Original)</option>
+					<option value="3">Evil Twin (Evil)</option>
+				</select>
+			</section>
+			<section>
+				<button id="btnClearAll">Clear All</button>
+			</section>
+			<section>
+				<button id="btnDownload" onclick="downloadChatJson()">Download Chat</button>
 			</section>
 		</div>
 	</dialog>
