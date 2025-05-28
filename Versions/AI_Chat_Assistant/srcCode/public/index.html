@@ -64,6 +64,7 @@
 		<div>
 			<h1>Chat Menu/Options</h1>
 			<section>
+				<h2>Change AI Model:</h2>
 				<select title="Select an AI Model" name="modelSelect" id="modelSelect">
 					<option value="0" selected>Default (Faster)</option>
 					<option value="1">Advanced (Slower)</option>
@@ -71,10 +72,14 @@
 					<option value="3">Evil Twin (Evil)</option>
 				</select>
 			</section>
+			<br>
 			<section>
+				<h2>Clear All Chat History:</h2>
 				<button id="btnClearAll">Clear All</button>
 			</section>
+			<br>
 			<section>
+				<h2>Download All Chat History:</h2>
 				<button id="btnDownload" onclick="downloadChatJson()">Download Chat</button>
 			</section>
 		</div>
