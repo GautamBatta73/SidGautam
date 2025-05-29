@@ -1,11 +1,11 @@
 const PORT = 3000;
 
-const fetch = require("node-fetch");
 const Express = require("express");
 const path = require("path");
 const cors = require('cors');
 const fs = require("fs");
 const app = Express();
+require('dotenv').config();
 
 app.use(Express.json());
 app.use(Express.static("public"));

@@ -228,7 +228,7 @@ function setupConvo(prompt) {
 	});
 
 	btnDel.addClass("delConvo");
-	btnDel.setText(`<img src="https://cdn.glitch.global/d8a2d8d1-6959-4a91-badd-90859a83dc87/delete.png?v=1705944823062" alt="Delete">`, true);
+	btnDel.setText(`<img src="./images/delete.png" alt="Delete">`, true);
 	btnDel.css('display', 'none');
 	btnDel.whenOn('click', () => {
 		convoDiv.delEl();
