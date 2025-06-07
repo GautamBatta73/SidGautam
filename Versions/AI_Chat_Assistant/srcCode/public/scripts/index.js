@@ -301,32 +301,42 @@ function clipboardCopy(el) {
 }
 
 function getMessages(userInput) {
-	let convoDivs = Array.from(getEl('#chatDiv > div'));
-
-	convoDivs = convoDivs.filter(div => {
-		const user = getChildEl("section.user", div);
-		const ai = getText(getChildEl("section.ai", div)).trim();
-		const aiError = getChildEl("section.aiError", div);
-
-		return user && ai && !aiError;
-	});
-
-	const last5 = convoDivs.slice(Math.max(convoDivs.length - 10, 0));
+	const convoDivs = getEl('#chatDiv > div');
 	let messages = [];
+	let convoDivArr = [];
 
-	last5.forEach(div => {
-		const userEl = getChildEl("section.user", div);
-		const aiEl = getChildEl("section.ai", div);
-
-		unless((!(userEl)), () => {
-			messages.push({ role: "user", content: `${getText(userEl).trim()}` });
-		});
-		unless((!(aiEl)), () => {
-			messages.push({ role: "assistant", content: `${getText(aiEl).trim()}` });
-		});
+	unless((!(convoDivs instanceof Element)), () => {
+		convoDivArr.push(convoDivs);
+	}, () => {
+		convoDivArr = convoDivs ? Array.from(convoDivs) : 0;
 	});
 
-	messages.push({ role: "user", content: `${userInput}` });
+	unless((!(Array.isArray(convoDivArr))), () => {
+		convoDivArr = convoDivArr.filter(div => {
+			const user = getChildEl("section.user", div);
+			const ai = getText(getChildEl("section.ai", div)).trim();
+			const aiError = getChildEl("section.aiError", div);
+
+			return user && ai && !aiError;
+		});
+
+		const last = convoDivArr.slice(Math.max(convoDivArr.length - 10, 0));
+
+		last.forEach(div => {
+			const userEl = getChildEl("section.user", div);
+			const aiEl = getChildEl("section.ai", div);
+
+			unless((!(userEl)), () => {
+				messages.push({ role: "user", content: `${getText(userEl).trim()}` });
+			});
+			unless((!(aiEl)), () => {
+				messages.push({ role: "assistant", content: `${getText(aiEl).trim()}` });
+			});
+		});
+
+		messages.push({ role: "user", content: `${userInput}` });
+	});
+
 	return messages;
 }
 
@@ -340,16 +350,25 @@ function parseThink(text) {
 }
 
 function buildChatJson() {
-	const convoDivs = Array.from(getEl('#chatDiv > div'));
+	const convoDivs = getEl('#chatDiv > div');
 	let chatData = [];
+	let convoDivArr = [];
 
-	convoDivs.forEach(div => {
-		const userTxt = getText(getChildEl('.user', div)).trim();
-		const aiTxt = getText(getChildEl('.ai', div)).trim();
-		const aiError = getChildEl("section.aiError", div);
+	unless((!(convoDivs instanceof Element)), () => {
+		convoDivArr.push(convoDivs);
+	}, () => {
+		convoDivArr = convoDivs ? Array.from(convoDivs) : 0;
+	});
 
-		unless((!(userTxt && aiTxt && !aiError)), () => {
-			chatData.push({ user: userTxt, ai: aiTxt });
+	unless((!(Array.isArray(convoDivArr))), () => {
+		convoDivArr.forEach(div => {
+			const userTxt = getText(getChildEl('.user', div)).trim();
+			const aiTxt = getText(getChildEl('.ai', div)).trim();
+			const aiError = getChildEl("section.aiError", div);
+
+			unless((!(userTxt && aiTxt && !aiError)), () => {
+				chatData.push({ user: userTxt, ai: aiTxt });
+			});
 		});
 	});
 
@@ -358,14 +377,18 @@ function buildChatJson() {
 
 function downloadChatJson() {
 	const chat = buildChatJson();
-	const blob = new Blob([JSON.stringify(chat, null, 2)], { type: 'application/json' });
-	const url = URL.createObjectURL(blob);
+	unless((chat.length !== 0), () => {
+		alert("No Chat History To Download!");
+	}, () => {
+		const blob = new Blob([JSON.stringify(chat, null, 2)], { type: 'application/json' });
+		const url = URL.createObjectURL(blob);
 
-	const a = addEl('a', document.body);
-	a.addAttr(`href=${url}`, "download=chat_history.json");
-	a.click();
-	a.delEl();
-	URL.revokeObjectURL(url);
+		const a = addEl('a', document.body);
+		a.addAttr(`href=${url}`, "download=chat_history.json");
+		a.click();
+		a.delEl();
+		URL.revokeObjectURL(url);
+	});
 }
 
 function _throw(m) { throw new Error(m); }
