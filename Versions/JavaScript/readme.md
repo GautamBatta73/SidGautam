@@ -1,9 +1,18 @@
-# Documentation
+# ~~Documentation~~
 
-## First Things First, You Will Need To Import The Script: Add This to The Bottom of Your Body Element, Before Any Other Scripts: 
-_<script src="ht<span>tps://raw.githack.</span>com/GautamBatta73/SidGautam/main/Versions/JavaScript/SidGaut_[Version].js"></script>_
-### OR
-_<script src="ht<span>tps://raw.githack.</span>com/GautamBatta73/SidGautam/main/Versions/JavaScript/Minfied/SidGaut_[Version].min.js"></script>_
+<hr> 
+
+### This documentation is outdated as of June 11, 2025.
+### Please visit the following links for the updated documentation and SidGautamJS page. 
+### [Updated Documentation](https://sidgautam.ca/js-lib/docs)
+### [SidGautamJS Page](https://sidgautam.ca/js-lib)
+
+<hr>
+
+## ~~First Things First, You Will Need To Import The Script: Add This to The Bottom of Your Body Element, Before Any Other Scripts:~~
+~~_<script src="ht<span>tps://raw.githack.</span>com/GautamBatta73/SidGautam/main/Versions/JavaScript/SidGaut_[Version].js"></script>_~~
+### ~~OR~~
+~~_<script src="ht<span>tps://raw.githack.</span>com/GautamBatta73/SidGautam/main/Versions/JavaScript/Minfied/SidGaut_[Version].min.js"></script>_~~
 
 <br>
 
