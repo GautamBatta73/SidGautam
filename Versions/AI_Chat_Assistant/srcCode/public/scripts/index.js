@@ -375,20 +375,57 @@ function buildChatJson() {
 	return chatData;
 }
 
-function downloadChatJson() {
-	const chat = buildChatJson();
-	unless((chat.length !== 0), () => {
-		alert("No Chat History To Download!");
-	}, () => {
-		const blob = new Blob([JSON.stringify(chat, null, 2)], { type: 'application/json' });
-		const url = URL.createObjectURL(blob);
+function buildChatSgtxt() {
+	const chatDupe = chatBox.cloneNode(true);
 
-		const a = addEl('a', document.body);
-		a.addAttr(`href=${url}`, "download=chat_history.json");
-		a.click();
-		a.delEl();
-		URL.revokeObjectURL(url);
+	getChildEl("div", chatDupe, -1).forEach(el => {
+		el.delAttr("id");
+		el.addClass("convo");
 	});
+
+	return getText(chatDupe, true).trim() || "";
+}
+
+function downloadChatJson() {
+	try {
+		const chat = buildChatJson();
+		unless((chat.length !== 0), () => {
+			alert("No Chat History To Download!");
+		}, () => {
+			const blob = new Blob([JSON.stringify(chat, null, 2)], { type: 'application/json' });
+			const url = URL.createObjectURL(blob);
+
+			const a = addEl('a', document.body);
+			a.addAttr(`href=${url}`, "download=chat_history.json");
+			a.click();
+			a.delEl();
+			URL.revokeObjectURL(url);
+		});
+	} catch (err) {
+		console.error("Error downloading chat as JSON: ", err);
+		alert("Failed To Download Chat History as JSON.\nPlease Try Again Later!");
+	}
+}
+
+function downloadChatSgtxt() {
+	try {
+		const chat = buildChatSgtxt();
+		unless((chat.length !== 0 || Boolean(chat)), () => {
+			alert("No Chat History To Download!");
+		}, () => {
+			const blob = new Blob([btoa(encodeURIComponent(chat))], { type: 'text/plain' });
+			const url = URL.createObjectURL(blob);
+
+			const a = addEl('a', document.body);
+			a.addAttr(`href=${url}`, "download=chat_history.sgtxt");
+			a.click();
+			a.delEl();
+			URL.revokeObjectURL(url);
+		});
+	} catch (err) {
+		console.error("Error downloading chat as SGTXT: ", err);
+		alert("Failed To Download Chat History as SGTXT.\nPlease Try Again Later!");
+	}
 }
 
 function _throw(m) { throw new Error(m); }

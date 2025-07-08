@@ -78,9 +78,16 @@
 				<button id="btnClearAll">Clear All</button>
 			</section>
 			<br>
-			<section>
+			<section id="downloadSection">
 				<h2>Download All Chat History:</h2>
-				<button id="btnDownload" onclick="downloadChatJson()">Download Chat</button>
+				<div>
+					<button onclick="downloadChatJson()">Download<br>JSON</button>
+					<p>Good for Basic Archiving</p>
+					<button onclick="downloadChatSgtxt()">Download<br>SGTXT</button>
+					<p>Good for Viewing and Preserving Styling</p>
+				</div>
+				<a href="./display" id="btnViewChat"
+					title="Display Chat Page">Import and View Chat</a>
 			</section>
 		</div>
 	</dialog>
@@ -92,7 +99,7 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 	<script
-		src="https://raw.githack.com/GautamBatta73/SidGautam/main/Versions/JavaScript/Minfied/SidGaut_5.5.0.min.js"></script>
+		src="https://sidgautam.ca/js-lib/latest-min"></script>
 	<script src="scripts/index.js" type="application/javascript"></script>
 </body>
 

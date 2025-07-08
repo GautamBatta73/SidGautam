@@ -160,9 +160,29 @@ header>div {
 
 #btnClearAll,
 #btnMenu,
-#btnDownload,
+#downloadSection button,
+#btnViewChat,
 select {
   font-size: 1.5em;
+}
+
+#btnViewChat {
+  display: inline-block;
+  margin: 0.5em 0;
+}
+
+#downloadSection div {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  justify-items: start;
+  width: 90%;
+  gap: 1em;
+}
+
+#downloadSection p {
+  font-size: 1.3em;
 }
 
 form {

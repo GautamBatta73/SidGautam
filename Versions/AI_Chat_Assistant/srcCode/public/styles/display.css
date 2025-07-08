@@ -1,0 +1,295 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+think {
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.2);
+  display: block;
+}
+
+dialog#menuDialog>div button {
+  font-weight: normal;
+}
+
+body {
+  min-height: 100%;
+  background-color: #aaaaaa;
+  display: grid;
+  grid-template-rows: 7em 82vh;
+}
+
+img {
+  font-style: italic;
+  text-align: center;
+}
+
+main {
+  margin: 0 2vw;
+  background-color: white;
+  overflow-y: visible;
+}
+
+.user {
+  background-color: #aadddd;
+  cursor: pointer;
+}
+
+.ai {
+  background-color: #ffaabb;
+  cursor: pointer;
+}
+
+.ai * {
+  margin: revert;
+}
+
+.ai.aiError {
+  background-color: #ff0000;
+}
+
+.user::before {
+  font-weight: bold;
+  content: "User: ";
+}
+
+.ai::before {
+  font-weight: bold;
+  content: "AI: ";
+}
+
+#chatDiv>div>section {
+  font-size: 1.5em;
+  border: 0.1em solid black;
+  border-radius: 22px;
+  padding: 0.5em;
+  margin: 0.5em;
+  width: fit-content;
+  word-break: break-word;
+}
+
+.ai table {
+  margin: 1em;
+  border-collapse: collapse;
+}
+
+.ai table * {
+  border: 0.1em black solid;
+  padding: 0.3em;
+}
+
+#chatDiv {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  height: 93%;
+  overflow-y: auto;
+}
+
+.ai hr {
+  border-color: black
+}
+
+div.convo{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.delConvo {
+  grid-row: 1/4;
+  grid-column: 2;
+  background-color: transparent;
+  border: none;
+  margin: 1.5em 0;
+  margin-left: 0.5em;
+  visibility: hidden;
+}
+
+div.convo:hover>.delConvo {
+  visibility: visible;
+}
+
+header img {
+  height: 3em;
+  cursor: pointer;
+}
+
+.delConvo img {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+header {
+  font-size: 2.5vmax;
+  padding: 1em 0;
+  display: grid;
+  grid-template-columns: 1fr 7em;
+  align-items: center;
+  justify-content: center;
+}
+
+header>div {
+  font-size: 2vmax;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#btnClearAll,
+#btnMenu,
+#btnDownload,
+#btnUpload,
+#downloadSection button,
+#uploadLabel {
+  font-size: 1.5em;
+}
+
+#downloadSection div {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  justify-items: start;
+  width: 90%;
+  gap: 1em;
+}
+
+#downloadSection p {
+  font-size: 1.3em;
+}
+
+#uploadLabel img {
+  width: 2.5em;
+  cursor: pointer;
+  border: 0.1em solid black;
+}
+
+#uploadLabel {
+  line-height: 0;
+  background-color: white;
+}
+
+#uploadLabel:hover {
+  background-color: #ccc;
+}
+
+#sectionUpload>div {
+  display: flex;
+  column-gap: 1em;
+  align-items: center;
+}
+
+#uploadErrors {
+  color: red;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+button {
+  font-weight: bold;
+  font-size: 2em;
+  width: fit-content;
+  height: fit-content;
+  margin: 0 0.5em;
+  cursor: pointer;
+}
+
+dialog#menuDialog button {
+  margin: 0;
+}
+
+dialog {
+  margin: auto;
+  font-size: large;
+}
+
+dialog::backdrop {
+  background: rgb(0 0 0 / 45%);
+}
+
+dialog h1 {
+  text-align: center;
+}
+
+dialog section {
+  margin: 1em 0;
+}
+
+dialog h3 {
+  text-decoration: underline;
+  margin-left: 0em;
+  font-size: 1.5em;
+}
+
+dialog>div {
+  padding: 1em;
+}
+
+button#btnCloseMenu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  background-color: red;
+  border-right: 0;
+  border-top: 0;
+  font-size: 1.5em;
+  height: 1.5em;
+  width: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  color: blue;
+  font-weight: bold;
+}
+
+a:hover {
+  color: aqua;
+}
+
+div#copied {
+  border: 0.1em solid black;
+  position: absolute;
+  padding: 0.25em 0.5em;
+  display: none;
+  font-size: 1.5em;
+  font-weight: bold;
+  background-color: white;
+  z-index: 4;
+}
+
+#TEXTAREA--texthelp-mirror-div {
+  display: none !important;
+}
+
+@media all and (min-width: 768px) {
+  main {
+    overflow-y: visible;
+  }
+
+  header {
+    font-size: 1.2em;
+  }
+
+  header>div {
+    font-size: inherit;
+    margin-left: 8em;
+  }
+
+  #chatDiv {
+    height: 95%;
+  }
+}

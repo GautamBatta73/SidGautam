@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="styles/display.css" rel="stylesheet" type="text/css" />
+	<link rel="icon" href="./images/icon.png" type="image/x-icon">
+	<title>SidGautamAI Display</title>
+</head>
+
+<body>
+	<header>
+		<div>
+			<img src="./images/logo.png"
+				alt="logo">
+			<h1>SidGautamAI</h1>
+		</div>
+		<button id="btnMenu">Page Menu</button>
+	</header>
+	<main>
+		<p style="display: none;"></p>
+		<div id="chatDiv">
+		</div>
+		<br>
+	</main>
+	<dialog id="menuDialog">
+		<button id="btnCloseMenu">
+			<span>✖</span>
+		</button>
+		<div>
+			<h1>Display Menu/Options</h1>
+			<section>
+				<h2>Clear Imported Messages:</h2>
+				<button id="btnClearAll">Clear All</button>
+			</section>
+			<br>
+			<section id="sectionUpload">
+				<h2>Upload Chat (JSON/SGTXT):</h2>
+				<div>
+					<label id="uploadLabel" for="uploadInput">
+						<img src="./images/upload.png" alt="Upload" />
+						<input type="file" id="uploadInput" accept=".json,.sgtxt" onchange="uploadChat()" />
+					</label>
+					<p id="uploadErrors"></p>
+				</div>
+			</section>
+			<br>
+			<section id="downloadSection">
+				<h2>Download All Chat History:</h2>
+				<div>
+					<button onclick="downloadChatJson()">Download<br>JSON</button>
+					<p>Good for Basic Archiving</p>
+					<button onclick="downloadChatSgtxt()">Download<br>SGTXT</button>
+					<p>Good for Viewing and Preserving Styling</p>
+				</div>
+			</section>
+		</div>
+	</dialog>
+	<div id="copied">Copied!</div>
+
+	<script src="https://sidgautam.ca/js-lib/latest-min"></script>
+	<script src="scripts/display.js" type="application/javascript"></script>
+</body>
+
+</html>

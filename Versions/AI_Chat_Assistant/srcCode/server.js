@@ -28,6 +28,10 @@ app.route(["/", "/chat", "/home"]).get((req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+app.route("/display").get((req, res) => {
+  res.sendFile(path.join(__dirname, "public", "display.html"));
+});
+
 async function log(prompts) {
   const logEntry = {
     timestamp: new Date().toISOString(),
