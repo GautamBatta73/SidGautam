@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        const status = 'O';
+        // M = Maintenance, O = Online, D = Down
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://sidgautam.ca/assets/icon.png" type="image/x-icon">
+    <title>SidGautamStatus</title>
+    <style>
+        html {
+            color: white;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 15vmin;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1></h1>
+    <script>
+        const statusElement = document.querySelector('h1');
+        switch (status) {
+            case 'M':
+                statusElement.textContent = 'In Maintenance';
+                document.title = 'SidGautamStatus - Maintenance';
+                document.body.style.backgroundColor = '#f0ad4e'; // Orange
+                break;
+            case 'O':
+                statusElement.textContent = 'Online';
+                document.title = 'SidGautamStatus - Online';
+                document.body.style.backgroundColor = '#5cb85c'; // Green
+                break;
+            case 'D':
+                statusElement.textContent = 'Down';
+                document.title = 'SidGautamStatus - Down';
+                document.body.style.backgroundColor = '#d9534f'; // Red
+                break;
+            default:
+                statusElement.textContent = 'Unknown Status';
+                document.title = 'SidGautamStatus - Unknown';
+                document.body.style.backgroundColor = '#f0f0f0'; // Default Gray
+        }
+    </script>
+</body>
+
+</html>
