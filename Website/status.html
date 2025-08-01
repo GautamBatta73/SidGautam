@@ -3,8 +3,12 @@
 
 <head>
     <script>
-        const status = 'O';
         // M = Maintenance, O = Online, D = Down
+        const status = {
+            "overall": 'O',
+            "js": 'O',
+            "ai": 'D',
+        };
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +21,7 @@
 
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
@@ -28,15 +33,38 @@
         h1 {
             font-size: 15vmin;
             text-align: center;
+            margin: 0;
+        }
+
+        ul {
+            margin: 0;
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        li {
+            font-weight: bold;
+            font-size: 8vmin;
+        }
+
+        li > span {
+            font-weight: normal;
         }
     </style>
 </head>
 
 <body>
     <h1></h1>
+    <ul>
+        <li>SidGautamJS: <span id="js-status">❌</span></li>
+        <li>SidGautamAI: <span id="ai-status">❌</span></li>
+    </ul>
     <script>
         const statusElement = document.querySelector('h1');
-        switch (status) {
+        const jsStatusElement = document.getElementById('js-status');
+        const aiStatusElement = document.getElementById('ai-status');
+        switch (status.overall) {
             case 'M':
                 statusElement.textContent = 'In Maintenance';
                 document.title = 'SidGautamStatus - Maintenance';
@@ -57,6 +85,37 @@
                 document.title = 'SidGautamStatus - Unknown';
                 document.body.style.backgroundColor = '#f0f0f0'; // Default Gray
         }
+
+        if (status.overall === 'O') {
+            switch (status.js) {
+                case 'M':
+                    jsStatusElement.textContent = '⚠️';
+                    break;
+                case 'O':
+                    jsStatusElement.textContent = '✔️';
+                    break;
+                case 'D':
+                    jsStatusElement.textContent = '❌';
+                    break;
+                default:
+                    jsStatusElement.textContent = 'Unknown';
+            }
+
+            switch (status.ai) {
+                case 'M':
+                    aiStatusElement.textContent = '⚠️';
+                    break;
+                case 'O':
+                    aiStatusElement.textContent = '✔️';
+                    break;
+                case 'D':
+                    aiStatusElement.textContent = '❌';
+                    break;
+                default:
+                    aiStatusElement.textContent = 'Unknown';
+            }
+        }
+
     </script>
 </body>
 
