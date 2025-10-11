@@ -203,7 +203,7 @@ function setupConvo(prompt) {
 
 	userEl.addClass("user");
 	userEl.addAttr("title=Click to Copy");
-	userEl.setText(`${prompt}`);
+	addEl('pre', userEl).setText(`${prompt}`);
 	userEl.whenOn('click', (e) => {
 		navigator.clipboard.writeText(getText(userEl));
 		let copyDiv = getEl('div#copied');
