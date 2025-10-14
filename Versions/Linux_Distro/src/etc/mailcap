@@ -1,0 +1,168 @@
+###############################################################################
+#
+#  MIME media types and programs that process those types
+#
+#  Much of this file is generated automatically by the program "update-mime".
+#  Please see the "update-mime" man page for more information.
+#
+#  Users can add their own rules if they wish by creating a ".mailcap"
+#  file in their home directory.  Entries included there will take
+#  precedence over those listed here.
+#
+###############################################################################
+
+
+###############################################################################
+#
+#  User section follows:  Any entries included in this section will take
+#  precedence over those created by "update-mime".  DO NOT CHANGE the
+#  "User Section Begins" and "User Section Ends" lines, or anything outside
+#  of this section!
+#
+
+# ----- User Section Begins ----- #
+# -----  User Section Ends  ----- #
+
+###############################################################################
+
+text/plain; less %s; needsterminal
+video/mpeg; vlc %s; description="MPEG Video"; test=test -n "$DISPLAY"
+video/x-mpeg; vlc %s; description="MPEG Video"; test=test -n "$DISPLAY"
+video/mpeg-system; vlc %s; description="MPEG Video"; test=test -n "$DISPLAY"
+video/x-mpeg-system; vlc %s; description="MPEG Video"; test=test -n "$DISPLAY"
+audio/x-wav; vlc %s; description="WAV Audio"; nametemplate=%s.wav; test=test -n "$DISPLAY"
+video/mpeg4; vlc %s; description="MPEG-4 Video"; test=test -n "$DISPLAY"
+audio/mpeg; vlc %s; description="MPEG Audio"; nametemplate=%s.mpg; test=test -n "$DISPLAY"
+audio/mpegurl; vlc %s; description="MPEG Audio URL"; nametemplate=%s.m3u; test=test -n "$DISPLAY"
+audio/x-mp3; vlc %s; nametemplate=%s.mp3; description="MPEG Audio"; test=test -n "$DISPLAY"
+audio/mpeg4; vlc %s; description="MPEG-4 Audio"; test=test -n "$DISPLAY"
+application/mpeg4-iod; vlc %s; description="MPEG-4 Video"; test=test -n "$DISPLAY"
+application/mpeg4-muxcodetable; vlc %s; description="MPEG-4 Video"; test=test -n "$DISPLAY"
+application/x-troff-man; /usr/bin/man -X100 -l %s; test=test -n "$DISPLAY" -a -e /usr/bin/gxditview; description=Man page
+text/troff; /usr/bin/man -X100 -l %s; test=test -n "$DISPLAY" -a -e /usr/bin/gxditview; description=Man page
+application/x-troff-man; /usr/bin/man -l %s; needsterminal; description=Man page
+text/troff; /usr/bin/man -l %s; needsterminal; description=Man page
+text/html; /usr/bin/sensible-browser %s; description=HTML Text; nametemplate=%s.html
+application/x-troff-man; /usr/bin/nroff -t -mandoc -Tutf8; copiousoutput; print=/usr/bin/nroff -t -mandoc -Tutf8 | print text/plain:-
+text/troff; /usr/bin/nroff -t -mandoc -Tutf8; copiousoutput; print=/usr/bin/nroff -t -mandoc -Tutf8 | print text/plain:-
+text/plain; more %s; needsterminal
+application/pkcs12; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/pkcs12+pem; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/pkcs7-mime; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/pkcs7-mime+pem; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/pkcs8; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/pkcs8+pem; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/pkix-cert; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/pkix-cert+pem; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/pkix-crl; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/pkix-crl+pem; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/x-pem-file; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/x-pem-key; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/x-pkcs12; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/x-pkcs7-certificates; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/x-x509-ca-cert; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/x-x509-user-cert; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/pkcs10; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/pkcs10+pem; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/x-spkac; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/x-spkac+base64; /usr/bin/gcr-viewer %s; test=test -n "$DISPLAY"
+application/vnd.debian.binary-package; gdebi-gtk %s; test=test -n "$DISPLAY"
+application/json; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+application/pdf; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+application/rdf+xml; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+application/rss+xml; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+application/xhtml+xml; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+application/xhtml_xml; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+application/xml; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+image/gif; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+image/jpeg; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+image/png; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+image/webp; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+text/html; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+text/xml; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+x-scheme-handler/http; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+x-scheme-handler/https; /usr/share/librewolf/librewolf %s; test=test -n "$DISPLAY"
+x-content/unix-software; nemo-autorun-software %s; test=command -v nemo-autorun-software > /dev/null 2>&1 && test -n "$DISPLAY"
+inode/directory; nemo %s; test=test -n "$DISPLAY"
+application/x-gnome-saved-search; nemo %s; test=test -n "$DISPLAY"
+text/english; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+text/plain; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+text/x-makefile; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+text/x-c++hdr; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+text/x-c++src; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+text/x-chdr; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+text/x-csrc; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+text/x-java; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+text/x-moc; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+text/x-pascal; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+text/x-tcl; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+text/x-tex; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+application/x-shellscript; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+text/x-c; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+text/x-c++; nvim %s; needsterminal; test=command -v nvim > /dev/null 2>&1
+x-scheme-handler/com.googleusercontent.apps.590402290962-2i0b7rqma8b9nmtfrcp7fa06g6cf7g74; /usr/libexec/evolution-data-server/evolution-oauth2-handler %s; test=test -n "$DISPLAY"
+x-scheme-handler/eds-oauth2; /usr/libexec/evolution-data-server/evolution-oauth2-handler %s; test=test -n "$DISPLAY"
+x-scheme-handler/goa-oauth2; /usr/libexec/goa-oauth2-handler %s; test=test -n "$DISPLAY"
+x-scheme-handler/com.googleusercontent.apps.44438659992-7kgjeitenc16ssihbtdjbgguch7ju55s; /usr/libexec/goa-oauth2-handler %s; test=test -n "$DISPLAY"
+text/english; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+text/plain; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+text/x-makefile; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+text/x-c++hdr; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+text/x-c++src; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+text/x-chdr; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+text/x-csrc; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+text/x-java; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+text/x-moc; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+text/x-pascal; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+text/x-tcl; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+text/x-tex; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+application/x-shellscript; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+text/x-c; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+text/x-c++; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+text/plain; view %s; edit=vim %s; compose=vim %s; test=test -x /usr/bin/vim; needsterminal
+video/mpeg; vlc -I rc -V caca %s; needsterminal; description="MPEG Video"
+video/x-mpeg; vlc -I rc -V caca %s; needsterminal; description="MPEG Video"
+video/mpeg-system; vlc -I rc -V caca %s; needsterminal; description="MPEG Video"
+video/x-mpeg-system; vlc -I rc -V caca %s; needsterminal; description="MPEG Video"
+audio/x-wav; vlc -I rc -V caca %s; nametemplate=%s.wav; needsterminal; description="WAV Audio"
+video/mpeg4; vlc -I rc -V caca %s; needsterminal; description="MPEG-4 Video"
+audio/mpeg; vlc -I rc -V caca %s; nametemplate=%s.mpg; needsterminal; description="MPEG Audio"
+audio/mpegurl; vlc -I rc -V caca %s; nametemplate=%s.m3u; needsterminal; description="MPEG Audio URL"
+audio/x-mp3; vlc -I rc -V caca %s; nametemplate=%s.mp3; needsterminal; description="MPEG Audio"
+audio/mpeg4; vlc -I rc -V caca %s; needsterminal; description="MPEG-4 Audio"
+application/mpeg4-iod; vlc -I rc -V caca %s; needsterminal; description="MPEG-4 Video"
+application/mpeg4-muxcodetable; vlc -I rc -V caca %s; needsterminal; description="MPEG-4 Video"
+video/x-msvideo; vlc %s; description="MS Video (AVI)"; test=test -n "$DISPLAY"
+video/quicktime; vlc %s; description="Apple Quicktime Video"; test=test -n "$DISPLAY"
+application/ogg; vlc %s; nametemplate=%s.ogg; description="Ogg stream"; test=test -n "$DISPLAY"
+application/x-ogg; vlc %s; nametemplate=%s.ogg; description="Ogg stream"; test=test -n "$DISPLAY"
+video/ogg; vlc %s; description="Ogg Video"; test=test -n "$DISPLAY"
+application/x-ms-asf-plugin; vlc %s; description="Windows Media Video"; test=test -n "$DISPLAY"
+application/x-mplayer2; vlc %s; description="Windows Media"; test=test -n "$DISPLAY"
+text/html; /usr/bin/lynx -force_html %s; needsterminal; description=HTML Text; nametemplate=%s.html
+application/zip; unzip -l %s; nametemplate=%s.zip; copiousoutput
+text/plain; view %s; edit=vi %s; compose=vi %s; needsterminal
+video/x-msvideo; vlc -I rc -V caca %s; needsterminal; description="MS Video (AVI)"
+video/quicktime; vlc -I rc -V caca %s; needsterminal; description="Apple Quicktime Video"
+application/ogg; vlc -I rc -V caca %s; nametemplate=%s.ogg; needsterminal; description="Ogg stream"
+application/x-ogg; vlc -I rc -V caca %s; nametemplate=%s.ogg; needsterminal; description="Ogg stream"
+video/ogg; vlc -I rc -V caca %s; needsterminal; description="Ogg Video"
+application/x-ms-asf-plugin; vlc -I rc -V caca %s; needsterminal; description="Windows Media Video"
+application/x-mplayer2; vlc -I rc -V caca %s; needsterminal; description="Windows Media"
+text/html; /usr/bin/html2text %s; copiousoutput; description=HTML Text
+text/html; /usr/bin/lynx -dump -force_html %s; copiousoutput; description=HTML Text; nametemplate=%s.html
+application/x-troff-man; /usr/bin/man -Tascii -l %s | col -b; copiousoutput; description=Man page
+text/troff; /usr/bin/man -Tascii -l %s | col -b; copiousoutput; description=Man page
+text/*; less %s; needsterminal
+text/*; view %s; edit=vim %s; compose=vim %s; test=test -x /usr/bin/vim; needsterminal
+application/x-tar; /bin/tar tvf %s; print=/bin/tar tvf - | print text/plain:-; copiousoutput
+application/x-gtar; /bin/tar tvf %s; print=/bin/tar tvf - | print text/plain:-; copiousoutput
+application/x-ustar; /bin/tar tvf %s; print=/bin/tar tvf - | print text/plain:-; copiousoutput
+text/*; more %s; needsterminal
+text/*; view %s; edit=vi %s; compose=vi %s; needsterminal
+application/msword; wordview %s; description="MS Word Text"; test=test "$DISPLAY"
+application/msword; catdoc %s; copiousoutput; description="MS Word Text";
+application/vnd.ms-excel; xls2csv %s; copiousoutput; description="MS Excel sheet";
+application/vnd.ms-powerpoint; catppt %s; copiousoutput; description="MS PowerPoint presentation";
+application/postscript; /usr/bin/ps2txt '%s'; copiousoutput; description=Postscript
+application/vnd.debian.binary-package; /usr/lib/mime/debian-view %s; needsterminal; description=Debian GNU/Linux Package; nametemplate=%s.deb
