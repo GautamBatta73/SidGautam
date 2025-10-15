@@ -8,6 +8,7 @@ GRUB_TIMEOUT=5
 GRUB_DISTRIBUTOR=`( . /etc/os-release && echo ${NAME} )`
 GRUB_CMDLINE_LINUX_DEFAULT="quiet"
 GRUB_CMDLINE_LINUX=""
+GRUB_BACKGROUND="/boot/grub/grub-background.png"
 
 # If your computer has multiple operating systems installed, then you
 # probably want to run os-prober. However, if your computer is a host
