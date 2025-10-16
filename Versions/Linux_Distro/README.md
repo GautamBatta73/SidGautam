@@ -33,6 +33,6 @@ It is a Linux Distribution based on Debian 13 (Trixie).<br>
 
 Click the inconspicuous button below to go to my Google Drive, where you can download a zip with the ISO and SHA256 Hash.
 
-<a href="https://drive.google.com/drive/folders/1IUUeFiGeaYypG1kqfuIzx1cW81QIJsi9?usp=sharing" id="downloadBtn">
+<a href="https://drive.google.com/drive/folders/1IUUeFiGeaYypG1kqfuIzx1cW81QIJsi9?usp=sharing" id="downloadBtn" target="_blank">
   <img style="width: 15em;" alt="Download" src="https://github.com/user-attachments/assets/6538da9a-0f30-4a59-a7e9-c3f1268ac4e3" />
 </a>
