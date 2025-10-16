@@ -8,7 +8,8 @@ The directory contains the most important configuration files and other project-
 <a href="#downloadBtn">Skip to Download Buttton</a><br>
 
 It is a Linux Distribution based on Debian 13 (Trixie).<br>
-<img alt="Desktop Screenshot" src="https://github.com/user-attachments/assets/4692c5a3-19be-4d93-96c7-e0279041821c" />
+<img alt="Desktop Screenshot" src="https://github.com/user-attachments/assets/69fba539-774d-4596-b7f2-2d78d8116104" />
+
 
 <br>
 
