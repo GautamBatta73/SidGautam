@@ -10,7 +10,7 @@ The directory contains the most important configuration files and other project-
 It is a Linux Distribution based on Debian 13 (Trixie).<br>
 <img alt="Desktop Screenshot" src="https://github.com/user-attachments/assets/69fba539-774d-4596-b7f2-2d78d8116104" />
 
-
+**_Liveuser/Root Password: 123_**
 <br>
 
 **Default Applications:**
