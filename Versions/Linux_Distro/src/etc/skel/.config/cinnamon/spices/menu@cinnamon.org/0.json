@@ -99,7 +99,7 @@
         "units": "px",
         "description": "Icon size",
         "dependency": "menu-custom",
-        "value": 32.0
+        "value": 32
     },
     "menu-label": {
         "type": "entry",
@@ -247,12 +247,12 @@
     "popup-width": {
         "type": "generic",
         "default": 590,
-        "value": 590
+        "value": 584.990234375
     },
     "popup-height": {
         "type": "generic",
         "default": 515,
-        "value": 515
+        "value": 497.9986572265625
     },
     "reset-menu-size-button": {
         "type": "button",
