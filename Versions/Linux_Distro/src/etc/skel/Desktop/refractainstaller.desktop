@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=SidGautamOS Installer
+Comment=Install from a live CD to your system.
+#Exec=gksu 'x-terminal-emulator -e /usr/bin/refractainstaller-gui'
+Exec=/usr/bin/refractainstaller-wrapper.sh
+Terminal=false
+Type=Application
+Icon=debian-installer-launcher
+Categories=GNOME;GTK;System;
+PrefersNonDefaultGPU=false

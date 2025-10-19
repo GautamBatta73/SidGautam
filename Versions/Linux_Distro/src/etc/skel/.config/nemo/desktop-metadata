@@ -1,22 +1,22 @@
 [desktop-monitor-0]
 nemo-icon-view-keep-aligned=true
 nemo-icon-view-auto-layout=false
-nemo-icon-view-layout-timestamp=1760555847
+nemo-icon-view-layout-timestamp=1760839130
 
 [trash]
 nemo-icon-position=46,35
 monitor=0
 icon-scale=1
-nemo-icon-position-timestamp=1760555847
+nemo-icon-position-timestamp=1760839130
 
 [home]
 nemo-icon-position=46,135
 monitor=0
 icon-scale=1
-nemo-icon-position-timestamp=1760555847
+nemo-icon-position-timestamp=1760839130
 
 [BATHDD.volume]
 nemo-icon-position=46,235
 monitor=0
 icon-scale=1
-nemo-icon-position-timestamp=1760512669
+nemo-icon-position-timestamp=1760589694
