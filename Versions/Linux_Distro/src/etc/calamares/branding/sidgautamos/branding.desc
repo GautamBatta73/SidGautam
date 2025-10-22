@@ -1,0 +1,37 @@
+---
+componentName:   sidgautamos
+welcomeStyleCalamares: true
+welcomeExpandingLogo: true
+windowExpanding: normal
+windowSize: 800px,580px
+windowPlacement: center
+
+strings:
+    productName:         SidGautamOS (Based on Debian)
+    shortProductName:    SidGautamOS
+    version:             1.5.2 (Testing)
+    shortVersion:        1.5
+    versionedName:       SidGautamOS 1.5.2 (Testing)
+    shortVersionedName:  SidGautamOS 1.5
+    bootloaderEntryName: SidGautamOS
+    productUrl:          https://sidgautam.ca/
+    supportUrl:          https://github.com/GautamBatta73/SidGautam/issues
+    knownIssuesUrl:      https://github.com/GautamBatta73/SidGautam/issues
+
+sidebar: widget
+navigation: widget
+
+images:
+    productLogo:         "logo.png"
+    productIcon:         "logo.png"
+    productWelcome:      "welcome.png"
+
+slideshow:               "show.qml"
+
+style:
+   SidebarBackground:    "#26475b"
+   SidebarText:          "#FFFFFF"
+   SidebarTextCurrent:   "#fbfbfb"
+   SidebarBackgroundCurrent: "#265370"
+
+slideshowAPI: 2
