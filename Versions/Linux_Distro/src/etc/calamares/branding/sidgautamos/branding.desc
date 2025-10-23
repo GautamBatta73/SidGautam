@@ -9,9 +9,9 @@ windowPlacement: center
 strings:
     productName:         SidGautamOS (Based on Debian)
     shortProductName:    SidGautamOS
-    version:             1.5.2 (Testing)
+    version:             1.5.2 (Stable)
     shortVersion:        1.5
-    versionedName:       SidGautamOS 1.5.2 (Testing)
+    versionedName:       SidGautamOS 1.5.2 (Stable)
     shortVersionedName:  SidGautamOS 1.5
     bootloaderEntryName: SidGautamOS
     productUrl:          https://sidgautam.ca/
@@ -29,9 +29,9 @@ images:
 slideshow:               "show.qml"
 
 style:
-   SidebarBackground:    "#26475b"
-   SidebarText:          "#FFFFFF"
-   SidebarTextCurrent:   "#fbfbfb"
-   SidebarBackgroundCurrent: "#265370"
+   SidebarBackground:    "#aadddd"
+   SidebarText:          "#222222"
+   SidebarTextCurrent:   "#000000"
+   SidebarBackgroundCurrent: "#3ea7a7"
 
 slideshowAPI: 2
