@@ -13,6 +13,9 @@ It is a Linux Distribution based on Debian 13 (Trixie).<br>
 **_Liveuser/Root Password: 123_**
 <br>
 
+**Disclaimer: The LiveCD Environment (when the ISO is booted into) may have some odd formatting. The installed Operating System will look like it's supposed to.**
+<br>
+
 **Default Applications:**
 - Neovim and Vim
 - LibreWolf
