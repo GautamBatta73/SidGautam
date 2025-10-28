@@ -40,6 +40,11 @@ main {
   cursor: pointer;
 }
 
+.user > pre {
+	word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
 .ai {
   background-color: #ffaabb;
   cursor: pointer;
