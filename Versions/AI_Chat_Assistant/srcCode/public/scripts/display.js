@@ -294,7 +294,7 @@ function downloadChatSgtxt() {
 		unless((chat.length !== 0 || Boolean(chat)), () => {
 			alert("No Chat History To Download!");
 		}, () => {
-			const blob = new Blob([btoa(encodeURIComponent(chat))], { type: 'text/plain' });
+			const blob = new Blob([btoa(encodeURIComponent(chat))], { type: 'application/octet-stream' });
 			const url = URL.createObjectURL(blob);
 
 			const a = addEl('a', document.body);
