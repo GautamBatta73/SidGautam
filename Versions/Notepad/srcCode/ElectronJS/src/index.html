@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/default-theme.css" rel="stylesheet" type="text/css" id="themeCSS">
+    <link rel="icon" href="assets/icon.png" type="image/x-icon">
+    <title>SidGautamNotes</title>
+</head>
+
+<body>
+    <header>
+        <nav id="menuBar">
+            <ul>
+                <li>
+                    <span class="menuItem">File</span>
+                    <div class="menuDropdown">
+                        <a draggable="false" class="menuItem" href="#" id="loadItem">Open</a>
+                        <a draggable="false" class="menuItem" href="#" id="saveItem">Save</a>
+                        <a draggable="false" class="menuItem" href="#" id="saveAsItem">Save As</a>
+                        <a draggable="false" class="menuItem" href="#" id="exitItem">Exit</a>
+                    </div>
+                </li>
+                <li>
+                    <span class="menuItem">Edit</span>
+                    <div class="menuDropdown">
+                        <a draggable="false" class="menuItem" href="#" id="undoItem">Undo</a>
+                        <a draggable="false" class="menuItem" href="#" id="redoItem">Redo</a>
+                        <a draggable="false" class="menuItem" href="#" id="cutItem">Cut</a>
+                        <a draggable="false" class="menuItem" href="#" id="copyItem">Copy</a>
+                        <a draggable="false" class="menuItem" href="#" id="pasteItem">Paste</a>
+                        <hr>
+                        <a draggable="false" class="menuItem" href="#" id="clearItem">Clear All</a>
+                    </div>
+                </li>
+                <li>
+                    <span class="menuItem" id="viewMenu">View</span>
+                    <div class="menuDropdown">
+                        <a draggable="false" class="menuItem" href="#" id="boldItem">Bold</a>
+                        <div id="themeItem">
+                            <span class="menuItem">Theme</span>
+                            <div class="submenuDropdown">
+                                <a draggable="false" class="menuItem" href="#" id="defaultThemeItem">Default</a>
+                                <a draggable="false" class="menuItem" href="#" id="lightThemeItem">Light</a>
+                                <a draggable="false" class="menuItem" href="#" id="darkThemeItem">Dark</a>
+                            </div>
+                        </div>
+                        <div id="zoomItem">
+                            <span class="menuItem">Zoom</span>
+                            <div class="submenuDropdown">
+                                <input type="range" id="zoomInput" name="zoomInput" step="1" min="8" value="16"
+                                    max="28" />
+                                <label for="zoomInput">40%</label>
+                            </div>
+                        </div>
+                        <a draggable="false" class="menuItem" href="#" id="screenshotItem">Screenshot</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <label for="textArea">text</label>
+        <textarea id="textArea" name="textArea"></textarea>
+
+        <div id="contextMenu">
+            <a draggable="false" class="menuItem" href="#" id="contextUndo">Undo</a>
+            <a draggable="false" class="menuItem" href="#" id="contextRedo">Redo</a>
+            <a draggable="false" class="menuItem" href="#" id="contextCut">Cut</a>
+            <a draggable="false" class="menuItem" href="#" id="contextCopy">Copy</a>
+            <a draggable="false" class="menuItem" href="#" id="contextPaste">Paste</a>
+            <a draggable="false" class="menuItem" href="#" id="contextDelete">Delete</a>
+            <hr>
+            <a draggable="false" class="menuItem" href="#" id="contextSelect">Select All</a>
+        </div>
+
+        <dialog id="errorDialog">
+            <h1>File is Incompatible</h1>
+            <div>The file that you tried to open<br>
+                may be corrupted or incompatible.</div>
+            <footer>
+                <a draggable="false" href="#">OK</a>
+            </footer>
+        </dialog>
+        <dialog id="confirmDialog">
+            <h1>Do You Wanna Save?</h1>
+            <div>There are unsaved changes in your file.<br>
+                Do you want save them?</div>
+            <footer>
+                <a draggable="false" href="#">Yes</a>
+                <a draggable="false" href="#">No</a>
+            </footer>
+        </dialog>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

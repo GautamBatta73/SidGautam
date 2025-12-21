@@ -1,0 +1,243 @@
+@font-face {
+    font-family: 'DefaultFont';
+    src: url('../assets/normalFont.ttf');
+}
+
+@font-face {
+    font-family: 'BoldFont';
+    src: url('../assets/boldFont.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0;
+}
+
+:root {
+    border-width: 5pt;
+    border-style: solid;
+    position: absolute;
+    z-index: 1;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+body {
+    display: grid;
+    grid-template-rows: 2em calc(100% - 2em);
+    font-family: Arial, Helvetica, sans-serif;
+    height: calc(100vh - 10pt);
+    width: calc(100vw - 10pt);
+}
+
+main label {
+    display: none;
+}
+
+#menuBar {
+    border-width: 0 0 5pt 0;
+    border-style: solid;
+    position: relative;
+    z-index: 1;
+}
+
+#menuBar .menuDropdown,
+#menuBar .submenuDropdown,
+#contextMenu {
+    display: none;
+    position: absolute;
+    top: 2em;
+    left: 0;
+    z-index: 2;
+    width: max-content;
+    padding: 0.2em 0;
+    border-width: 2pt;
+    border-style: solid;
+}
+
+#menuBar #themeItem .submenuDropdown {
+    top: 2.3em;
+    left: auto;
+    right: -6.5em;
+    width: 6.5em;
+}
+
+#menuBar #zoomItem .submenuDropdown {
+    top: 4.5em;
+    left: auto;
+    right: -9em;
+    width: 9em;
+    height: 4.5em;
+}
+
+#menuBar hr,
+#contextMenu hr {
+    border-width: 1pt;
+    border-style: solid;
+}
+
+#menuBar .menuDropdown a,
+#menuBar .menuDropdown span,
+#contextMenu a,
+dialog a {
+    display: block;
+    text-decoration: none;
+    padding: 0.5em 0.4em;
+    cursor: pointer;
+}
+
+#menuBar ul {
+    list-style-type: none;
+    display: flex;
+    padding: 0 0.4em;
+}
+
+#menuBar ul>li {
+    font-weight: bold;
+    font-size: 13pt;
+    position: relative;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#menuBar ul>li>span {
+    padding: 0.5em 0.7em;
+    display: inline-block;
+}
+
+main {
+    padding: 0.5em;
+    margin-top: 5pt;
+    height: calc(100% - 5pt);
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+}
+
+#textArea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 16pt;
+    font-family: 'DefaultFont';
+    scrollbar-width: auto;
+}
+
+#textArea.bold {
+    font-family: 'BoldFont';
+}
+
+#boldItem::after,
+#themeItem .submenuDropdown a::after {
+    content: " ✔";
+    font-weight: bold;
+    float: right;
+    visibility: hidden;
+}
+
+#boldItem.selected::after,
+#themeItem .submenuDropdown a.selected::after {
+    visibility: visible;
+}
+
+#themeItem>span::after,
+#zoomItem>span::after {
+    content: " ▶";    
+    font-weight: bold;
+    float: right;
+}
+
+#zoomInput {
+    margin: 0.75em;
+    width: 9.75em;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+#zoomInput::-webkit-slider-runnable-track {
+    border-radius: 0.5rem;
+    height: 0.7rem;
+}
+
+#zoomInput::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -6.5px;
+    border-radius: 0.5rem;
+    height: 25px;
+    width: 15px;
+}
+
+#zoomInput::-moz-range-track {
+    border-radius: 0.5rem;
+    height: 0.7rem;
+}
+
+#zoomInput::-moz-range-thumb {
+    border: none;
+    border-radius: 0.5rem;
+    height: 25px;
+    width: 15px;
+}
+
+#zoomInput~label {
+    display: block;
+    margin: 0.1em 0.5em;
+}
+
+#contextMenu {
+    font-weight: bold;
+    font-size: 13pt;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+dialog {
+    margin: auto;
+    border-width: 5pt;
+    border-style: solid;
+}
+
+dialog h1 {
+    margin: auto;
+    border-width: 0 0 5pt 0;
+    border-style: solid;
+    padding: 0.5em;
+    font-size: 24pt;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+dialog div {
+    padding: 0 0.7em;
+    padding-top: 1.2em;
+    font-size: 15pt;
+    line-height: 1.5em;
+}
+
+dialog footer {
+    font-size: 15pt;
+    display: flex;
+    justify-content: right;
+    padding: 0.7em;    
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+dialog a {
+    border-width: 2pt;
+    border-radius: 16px;
+    border-style: solid;
+    width: fit-content;
+    padding: 0.4em 1em;
+}
+
+#confirmDialog footer {
+    gap: 1em;
+}

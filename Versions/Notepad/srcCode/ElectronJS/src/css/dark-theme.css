@@ -1,0 +1,80 @@
+:root {
+    border-color: #aaa;
+    background-color: #333;
+}
+
+#menuBar,
+dialog h1 {
+    color: #fff;
+    background-color: #222;
+    border-color: #aaa;
+}
+
+#menuBar .menuDropdown,
+#menuBar .submenuDropdown,
+#contextMenu,
+dialog a {
+    border-color: #aaa;
+    background-color: #222;
+}
+
+#menuBar hr,
+#contextMenu hr {
+    border-color: #aaa;
+}
+
+#menuBar li,
+#menuBar a,
+#contextMenu a,
+dialog a {
+    color: #fff;
+    background-color: #222;
+}
+
+#menuBar li:hover,
+#menuBar a:hover,
+#menuBar .menuDropdown span:hover,
+#contextMenu a:hover,
+dialog a:hover {
+    background-color: #000;
+}
+
+#textArea {
+    scrollbar-color: #222 #555;
+}
+
+#textArea,
+dialog div,
+dialog footer,
+main {
+    background-color: #333;
+    color: #fff;
+}
+
+#textArea::selection {
+    background-color: #555;
+    color: #fff;
+}
+
+#themeItem>span::after,
+#zoomItem>span::after,
+#boldItem::after,
+#themeItem .submenuDropdown a::after {
+    color: #fff;
+}
+
+#zoomInput::-moz-range-thumb {
+    background: #888;
+}
+
+#zoomInput::-webkit-slider-thumb {
+    background: #888;
+}
+
+#zoomInput::-moz-range-track {
+    background: #555;
+}
+
+#zoomInput::-webkit-slider-runnable-track {
+    background: #555;
+}
