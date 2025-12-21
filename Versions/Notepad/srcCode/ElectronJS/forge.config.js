@@ -1,21 +1,23 @@
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
 const { FuseV1Options, FuseVersion } = require('@electron/fuses');
-const path = require('path')
+const path = require('path');
+require('dotenv').config();
 
 module.exports = {
   packagerConfig: {
     name: 'SidGautamNotes',
     asar: true,
     icon: 'src/assets/icon',
-    appCategoryType: 'public.app-category.developer-tools'
   },
   rebuildConfig: {},
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
       config: {
-        iconUrl: 'https://rawcdn.githack.com/GautamBatta73/SidGautam/ebbc1522193ed896b5a14cf1bae06a9c692daf6f/Versions/Notepad/srcCode/bin/assets/icon.png',
-        setupIcon: 'src/assets/icon.ico'
+        iconUrl: 'https://rawcdn.githack.com/GautamBatta73/SidGautam/508166fc8dd4b22225861e19e48e900338533466/Versions/Notepad/srcCode/ElectronJS/src/assets/icon.ico',
+        setupIcon: 'src/assets/icon.ico',
+        certificateFile: './cert.pfx',
+        certificatePassword: process.env.CERTIFICATE_PASSWORD
       },
     },
     {

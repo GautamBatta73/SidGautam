@@ -1,9 +1,11 @@
+if (require('electron-squirrel-startup')) return;
+
 const { app, ipcMain, BrowserWindow, webContents, dialog } = require('electron/main');
 const { isBinaryFileSync } = require("isbinaryfile");
 const path = require('path');
 const fs = require('fs');
 let OPTIONS_FILE = 'options.json';
-let installationPath = 'exe'
+let installationPath = 'exe';
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -12,7 +14,7 @@ const createWindow = () => {
     minWidth: 500,
     minHeight: 350,
     icon: path.join(__dirname, 'src/assets/icon.png'),
-    //autoHideMenuBar: true,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, 'src/js/preload.js'),
     }
@@ -22,13 +24,20 @@ const createWindow = () => {
 }
 
 app.whenReady().then(() => {
-  let initialFileObj = { path: "", data: "", error: "No File" };  
+  let initialFileObj = { path: "", data: "", error: "No File" };
   installationPath = path.dirname(app.getPath('exe'))
   OPTIONS_FILE = path.join(installationPath, 'options.json');
 
   if (process.platform === 'win32' || process.platform === 'linux') {
-    const fileArg = process.argv.find(arg => !arg.startsWith('--') && path.isAbsolute(arg) && !arg.toLowerCase().includes('electron'));
-    if (fileArg) {
+    //const fileArg = process.argv.find(arg => !arg.startsWith('--') && path.isAbsolute(arg) && !arg.toLowerCase().includes('electron'));
+    let fileArg = "--";
+    if (app.isPackaged && process.argv[1]) {
+      fileArg = process.argv[1];
+    } else if (process.argv[2]) {
+      fileArg = process.argv[2];
+    }
+
+    if (!fileArg.startsWith('--') && path.isAbsolute(fileArg)) {
       initialFileObj = initializeFile(fileArg);
     }
   }

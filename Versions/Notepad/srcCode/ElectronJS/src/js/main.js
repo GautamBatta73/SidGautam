@@ -256,8 +256,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         console.error(`Error: ${error}`);
         if (fileObj.error == "Incompatible") {
             showErrorDialog("File is Incompatible", "The file that you tried to open\nmay be corrupted or incompatible.");
-        } else {
-            showErrorDialog("File Load Error", "An unknown error occurred while\nopening the file.");
         }
     }
     textArea.focus();

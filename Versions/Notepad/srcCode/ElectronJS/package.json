@@ -24,6 +24,7 @@
     "electron": "^39.2.7"
   },
   "dependencies": {
+    "dotenv": "^17.2.3",
     "electron-squirrel-startup": "^1.0.1",
     "isbinaryfile": "^5.0.7"
   }
