@@ -8,6 +8,7 @@ module.exports = {
     name: 'SidGautamNotes',
     asar: true,
     icon: 'src/assets/icon',
+    appCategoryType: 'public.app-category.developer-tools'
   },
   rebuildConfig: {},
   makers: [

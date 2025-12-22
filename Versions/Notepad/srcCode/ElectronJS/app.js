@@ -1,6 +1,6 @@
-if (require('electron-squirrel-startup')) return;
-
 const { app, ipcMain, BrowserWindow, webContents, dialog } = require('electron/main');
+if (require('electron-squirrel-startup')) app.exit();
+
 const { isBinaryFileSync } = require("isbinaryfile");
 const path = require('path');
 const fs = require('fs');
