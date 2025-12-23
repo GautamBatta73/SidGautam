@@ -37,6 +37,10 @@ app.whenReady().then(() => {
       fileArg = process.argv[2];
     }
 
+    if (process.platform === 'linux') {
+      OPTIONS_FILE = path.join(app.getPath('userData'), 'options.json');
+    }
+
     if (!fileArg.startsWith('--') && path.isAbsolute(fileArg)) {
       initialFileObj = initializeFile(fileArg);
     }

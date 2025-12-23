@@ -29,11 +29,9 @@ module.exports = {
       name: '@electron-forge/maker-deb',
       config: {
         icon: path.join(__dirname, 'src/assets/icon.png'),
+        maintainer: 'Gautam Batta',
+        homepage: 'https://github.com/GautamBatta73/SidGautam/tree/main/Versions/Notepad'
       },
-    },
-    {
-      name: '@electron-forge/maker-rpm',
-      config: {},
     },
   ],
   plugins: [
