@@ -28,7 +28,7 @@
         "portable"
       ],
       "cscLink": "./cert.pfx",
-      "cscKeyPassword": "Bhavana123"
+      "cscKeyPassword": "Password"
     },
     "portable": {
       "artifactName": "SidGautamNotes-Portable.exe"
