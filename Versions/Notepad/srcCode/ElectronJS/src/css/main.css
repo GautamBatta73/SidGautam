@@ -241,3 +241,9 @@ dialog a {
 #confirmDialog footer {
     gap: 1em;
 }
+
+#menuBar .menuDropdown span#versionItem {
+    -webkit-user-select: text;
+    user-select: text;
+    cursor: auto;
+}

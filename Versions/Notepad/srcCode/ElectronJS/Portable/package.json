@@ -1,0 +1,46 @@
+{
+  "name": "SidGautamNotes",
+  "version": "1.2.0",
+  "description": "A simple text-editor",
+  "author": "Gautam Batta",
+  "license": "ISC",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "postinstall": "electron-builder install-app-deps",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "electron": "^39.2.7",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "isbinaryfile": "^5.0.7"
+  },
+  "build": {
+    "appId": "com.app.sidgautamnotes",
+    "productName": "SidGautamNotes",
+    "win": {
+      "icon": "src/assets/icon.png",
+      "target": [
+        "portable"
+      ],
+      "cscLink": "./cert.pfx",
+      "cscKeyPassword": "Bhavana123"
+    },
+    "portable": {
+      "artifactName": "SidGautamNotes-Portable.exe"
+    },
+    "files": [
+      "src/**/*",
+      "node_modules/**/*",
+      "app.js",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist"
+    }
+  }
+}

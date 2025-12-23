@@ -26,7 +26,8 @@ dialog a {
 #menuBar li,
 #menuBar a,
 #contextMenu a,
-dialog a {
+dialog a,
+#menuBar .menuDropdown span#versionItem:hover {
     color: #f00;
     background-color: #600;
 }
@@ -51,7 +52,7 @@ main {
     color: #f00;
 }
 
-#textArea::selection {
+body::selection {
     background-color: #500;
     color: #fff;
 }

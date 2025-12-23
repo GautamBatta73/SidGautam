@@ -1,3 +1,4 @@
+const VERSION = "1.2.0"
 let filePath = "";
 let exitDebounce = false;
 let options = { theme: '', bold: false, zoom: 16 };
@@ -30,7 +31,9 @@ let saveAsItem = document.querySelector("#saveAsItem");
 let errorDialog = document.querySelector("#errorDialog");
 let confirmDialog = document.querySelector("#confirmDialog");
 let themeStyle = document.querySelector("#themeCSS");
+let versionItem = document.querySelector("#versionItem");
 
+versionItem.textContent = `v${VERSION}`
 errorDialog.querySelector('a').addEventListener("click", () => errorDialog.close());
 redoItem.addEventListener("click", (e) => redoText(e));
 contextRedo.addEventListener("click", (e) => redoText(e));
