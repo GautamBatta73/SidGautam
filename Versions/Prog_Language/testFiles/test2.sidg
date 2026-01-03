@@ -1,0 +1,8 @@
+import "Math";
+
+var rad = 3;
+
+var cir = Math.PI * (Math.pow(3, 2));
+
+print(cir);
+print(Math.rnd(cir, 2));

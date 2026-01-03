@@ -1,0 +1,5 @@
+func add(a, b) {
+    pass a + b;
+}
+
+print("hi");

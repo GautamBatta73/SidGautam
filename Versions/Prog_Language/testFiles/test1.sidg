@@ -1,0 +1,105 @@
+# full line comment
+var x = 5;
+var y = 10;
+print(x);
+
+var a = 4;
+var b = 2;
+var c = -1;
+
+print(!x);
+print(-x);
+print(!a * -b);
+
+print(x > 10);
+print(a + 1 == b * 2);
+print(1 + 2 > 3 == false);
+
+print(a && b);
+print(x > 0 && x < 10);
+print(a || b && c);
+print(!a && b == 3 || c < 10);
+
+x = 5; # inline comment
+a = b = c;
+x = x + 1;
+print(x = 10);
+
+unless (x > 0) {
+  print(x);
+} orElse {
+  print(-x);
+}
+
+though (x >= 15) {
+  errPrint(x);
+  x = x + 1;
+}
+
+var add = (a, b) -> a + b;
+
+var result = add(2, 3);
+print(result);
+
+a = (a + b);
+
+var f2 = () -> 42;
+
+var thing = double("5.45"); # Theres also int() and str()
+print(thing);
+
+var abs = (x) -> {
+    unless (x > 0) {
+        pass -x;
+    }
+    pass x;
+};
+
+print(abs(thing));
+
+func testFunc () {
+    print("test");
+}
+
+until(var i = 0, i < 10, i = i + 2) {
+		print("I Like Turtles!");
+}
+
+var nums = {1, 2 + 3, x * y};
+print(nums[len(nums) - 1]);
+
+nums[1] = 99;
+print(nums);
+
+var obj = {
+    a: () -> 5, 
+    b: 20
+};
+
+var test = obj["a"];
+print(test());
+
+obj["a"] = 5;
+
+var user = {name: "Alice", age: 30};
+print(user.name);
+
+user.age = user.age + 1;
+print(user.age);
+
+print(NULL ?? 10);
+print(0 ?? 10);
+print(false ?? true);
+
+x = NULL;
+print(x ?? "fallback");
+
+final CONST_VAR = 12;
+
+# CONST_VAR = 5; will throw all the errors!
+
+print(CONST_VAR);
+
+print("TEST" == "test");
+
+exit(); # Exits the program!
