@@ -13,6 +13,7 @@ print(Math.PI); # Prints '3.14159'
 
 <br>
 
+## Methods
 ### Math.pow(base, exp)
 This function returns the value of base raised to the power of exp.
 <br>
