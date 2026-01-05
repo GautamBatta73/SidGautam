@@ -12,7 +12,7 @@ function parser(tokens) {
     function expect(value) {
         const token = consume();
         if (!token || token.value !== value) {
-            throw new Error(`Expected '${value}'\nGot '${token.value}', at line: ${token.line} and column: ${token.column}`);
+            throw new Error(`Expected '${value ?? ""}'\nGot '${token?.value}', at line: ${token?.line} and column: ${token?.column}`);
         }
     }
 
@@ -228,6 +228,37 @@ function parser(tokens) {
                     value: token.value,
                     loc: { line: token.line, column: token.column }
                 };
+
+            case "TEMPLATE": {
+                const parts = token.parts.map(part => {
+                    if (part.type === "text") {
+                        return {
+                            type: "StringLiteral",
+                            value: part.value
+                        };
+                    }
+
+                    // Parse embedded expression
+                    const exprParser = require("./parser");
+                    const ast = exprParser(part.tokens);
+
+                    if (ast.body.length !== 1 ||
+                        ast.body[0].type !== "ExpressionStatement") {
+                        throw new Error("Invalid template expression");
+                    }
+
+                    return {
+                        type: "TemplateExpression",
+                        expression: ast.body[0].expression
+                    };
+                });
+
+                return {
+                    type: "TemplateLiteral",
+                    parts,
+                    loc: { line: token.line, column: token.column }
+                };
+            }
         }
 
         throw new Error(`Unexpected token: ${token.value}, at line: ${token.line} and column: ${token.column}`);

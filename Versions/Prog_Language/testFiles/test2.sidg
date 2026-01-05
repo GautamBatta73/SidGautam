@@ -4,5 +4,8 @@ var rad = 3;
 
 var cir = Math.PI * (Math.pow(3, 2));
 
-print(cir);
-print(Math.rnd(cir, 2));
+print('Diameter is {rad * 2}\nCircumference is {cir}'); # Don't you love template literals?
+
+print(Math.random()); # Generates decimal number from 0 to 1 (exclusive)
+print(Math.random(5)); # Generates integer number from 1 to 5 (inclusive)
+print(Math.random(10, 20)); # Generates integer number from 10 to 20 (inclusive)

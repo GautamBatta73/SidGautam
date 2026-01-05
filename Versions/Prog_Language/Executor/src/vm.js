@@ -1,5 +1,6 @@
 const Op = require("./bytecode");
 const ProgramExit = require("./ProgramExit");
+const { Prototypes, definePrototype } = require("./prototypes.js");
 let loadModule = undefined;
 
 function runFunction(chunk, params, args, globals) {
@@ -16,7 +17,6 @@ function runFunction(chunk, params, args, globals) {
     return runChunk(chunk, globals, true);
 }
 
-
 function run(chunk) {
     let globals = Object.create(null);
     loadModule = require("../run.js");
@@ -24,53 +24,68 @@ function run(chunk) {
     return runChunk(chunk, globals);
 }
 
-function NativeFunction(fn) {
+function NativeFunction(args, fn) {
     return {
         type: "NativeFunction",
+        params: args || [],
         call: fn
     };
 }
 
 function addNativeFunctions(globals) {
     globals.str = {
-        value: NativeFunction((x) => {
+        value: NativeFunction(["obj"], (x) => {
             let str = getPrintable(x[0] ?? null);
-            return String(str);
+            return String(str ?? "NULL");
         }),
         constant: true
     };
     globals.int = {
-        value: NativeFunction((x) => {
+        value: NativeFunction(["obj"], (x) => {
             let str = String(getPrintable(x[0]));
             return (isNaN(parseInt(str)) ? 0 : parseInt(str));
         }),
         constant: true
     };
     globals.double = {
-        value: NativeFunction((x) => {
+        value: NativeFunction(["obj"], (x) => {
             let str = String(getPrintable(x[0]));
             return (isNaN(parseFloat(str)) ? 0 : parseFloat(str));
         }),
         constant: true
     };
     globals.trim = {
-        value: NativeFunction((x) => String(getPrintable(x[0])).trim()),
+        value: NativeFunction(["str"], (x) => String(getPrintable(x[0])).trim()),
         constant: true
     };
 
     globals.true = { value: true, constant: true };
     globals.false = { value: false, constant: true };
     globals.NULL = { value: null, constant: true };
-    
+    globals.__addToPrototype = {
+        value: NativeFunction(["dataType", "name", "fn"], (args) => {
+            const dataType = args[0];
+            const name = args[1];
+            const fn = args[2];
+
+            if (fn.type !== "Function" && fn.type !== "NativeFunction") {
+                throw new Error("__addToPrototype() expects a DataType, FunctionName, FunctionObject");
+            }
+
+            definePrototype(dataType, name, fn)
+        }),
+        constant: true
+    }
+
     globals.exit = {
-        value: NativeFunction((args) => {
+        value: NativeFunction(["exitCode"], (args) => {
             const code = args[0] ?? 0;
             throw new ProgramExit(code);
         }),
         constant: true
     }
     globals.print = {
-        value: NativeFunction((args) => {
+        value: NativeFunction(["...obj(s)"], (args) => {
             let printableArgs = args.map(getPrintable)
             console.log(...printableArgs);
             return null;
@@ -78,7 +93,7 @@ function addNativeFunctions(globals) {
         constant: true
     }
     globals.errPrint = {
-        value: NativeFunction((args) => {
+        value: NativeFunction(["...obj(s)"], (args) => {
             let printableArgs = args.map(getPrintable)
             console.error(...printableArgs);
             return null;
@@ -86,7 +101,7 @@ function addNativeFunctions(globals) {
         constant: true
     }
     globals.len = {
-        value: NativeFunction((args) => {
+        value: NativeFunction(["str/list"], (args) => {
             const x = args[0];
             if (Array.isArray(x) || typeof x === "string") {
                 return x.length;
@@ -96,42 +111,67 @@ function addNativeFunctions(globals) {
         constant: true
     }
     globals.isEmpty = {
-        value: NativeFunction((args) => {
-            const str = String(getPrintable(args[0]));
-            return (!str || str.trim().length === 0)
+        value: NativeFunction(["str/list"], (args) => {
+            const x = args[0];
+            if (Array.isArray(x)) {
+                return (!x || x.length === 0)
+            } else if (typeof x === "string") {
+                return (!x || x.trim().length === 0)
+            } else {
+                throw new Error("len() expects array or string");
+            }
+        }),
+        constant: true
+    }
+    globals.dataType = {
+        value: NativeFunction(["obj"], (args) => {
+            let x = args[0];
+            if (typeof x === "number") return "Number";
+            if (typeof x === "string") return "String";
+            if (typeof x === "boolean") return "Boolean";
+            if (Array.isArray(x)) return "List";
+            if (typeof x === "object" && x !== null) {
+                if (x.type) {
+                    if (x.type === "Function" || x.type === "NativeFunction") {
+                        return "Function";
+                    }
+                }
+                return "Object";
+            }
+
+            return "NULL";
         }),
         constant: true
     }
 }
 
 function getPrintable(obj) {
-    let printable = obj;
-
-    if (Array.isArray(obj)) {
-        let arr = [];
-        obj.forEach(e => arr.push(getPrintable(e)));
-        printable = JSON.stringify(arr, null, 2);
-    } else if (typeof obj == "object" && obj !== null) {
-        if (obj.type) {
-            printable = (obj.type === "Function" || obj.type === "NativeFunction") ?
-                `FunctionObject(${obj.params ? obj.params.join(", ") : ""})` :
-                null;
-        } else {
-            printable = (Object.getPrototypeOf(obj) === Object.prototype) ?
-                null :
-                "Unknown-Object";
+    function printerize(newObj) {
+        if (Array.isArray(newObj)) {
+            return newObj.map(printerize);
         }
-
-        if (printable === null) {
+        if (typeof newObj === "object" && newObj !== null) {
+            if (newObj.type) {
+                if (newObj.type === "Function" || newObj.type === "NativeFunction") {
+                    return `FunctionObject(${newObj.params ? newObj.params.join(", ") : ""})`;
+                }
+            }
             let arr = {};
             Object.entries(obj).forEach(([key, value]) => {
-                arr[key] = getPrintable(value);
+                arr[key] = printerize(value);
             });
-            printable = JSON.stringify(arr, null, 2);
+            return arr;
         }
+        return newObj;
     }
 
-    return printable ?? null;
+    let x = printerize(obj);
+
+    if (Array.isArray(x) || (typeof x === "object" && x !== null)) {
+        return JSON.stringify(x, null, 2);
+    } else {
+        return x ?? null;
+    }
 }
 
 function runChunk(chunk, globals, func = false) {
@@ -149,7 +189,6 @@ function runChunk(chunk, globals, func = false) {
                     break;
                 }
 
-                // Execute in SAME globals
                 runChunk(importedChunk, globals);
                 break;
             }
@@ -361,6 +400,7 @@ function runChunk(chunk, globals, func = false) {
                 if (fn.type === "NativeFunction") {
                     let result = null;
                     try {
+                        if (fn.obj !== null && fn.obj !== undefined) args.unshift(fn.obj);
                         result = fn.call(args) ?? null;
                     } catch (error) {
                         if (error instanceof ProgramExit) {
@@ -374,6 +414,7 @@ function runChunk(chunk, globals, func = false) {
 
                 // User-defined function
                 if (fn.type === "Function") {
+                    if (fn.obj !== null && fn.obj !== undefined) args.unshift(fn.obj);
                     const result = runFunction(fn.chunk, fn.params, args, globals);
                     stack.push(result ?? null);
                     break;
@@ -415,6 +456,7 @@ function runChunk(chunk, globals, func = false) {
                 if (fn.type === "NativeFunction") {
                     let result = null;
                     try {
+                        if (fn.obj !== null && fn.obj !== undefined) args.unshift(fn.obj);
                         result = fn.call(args) ?? null;
                     } catch (error) {
                         if (error instanceof ProgramExit) {
@@ -428,6 +470,7 @@ function runChunk(chunk, globals, func = false) {
 
                 // User-defined function
                 if (fn.type === "Function") {
+                    if (fn.obj !== null && fn.obj !== undefined) args.unshift(fn.obj);
                     const result = runFunction(fn.chunk, fn.params, args, globals);
                     stack.push(result ?? null);
                     break;
@@ -452,16 +495,53 @@ function runChunk(chunk, globals, func = false) {
                 const index = stack.pop();
                 const obj = stack.pop();
 
-                if (Array.isArray(obj) || typeof obj === "string"
-                    || (typeof obj === "object" && obj !== null)) {
-                    stack.push(obj[index]);
-                } else {
-                    if (obj !== null ||
-                        obj !== undefined ||
-                        obj !== false) {
-                        throw new Error(`Cannot index non-list/non-string/non-object, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
+                if (typeof obj === "string") {// Strings
+                    const method = Prototypes["String"][index];
+                    if (typeof index === "number") {
+                        stack.push(obj[index]);
+                        break;
+                    } else if (!method) {
+                        throw new Error(`String has no method '${index}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                     }
+
+                    method.obj = obj;
+                    stack.push(method);
+                    break;
+                } else if (Array.isArray(obj)) {// Lists
+                    const method = Prototypes["List"][index];
+                    if (typeof index === "number") {
+                        stack.push(obj[index]);
+                        break;
+                    } else if (!method) {
+                        throw new Error(`List has no method '${index}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
+                    }
+
+                    method.obj = obj;
+                    stack.push(method);
+                    break;
+                } else if (typeof obj === "object" && obj !== null) {// Objects
+                    if (obj.type) {
+                        if (obj.type === "Function" || obj.type === "NativeFunction") {
+                            throw new Error(`FunctionObject has no method '${index}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
+                        }
+                    }
+
+                    const method = Prototypes["Object"][index];
+                    if (typeof index === "string" && !method) {
+                        if (Object.hasOwn(obj, index)) {
+                            stack.push(obj[index]);
+                        }
+                        break;
+                    } else if (!method) {
+                        throw new Error(`Object has no method '${index}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
+                    }
+
+                    method.obj = obj;
+                    stack.push(method);
+                } else {
+                    throw new Error(`Cannot index non-list/non-string/non-object, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                 }
+
                 break;
             }
 

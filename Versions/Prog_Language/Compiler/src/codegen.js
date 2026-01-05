@@ -379,6 +379,29 @@ function compile(node, chunk) {
             break;
         }
 
+        case "TemplateLiteral": {
+            let first = true;
+
+            for (const part of node.parts) {
+                if (part.type === "StringLiteral") {
+                    chunk.emit(Op.PUSH_CONST, chunk.addConst(part.value));
+                } else {
+                    compile(part.expression, chunk);
+                    if (part.expression.type !== "StringLiteral") {
+                        chunk.emit(Op.LOAD, "str");
+                        chunk.emit(Op.CALL, 1);
+                    }
+                }
+
+                if (!first) {
+                    chunk.emit(Op.ADD);
+                }
+                first = false;
+            }
+
+            break;
+        }
+
         case "CallExpression": {
             // Compile arguments first (they get pushed on the stack in order)
             for (const arg of node.arguments) {

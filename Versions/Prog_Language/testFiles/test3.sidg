@@ -1,0 +1,11 @@
+import "ListUtils"; # Has forEach(), join(), and has()
+
+var arr = {1, 2, 3};
+arr.forEach(print); # Prints every element
+
+
+import "StringUtils"; # Has upper(), lower(), and split()
+
+var string = "Test";
+print(lower(string)); # Lowercases the string
+print(upper(string)); # Uppercases the string

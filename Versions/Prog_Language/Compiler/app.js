@@ -3,18 +3,30 @@ const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk").default;
 const compile = require("./src/compiler.js")
-const VERSION = "2.1.0";
+const VERSION = "2.2.0";
 
 const originalError = console.error;
 console.error = (...args) => {
     const coloredArgs = args.map(arg => {
         if (typeof arg === 'object' && arg !== null) {
-            return chalk.red(JSON.stringify(arg, null, 2));
+            return chalk.bold.red(JSON.stringify(arg, null, 2));
         }
-        return chalk.red(arg);
+        return chalk.bold.red(arg);
     });
 
     originalError(...coloredArgs);
+};
+
+const originalWarn = console.warn;
+console.warn = (...args) => {
+    const coloredArgs = args.map(arg => {
+        if (typeof arg === 'object' && arg !== null) {
+            return chalk.bold.hex('#FFA500')(JSON.stringify(arg, null, 2));
+        }
+        return chalk.bold.hex('#FFA500')(arg);
+    });
+
+    originalWarn(...coloredArgs);
 };
 
 program

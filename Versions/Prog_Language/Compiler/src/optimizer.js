@@ -11,7 +11,7 @@ function fold(node) {
                 left.type === "NumberLiteral" &&
                 right.type === "NumberLiteral"
             ) {
-                let value = eval(`${left.value} ${node.operator} ${right.value}`);
+                let value = eval(`${left.value} ${node.operator} ${right.value}`) || 0;
                 return {
                     type: "NumberLiteral",
                     value
@@ -19,8 +19,12 @@ function fold(node) {
             }
 
             if (
-                (left.type === "StringLiteral" ||
-                right.type === "StringLiteral") &&
+                ((left.type === "StringLiteral" &&
+                    right.type === "StringLiteral") ||
+                    (left.type === "NumberLiteral" &&
+                        right.type === "StringLiteral") ||
+                    (left.type === "StringLiteral" &&
+                        right.type === "NumberLiteral")) &&
                 node.operator === "+"
             ) {
                 let value = `${left.value}${right.value}`;
@@ -57,6 +61,12 @@ function fold(node) {
 
             return { ...node, left, right };
         }
+
+        case "LambdaExpression":
+            return {
+                ...node,
+                body: Array.isArray(node.body) ? node.body.map(fold) : fold(node.body)
+            };
 
         case "UnaryExpression": case "ReturnStatement":
             return {
@@ -133,17 +143,11 @@ function fold(node) {
                     value: fold(p.value)
                 }))
             };
-        
+
         case "ArrayLiteral":
             return {
                 ...node,
                 elements: node.elements.map(fold)
-            };
-
-        case "LambdaExpression":
-            return {
-                ...node,
-                body: Array.isArray(node.body) ? node.body.map(fold) : fold(node.body)
             };
 
         default:

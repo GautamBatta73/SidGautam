@@ -1,5 +1,5 @@
 const builtins = [];
-const builtinConst = ["true", "false", "NULL", "print", "exit", "str", "int", "double", "trim", "injs", "errPrint", "len", "isEmpty"]
+const builtinConst = ["true", "false", "NULL", "print", "exit", "str", "int", "double", "trim", "__injs", "errPrint", "len", "isEmpty", "__addToPrototype"]
 
 function semantic(ast) {
   const progScope = new Set();
@@ -98,9 +98,14 @@ function semantic(ast) {
           node.body.forEach(e => visit(e, statementScope, statementConstants)) :
           visit(node.body, statementScope, statementConstants)
       } else if (node.type === "CallExpression") {
-        if (node.callee?.name === "injs") {
-            throw new Error(`This function is in development and shouldn't be called, at line: ${node.loc?.line} and column: ${node.loc?.column}`);
-          }
+        if (node.callee?.name === "__injs") {
+          throw new Error(`This function is in development and shouldn't be called, at line: ${node.loc?.line} and column: ${node.loc?.column}`);
+        } else if (node.callee?.name === "__addToPrototype") {
+          console.warn(`Adding to a DataType Prototype can cause some issues.\nMake sure you know what you are doing, at line: ${node.loc?.line} and column: ${node.loc?.column}\n`);
+        }
+        let statementScope = new Set(scope);
+        let statementConstants = new Set(constants);
+        node.arguments.forEach(e => visit(e, statementScope, statementConstants));
       }
     }
   }
