@@ -12,7 +12,7 @@ import "Math";
 ```
   
 <br>
-The following snippet imports the a compiled sidgc file, from the same directory as the current script.
+The following snippet imports a compiled sidgc file from the same directory as the current script.
 
 ```python
 import "./functions";
@@ -20,5 +20,7 @@ import "./functions";
 
 <br>
 
-[More Info on Builtin Libraries](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/Prog_Language/Documentation/Libraries)
+[More Info on Built-in Libraries](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/Prog_Language/Documentation/Libraries)
+
+
 ...
