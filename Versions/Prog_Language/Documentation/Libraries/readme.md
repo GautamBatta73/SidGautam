@@ -1,6 +1,6 @@
 # SidGautamScript Libraries
 
-This folder has information on the functions and variables, that I packaged with the compiler and runtime environment, as built in libraries.
+This folder contains information on the functions and variables that I packaged with the compiler and runtime environment, which are built-in libraries.
 
 ## How to import libraries
 
@@ -11,15 +11,15 @@ The following snippet imports the Math library.
 import "Math";
 ```
 
-The same goes for all the libraries, but replace 'Math' with the name of the library.
+The same applies to all built-in libraries, but replace 'Math' with the name of the library.
 
 
 ## Libraries
 
-1. **Math**: Has the basic math functions one may need.
+1. **[Math](./math.md)**: Has the basic math functions one may need.
 
-2. **ObjectUtils**: Has some extra helpful utilities for Objects.
+2. **[ObjectUtils](./objutils.md)**: Has some extra helpful utilities for Objects.
 
-3. **ListUtils**: Has some extra helpful utilities for Lists.
+3. **[ListUtils](./listutils.md)**: Has some extra helpful utilities for Lists.
 
-4. **StringUtils**: Has some extra helpful utilities for Strings.
+4. **[StringUtils](./strutils.md)**: Has some extra helpful utilities for Strings.
