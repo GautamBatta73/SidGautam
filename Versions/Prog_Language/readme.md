@@ -11,6 +11,10 @@ It is a simple programming language with some basic functions. It can do your ba
 
 <br>
 
+[See Documentation](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/Prog_Language/Documentation)
+
+<br>
+
 <a href="#downloadBtn">Skip to Download Buttton</a><br>
 
 Currently, it only runs in Windows.<br>
@@ -25,11 +29,8 @@ Currently, it only runs in Windows.<br>
 5. Unless you get an error, it should execute the script's code.
 
 ### Basic Tips:
-- Pretty much anything you can do has been done in test1.sidg and test2.sidg (I use both for recursion testing).
-- Imports can be tricky, but basically:
-    - import "Math"; <- imports the builtin Math library. (See test2.sidg).
-    - import "./imports"; <- imports the COMPILED imports.sidgc file (You may need to compile it first).
-
+- Pretty much anything you can do has been done in test1.sidg, test2.sidg, and test3.sidg (I use both for recursion testing).
+<br><br>
 
 Click the inconspicuous button below to go to my Google Drive, where you can download:
 - Zip with the Test Files, Compiler, and Executor (Runtime Environment) as EXE.
