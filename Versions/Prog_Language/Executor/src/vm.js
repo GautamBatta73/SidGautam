@@ -157,7 +157,7 @@ function getPrintable(obj) {
                 }
             }
             let arr = {};
-            Object.entries(obj).forEach(([key, value]) => {
+            Object.entries(newObj).forEach(([key, value]) => {
                 arr[key] = printerize(value);
             });
             return arr;
