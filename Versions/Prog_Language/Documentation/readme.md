@@ -206,3 +206,114 @@ Do not reassign, at line: 2 and column: 2
 ```
 
 <br>
+
+### func \<name\>(\<parameters\>)
+Functions are a fundamental building block in any programming language. A function is essentially a set of statements that performs a task or calculates a value, and it should take some input and return an output.
+<br>
+To use a function, you must define it somewhere in the scope from which you wish to call it. Either with the full syntax or as a lambda expression.
+
+<br>
+Example 1 (Full Syntax):
+
+```python
+func printNum(number) { # Defines a function that takes in one parameter
+  print(number); # Prints said parameter
+}
+
+printNum(69); # Calls the function with a passed parameter
+```
+```javascript
+69
+```
+  
+<br>
+Example 2 (Lambda Syntax):
+
+```python
+var printNum = (number) -> print(number); # Defines a function that takes in one parameter, which prints said parameter
+
+printNum(69); # Calls the function with a passed parameter
+```
+```javascript
+69
+```
+
+<br>
+Example 3 (Full Syntax):
+
+```python
+var x = 8; # Declare and instantiate x to 8
+
+func incrementX() { # Defines a function called incrementX
+  x = x + 1; # increments the x variable
+}
+
+incrementX(); # Executes the code in the function
+incrementX(); # Executes the code in the function, again
+
+print(x); # Prints the value of x
+```
+```javascript
+10
+```
+  
+<br>
+Example 4 (Lambda Syntax):
+
+```python
+var x = 8; # Declare and instantiate x to 8
+
+final incrementX = () -> { # Defines a lambda function called incrementX
+  x = x + 1; # increments the x variable
+};
+
+incrementX(); # Executes the code in the function
+incrementX(); # Executes the code in the function, again
+
+print(x); # Prints the value of x
+```
+```javascript
+10
+```
+
+<br>
+
+### pass \<expression\>
+The pass statement ends function execution and specifies a value to be returned to the function caller.
+
+<br>
+Example 1:
+
+```python
+func getRectArea(width, height) { # Defines a function that takes 2 parameters, which are assumed to be numbers
+  unless (!(width > 0 && height > 0)) { # Checks if the parameters are more than 0
+    pass width * height; # Passes the product of the parameter back to the caller, then ends the call
+  }
+  pass 0; # Passes 0 back to the caller, given the function call has not ended by now
+}
+
+print(getRectArea(3, 4)); # Calls the function with parameters more than 0
+print(getRectArea(-3, 4)); # Calls the function with parameters less than 0
+```
+```javascript
+12
+0
+```
+  
+<br>
+Example 2 (Returning a function):
+
+```python
+func magic() { # Defines a function that takes no parameters
+  pass ((x) -> x * 2); # Passes a lambda function, which takes a parameter assumed to be a number, back to the caller
+}
+
+var answer = magic(); # Calls the function that returns a function, and gets passed the inner function, which is stored in a variable
+
+print(answer(15)); # Calls the variable function with a parameter
+```
+```javascript
+30
+```
+
+<br>
