@@ -8,7 +8,10 @@ I doubt it, so this var only returns 3.14159
 ```python
 import "Math";
 
-print(Math.PI); # Prints '3.14159'
+print(Math.PI); # Prints pi
+```
+```javascript
+3.14159
 ```
 
 <br>
@@ -22,7 +25,10 @@ Math.pow(x, y) = x<sup> y</sup>
 ```python
 import "Math";
 
-print(Math.pow(7, 3)); # Prints '343'
+print(Math.pow(7, 3)); # Prints (7 * 7 * 7)
+```
+```javascript
+343
 ```
 
 <br>
@@ -35,9 +41,13 @@ Math.root(x, y) = x<sup> 1/y</sup>
 ```python
 import "Math";
 
-print("Square Root:", Math.root(9, 2)); # Prints '"Square Root:" 3'
+print("Square Root:", Math.root(9, 2)); # Prints a string, and the square root of 9
 
-print("Cube Root:", Math.root(64, 3)); # Prints '"Cube Root:" 3.9999999999999996'
+print("Cube Root:", Math.root(64, 3)); # Prints a string, and the cube root of 64
+```
+```javascript
+"Square Root:" 3
+"Cube Root:" 3.9999999999999996
 ```
 
 <br>
@@ -53,6 +63,9 @@ import "Math";
 
 print(Math.random()); # Generates a decimal number from 0 to 1 (exclusive)
 ```
+```javascript
+0.72092
+```
 
 <br>
 If a single parameter is given, it returns an integer number between 1 and min (inclusive).
@@ -62,6 +75,9 @@ import "Math";
 
 print(Math.random(5)); # Generates integer number from 1 to 5 (inclusive)
 ```
+```javascript
+2
+```
 
 <br>
 If both parameters are given, it returns an integer number between min and max (inclusive).
@@ -70,6 +86,9 @@ If both parameters are given, it returns an integer number between min and max (
 import "Math";
 
 print(Math.random(10, 20)); # Generates integer number from 10 to 20 (inclusive)
+```
+```javascript
+19
 ```
 
 <br>
