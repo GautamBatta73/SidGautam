@@ -7,7 +7,10 @@ This function returns the string converted to uppercase letters.
 ```python
 import "StringUtils";
 
-print(upper("test")); # Prints "TEST"
+print(upper("test")); # Prints the string in uppercase
+```
+```javascript
+"TEST"
 ```
 
 <br>
@@ -18,7 +21,10 @@ This function returns the string converted to lowercase letters.
 ```python
 import "StringUtils";
 
-print(lower("TEST")); # Prints "test"
+print(lower("TEST")); # Prints the string in lowercase
+```
+```javascript
+"test"
 ```
 
 <br>
@@ -35,7 +41,13 @@ import "StringUtils";
 var string = "Hello World";
 var list = string.split();
 
-print(list); # Prints ["Hello", "World"]
+print(list); # Prints the string as a list, separated by " "
+```
+```javascript
+[
+  "Hello",
+  "World"
+]
 ```
 
 <br>
@@ -47,7 +59,13 @@ import "StringUtils";
 var string = "Hello,World";
 var list = string.split(",");
 
-print(list); # Prints ["Hello", "World"]
+print(list); # Prints the string as a list, separated by ","
+```
+```javascript
+[
+  "Hello",
+  "World"
+]
 ```
 
 <br>
@@ -59,7 +77,16 @@ import "StringUtils";
 var string = "Hello";
 var list = string.split("");
 
-print(list); # Prints ["H", "e", "l", "l", "o"]
+print(list); # Prints the string's character as a list
+```
+```javascript
+[
+  "H",
+  "e",
+  "l",
+  "l",
+  "o"
+]
 ```
 
 <br>
