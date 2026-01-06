@@ -1,5 +1,29 @@
 # SidGautamScript Documentation
 
+## DataTypes
+A datatype is the kind of data that a variable stores. It also tells the program how to interpret a value, so that it knows the operations allowed, such as arithmetic on numbers versus concatenation on text.
+<br>
+Understanding datatypes is important in any programming language. 
+
+[How To Get a Variable's Datatype](https://github.com/GautamBatta73/SidGautam/edit/main/Versions/Prog_Language/Documentation/readme.md#datatypearg)
+<br>
+
+### StringLiterals
+
+### NumberLiterals
+
+### ListLiterals
+
+### ObjectLiterals
+
+### Booleans
+
+### FunctionObjects
+
+### NULL
+
+<br>
+
 ## Statements
 ### import \<module\>
 Imports the functions and variables of compiled files into the current script.
@@ -317,3 +341,50 @@ print(answer(15)); # Calls the variable function with a parameter
 ```
 
 <br>
+
+## Native Variables and Functions
+### dataType(\<arg\>)
+Returns a string indicating the type of the arg's value. 
+<br>
+This is the best way to check for NULL.
+
+[More Info on Datatypes](https://github.com/GautamBatta73/SidGautam/edit/main/Versions/Prog_Language/Documentation/readme.md#datatypes)
+
+<br>
+Example 1:
+
+```python
+var add = (x, y) -> {
+  unless (dataType(x) == "null" || dataType(y) == "null") {
+    pass x + y;
+  } orElse {
+    pass 0;
+  }
+};
+
+print(add());
+print(add(7));
+```
+```javascript
+0
+0
+```
+
+Since the compiler and executor are in JS, both say that x and/or y are *undefined*, but such a thing does not exist in SidGautamScript.
+Checking for NULL, checks for any falsy values that are not numbers, strings, objects, booleans, or lists.
+  
+<br>
+Example 2:
+
+```python
+func someFunction() {
+  pass -1;
+}
+
+print(someFunction)
+```
+```javascript
+"Function"
+```
+
+You can use functions are normal variables, without calling them, if you omit the brackets.
