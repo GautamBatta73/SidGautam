@@ -75,7 +75,10 @@ If the array has only one item, then that item will be returned without using th
 import "ListUtils";
 
 var list = {1};
-print(list.join()); # Prints "1"
+print(list.join()); # Prints the list as a single value string
+```
+```javascript
+"1"
 ```
 
 <br>
@@ -85,7 +88,10 @@ If no parameter is given, it returns the concatenated list separated by ", ".
 import "ListUtils";
 
 var list = {1, 2, 3};
-print(list.join()); # Prints "1, 2, 3"
+print(list.join()); # Prints the list as a string, concatenated by ", "
+```
+```javascript
+"1, 2, 3"
 ```
 
 <br>
