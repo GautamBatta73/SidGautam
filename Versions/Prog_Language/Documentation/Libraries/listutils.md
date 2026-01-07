@@ -9,10 +9,14 @@ import "ListUtils";
 
 var list = {1, 2, 3};
 list.forEach(print); # Prints every element on a seperate line
-
+print(); # Prints blank new line for seperation
 list.forEach((el) -> print(el)); # Does same but easier to visualize
 ```
 ```javascript
+1
+2
+3
+
 1
 2
 3
