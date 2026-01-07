@@ -14,9 +14,11 @@ The String datatype is used to represent textual data. It can act as a list of c
 
 [Extra Importable String Utilities](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/strutils.md)
 
-<br>
+[Built-in Function to Convert to String](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/readme.md#strobj)
 
-All strings are enclosed by double quotes ( " ), and you can add escape characters: \n \\"
+<br>
+All strings are enclosed by double quotes ( " ), and you can add escape characters: \n \"
+
 ```python
 var string = "Hello\nWorld";
 
@@ -28,8 +30,8 @@ World"
 ```
 
 <br>
-
 It does not need to be stored in a variable for any of its uses:
+
 ```python
 print("Hello\nWorld"); # Prints the string literal to the console
 ```
@@ -39,8 +41,8 @@ World"
 ```
 
 <br>
-
 You can concatenate strings with other datatypes:
+
 ```python
 var string = "Hello World ";
 
@@ -68,8 +70,8 @@ print(string + "in Canada!"); # Prints the string variable concatenated with a s
 String literals allowing embedded expressions. You can use multi-line strings and string interpolation features with them.
 
 <br>
-
 Template literals are enclosed by single quotes ( ' ) instead of double quotes, and can contain placeholders. These are indicated by the curly braces ({expression}):
+
 ```python
 var string = 'Hello
 World';
@@ -82,8 +84,8 @@ World"
 ```
 
 <br>
-
 It does not need to be stored in a variable for any of its uses:
+
 ```python
 print('Hello
 World'); # Prints the string variable
@@ -94,8 +96,8 @@ World"
 ```
 
 <br>
-
 You can embed other datatypes into the string:
+
 ```python
 var string = 'Hello World {1}';
 
@@ -117,8 +119,8 @@ print(string); # Prints the template literal, with the string literal embedded
 ```
 
 <br>
-
 You can even do expressions:
+
 ```python
 var string = 'Hello World {1 + 1}';
 
@@ -158,8 +160,8 @@ print(num); # Prints the num variable
 ```
 
 <br>
-
 It does not need to be stored in a variable for any of its uses:
+
 ```python
 print(12); # Prints the number literal to the console
 ```
@@ -168,8 +170,8 @@ print(12); # Prints the number literal to the console
 ```
 
 <br>
-
 You can also do doubles (floating point numbers):
+
 ```python
 print(15.24096); # Prints the number literal to the console
 ```
@@ -178,8 +180,8 @@ print(15.24096); # Prints the number literal to the console
 ```
 
 <br>
-
 The great thing about numbers, is that you can do arithmetic with them:
+
 ```python
 var num = 2 + 2;
 
@@ -212,8 +214,8 @@ List elements cannot be accessed using arbitrary strings as indices, but must be
 [Extra Importable List Utilities](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/listutils.md)
 
 <br>
-
 List Example:
+
 ```python
 var list = {1, 2, 3, "4"};
 
@@ -229,8 +231,8 @@ print(list); # Prints the list to the console
 ```
 
 <br>
-
 You can get any specific element in a list by calling its index:
+
 ```python
 var list = {1, 2, 3, "4"};
 
@@ -241,8 +243,8 @@ print(list[1]); # Prints the second element to the console (Remember, counting s
 ```
 
 <br>
-
 You can also get null!
+
 ```python
 var list = {1, 2, 3, "4"};
 
@@ -253,8 +255,8 @@ null
 ```
 
 <br>
-
 You can also edit/add specific elements at specific indices:
+
 ```python
 var fruits = {"Apple", "Banana"}; # Declare and instantiate a list with two elements
 
@@ -278,8 +280,8 @@ print(fruits); # Prints the list to the console
 ```
 
 <br>
-
 To get the last element:
+
 ```python
 var fruits = {"Apple", "Banana", "Tomato"}; # Declare and instantiate a list with two elements
 
@@ -301,8 +303,8 @@ Any datatype can be a value in the object. Including functions.
 [Extra Importable Object Utilities](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/objutils.md)
 
 <br>
-
 Example:
+
 ```python
 var developer =  { # Declare and instantiate an object with many properties
   firstName: "Gautam",
@@ -322,6 +324,86 @@ print(developer); # Prints the object and its properties
   "online": true,
   "followers": 420
 }
+```
+
+<br>
+Like lists, you can index each property of an object. Except you use the key's name as a string or dot notation:
+
+```python
+var developer =  { # Declare and instantiate an object with many properties
+  firstName: "Gautam",
+  lastName: "Batta",
+  location: "Canada",
+  online: true,
+  followers: 420
+};
+
+print(developer["location"]); # Prints the location property
+```
+```javascript
+"Canada"
+```
+
+<br>
+
+```python
+var developer =  { # Declare and instantiate an object with many properties
+  firstName: "Gautam",
+  lastName: "Batta",
+  location: "Canada",
+  online: true,
+  followers: 420
+};
+
+print(developer.followers); # Prints the followers property
+```
+```javascript
+420
+```
+
+<br>
+Remember, you can store any datatype as a value:
+
+```python
+var developer =  { # Declare and instantiate an object with many properties
+  firstName: "Gautam",
+  lastName: "Batta",
+  location: "Canada",
+  online: true,
+  projects: {
+    "SidGautamAI",
+    "SidGautamNotes",
+    "SidGautamOS",
+    "SidGautamScript"
+  }
+};
+
+print(developer["projects"]); # Prints the projects list property
+```
+```javascript
+[
+  "SidGautamAI",
+  "SidGautamNotes",
+  "SidGautamOS",
+  "SidGautamScript"
+]
+```
+
+<br>
+
+```python
+var developer =  { # Declare and instantiate an object with many properties
+  firstName: "Gautam",
+  lastName: "Batta",
+  location: "Canada",
+  online: true,
+  favouriteFunction: print
+};
+
+developer.favouriteFunction("Hmmm"); # Calls my favourite function
+```
+```javascript
+"Hmmm"
 ```
 
 <br>
@@ -668,16 +750,16 @@ This is the best way to check for NULL.
 Example 1:
 
 ```python
-var add = (x, y) -> {
-  unless (dataType(x) == "null" || dataType(y) == "null") {
-    pass x + y;
+var add = (x, y) -> { # Defines a function that takes 2 parameters, which are assumed to be numbers
+  unless (dataType(x) == "null" || dataType(y) == "null") { # Checks if both parameters are not NULL
+    pass x + y; # Adds the non-NULL parameters
   } orElse {
-    pass 0;
+    pass 0; # Passes 0 to the caller, if any or all of the parameters are NULL
   }
 };
 
-print(add());
-print(add(7));
+print(add()); # Calls function without parameters, which means they get a NULL value
+print(add(7)); # Calls function with one NULL parameter
 ```
 ```javascript
 0
@@ -691,17 +773,97 @@ Checking for NULL, checks for any falsy values that are not numbers, strings, ob
 Example 2:
 
 ```python
-func someFunction() {
+func someFunction() { # Defines a function that takes no parameters, and passes -1
   pass -1;
 }
 
-print(someFunction)
+print(dataType(someFunction)); # Prints the function's dataType without calling it
 ```
 ```javascript
 "Function"
 ```
 
-You can use functions are normal variables, without calling them, if you omit the brackets.
+You can use functions as normal variables, without calling them, if you omit the brackets.
 
+<br>
 
+### str(\<obj\>)
+The str() function is a built-in function that takes an object as input and returns its value converted to a string. It can be used to convert all datatypes into strings, which can then be used for printing, concatenation, and formatting.
 
+<br>
+Example 1:
+
+```python
+func someFunction() { # Defines a function that takes no parameters, and passes -1
+  pass -1;
+}
+
+print(str(someFunction)); # Prints the function's string version without calling it
+```
+```javascript
+"FunctionObject()"
+```
+
+<br>
+
+```python
+var add = (x, y) -> { # Defines a function that takes 2 parameters, which are assumed to be numbers
+  unless (dataType(x) == "null" || dataType(y) == "null") { # Checks if both parameters are not NULL
+    pass x + y; # Adds the non-NULL parameters
+  } orElse {
+    pass 0; # Passes 0 to the caller, if any or all of the parameters are NULL
+  }
+};
+
+print(str(add)); # Prints the function's string version without calling it
+```
+```javascript
+"FunctionObject(x, y)"
+```
+
+<br>
+Example 2:
+
+```python
+var string = "Hello World";
+
+print(str(string)); # Prints the variable's string version
+```
+```javascript
+"Hello World"
+```
+
+<br>
+Example 3:
+
+```python
+var obj = {
+    name: "Gautam",
+    age: 20
+};
+
+print(str(obj)); # Prints the variable's string version
+```
+```javascript
+"{
+  name: Gautam,
+  age: 20
+}"
+```
+
+<br>
+
+```python
+var list = {1, 2, 3, 4, 5};
+
+print(str(list)); # Prints the variable's string version
+```
+```javascript
+"[
+  1,
+  2,
+  3,
+  4,
+  5
+]"
+```
