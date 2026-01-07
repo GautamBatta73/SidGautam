@@ -5,7 +5,7 @@ A datatype is the kind of data that a variable stores. It also tells the program
 <br>
 Understanding datatypes is important in any programming language. 
 
-[How To Get a Variable's Datatype](https://github.com/GautamBatta73/SidGautam/edit/main/Versions/Prog_Language/Documentation/readme.md#datatypearg)
+[How To Get a Variable's Datatype](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/readme.md#datatypearg)
 
 <br>
 
@@ -662,7 +662,7 @@ Returns a string indicating the type of the arg's value.
 <br>
 This is the best way to check for NULL.
 
-[More Info on Datatypes](https://github.com/GautamBatta73/SidGautam/edit/main/Versions/Prog_Language/Documentation/readme.md#datatypes)
+[More Info on Datatypes](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/readme.md#datatypes)
 
 <br>
 Example 1:
@@ -702,5 +702,6 @@ print(someFunction)
 ```
 
 You can use functions are normal variables, without calling them, if you omit the brackets.
+
 
 
