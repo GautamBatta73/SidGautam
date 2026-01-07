@@ -6,11 +6,147 @@ A datatype is the kind of data that a variable stores. It also tells the program
 Understanding datatypes is important in any programming language. 
 
 [How To Get a Variable's Datatype](https://github.com/GautamBatta73/SidGautam/edit/main/Versions/Prog_Language/Documentation/readme.md#datatypearg)
+
 <br>
 
 ### StringLiterals
+The String datatype is used to represent textual data. It can act as a list of characters. Each element in the String occupies a position in the String. The first element is at index 0, the next at index 1, and so on. The length of a String is the number of elements in it. You can create strings using string literals.
+
+[Extra Importable String Utilities](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/strutils.md)
+
+<br>
+
+All strings use "", and you can add escape characters: \n \\"
+```python
+var string = "Hello\nWorld";
+
+print(string); # Prints the string variable
+```
+```javascript
+"Hello
+World"
+```
+
+<br>
+
+It does not need to be stored in a variable for any of its uses:
+```python
+print("Hello\nWorld"); # Prints the string literal to the console
+```
+```javascript
+"Hello
+World"
+```
+
+<br>
+
+You can concatenate strings with other datatypes:
+```python
+var string = "Hello World ";
+
+print(string + 1); # Prints the string variable concatenated with a number 
+```
+```javascript
+"Hello World 1"
+```
+
+<br>
+
+```python
+var string = "Hello World ";
+
+print(string + "in Canada!"); # Prints the string variable concatenated with a string literal
+```
+```javascript
+var string = "Hello World ";
+
+print(string + "in Canada!"); # Prints the string variable concatenated with a string literal
+```
+<br>
+
+#### Template literals
+String literals allowing embedded expressions. You can use multi-line strings and string interpolation features with them.
+
+<br>
+
+Template literals are enclosed by single quotes (') instead of double quotes, and can contain placeholders. These are indicated by the curly braces ({expression}):
+```python
+var string = 'Hello
+World';
+
+print(string); # Prints the string variable
+```
+```javascript
+"Hello
+World"
+```
+
+<br>
+
+It does not need to be stored in a variable for any of its uses:
+```python
+print('Hello
+World'); # Prints the string variable
+```
+```javascript
+"Hello
+World"
+```
+
+<br>
+
+You can embed other datatypes into the string:
+```python
+var string = 'Hello World {1}';
+
+print(string); # Prints the template literal, with the number embedded 
+```
+```javascript
+"Hello World 1"
+```
+
+<br>
+
+```python
+var string = 'Hello World {"from Canada!"}';
+
+print(string); # Prints the template literal, with the string literal embedded 
+```
+```javascript
+"Hello World from Canada!"
+```
+
+<br>
+
+You can even do expressions:
+```python
+var string = 'Hello World {1 + 1}';
+
+print(string); # Prints the template literal, with the number embedded 
+```
+```javascript
+"Hello World 2"
+```
+
+<br>
+
+```python
+var string = 'Hello World, {!true}';
+
+print(string); # Prints the template literal, with the boolean embedded 
+```
+```javascript
+"Hello World, false"
+```
+
+<br>
 
 ### NumberLiterals
+The Number datatype is used to represent numeric data. There can be double (floating point) and integer numbers
+
+[Extra Importable Math Properties](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/math.md)
+
+<br>
 
 ### ListLiterals
 
@@ -388,3 +524,4 @@ print(someFunction)
 ```
 
 You can use functions are normal variables, without calling them, if you omit the brackets.
+
