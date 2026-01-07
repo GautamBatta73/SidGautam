@@ -10,13 +10,13 @@ Understanding datatypes is important in any programming language.
 <br>
 
 ### StringLiterals
-The String datatype is used to represent textual data. It can act as a list of characters. Each element in the String occupies a position in the String. The first element is at index 0, the next at index 1, and so on. The length of a String is the number of elements in it. You can create strings using string literals.
+The String datatype is used to represent textual data. It can act as a list of characters. Each element in the String occupies a position in the String. The first element is at index 0, the next at index 1, and so on. The length of a String is the number of elements in it. You can create strings using string literals or template literals.
 
 [Extra Importable String Utilities](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/strutils.md)
 
 <br>
 
-All strings use "", and you can add escape characters: \n \\"
+All strings are enclosed by double quotes ( " ), and you can add escape characters: \n \\"
 ```python
 var string = "Hello\nWorld";
 
@@ -69,7 +69,7 @@ String literals allowing embedded expressions. You can use multi-line strings an
 
 <br>
 
-Template literals are enclosed by single quotes (') instead of double quotes, and can contain placeholders. These are indicated by the curly braces ({expression}):
+Template literals are enclosed by single quotes ( ' ) instead of double quotes, and can contain placeholders. These are indicated by the curly braces ({expression}):
 ```python
 var string = 'Hello
 World';
@@ -148,9 +148,183 @@ The Number datatype is used to represent numeric data. There can be double (floa
 
 <br>
 
+```python
+var num = 12;
+
+print(num); # Prints the num variable
+```
+```javascript
+12
+```
+
+<br>
+
+It does not need to be stored in a variable for any of its uses:
+```python
+print(12); # Prints the number literal to the console
+```
+```javascript
+12
+```
+
+<br>
+
+You can also do doubles (floating point numbers):
+```python
+print(15.24096); # Prints the number literal to the console
+```
+```javascript
+15.24096
+```
+
+<br>
+
+The great thing about numbers, is that you can do arithmetic with them:
+```python
+var num = 2 + 2;
+
+print(num); # Prints the num to the console
+```
+```javascript
+4
+```
+
+<br>
+
+```python
+var num = (40 * 2) - (5.5 * 2);
+
+print(num); # Prints the num to the console
+```
+```javascript
+69
+```
+
 ### ListLiterals
+Lists, like arrays in other programming languages, enable the storage of a collection of multiple items under a single variable name.
+<br>
+Any datatype can be a value in the list. Including functions.
+
+Lists are zero-indexed: the first element of an array is at index 0, the second is at index 1, and so on. The last element is at the value of the array's length  minus 1.
+<br>
+List elements cannot be accessed using arbitrary strings as indices, but must be accessed using non-negative integers as indices.
+
+[Extra Importable List Utilities](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/listutils.md)
+
+<br>
+
+List Example:
+```python
+var list = {1, 2, 3, "4"};
+
+print(list); # Prints the list to the console
+```
+```javascript
+[
+  1,
+  2,
+  3,
+  "4"
+]
+```
+
+<br>
+
+You can get any specific element in a list by calling its index:
+```python
+var list = {1, 2, 3, "4"};
+
+print(list[1]); # Prints the second element to the console (Remember, counting starts at 0)
+```
+```javascript
+2
+```
+
+<br>
+
+You can also get null!
+```python
+var list = {1, 2, 3, "4"};
+
+print(list[10]); # Prints the non-existent eleventh element to the console (Remember, counting starts at 0)
+```
+```javascript
+null
+```
+
+<br>
+
+You can also edit/add specific elements at specific indices:
+```python
+var fruits = {"Apple", "Banana"}; # Declare and instantiate a list with two elements
+
+print(fruits); # Prints the list to the console
+
+fruits[0] = "Tomato"; # Changes the first element from "Apple" to "Tomato"
+fruits[2] = "Apple"; # Adds a third element with the value of "Apple"
+
+print(fruits); # Prints the list to the console
+```
+```javascript
+[
+  "Apple",
+  "Banana"
+]
+[
+  "Tomato",
+  "Banana",
+  "Apple"
+]
+```
+
+<br>
+
+To get the last element:
+```python
+var fruits = {"Apple", "Banana", "Tomato"}; # Declare and instantiate a list with two elements
+
+var lastIndex = len(fruits) - 1; # Gets the length of the list minus 1, which is the last index
+
+print(fruits[lastIndex]); # Prints the last element to the console
+```
+```javascript
+"Tomato"
+```
+
+<br>
 
 ### ObjectLiterals
+Objects are used to store various keyed collections and more complex entities. It is like lists but has key-value pairs.
+<br>
+Any datatype can be a value in the object. Including functions.
+
+[Extra Importable Object Utilities](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/objutils.md)
+
+<br>
+
+Example:
+```python
+var developer =  { # Declare and instantiate an object with many properties
+  firstName: "Gautam",
+  lastName: "Batta",
+  location: "Canada",
+  online: true,
+  followers: 420
+};
+
+print(developer); # Prints the object and its properties
+```
+```javascript
+{
+  "firstName": "Gautam",
+  "lastName": "Batta",
+  "location": "Canada",
+  "online": true,
+  "followers": 420
+}
+```
+
+<br>
 
 ### Booleans
 
@@ -308,6 +482,8 @@ unless (x > 11) { # Sets the starting condition to 'unless x is more than 11, do
 
 ### var \<name\> = \<expression>
 The var declaration declares re-assignable, block-scoped local variables, initializing each to a value of a datatype.
+<br>
+ALL VAR DECLARATIONS END WITH A SEMI-COLON ( ; ), EVEN MULTI-LINE ONES!
 
 <br>
 Example 1:
@@ -337,6 +513,8 @@ print(string); # Prints the value of string
 
 ### final \<name\> = \<expression>
 The final declaration declares block-scoped constant local variables. The value of a constant can't be reassigned, and even if a constant is an object or list, its properties/elements can't be added, updated, or removed. If you try, an error will be thrown on compile and/or execution.
+<br>
+ALL FINAL DECLARATIONS END WITH A SEMI-COLON ( ; ), EVEN MULTI-LINE ONES!
 
 <br>
 Example 1:
@@ -524,4 +702,5 @@ print(someFunction)
 ```
 
 You can use functions are normal variables, without calling them, if you omit the brackets.
+
 
