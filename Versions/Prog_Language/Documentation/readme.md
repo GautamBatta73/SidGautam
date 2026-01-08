@@ -9,7 +9,7 @@ Understanding datatypes is important in any programming language.
 
 <br>
 
-### StringLiterals
+### Strings
 The String datatype is used to represent textual data. It can act as a list of characters. Each element in the String occupies a position in the String. The first element is at index 0, the next at index 1, and so on. The length of a String is the number of elements in it. You can create strings using string literals or template literals.
 
 [Extra Importable String Utilities](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/strutils.md)
@@ -17,7 +17,11 @@ The String datatype is used to represent textual data. It can act as a list of c
 [Built-in Function to Convert to String](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/readme.md#strobj)
 
 <br>
-All strings are enclosed by double quotes ( " ), and you can add escape characters: \n \"
+
+#### String Literals
+
+<br>
+All string literals are enclosed by double quotes ( " ), and you can add escape characters: \n \"
 
 ```python
 var string = "Hello\nWorld";
@@ -66,8 +70,8 @@ print(string + "in Canada!"); # Prints the string variable concatenated with a s
 ```
 <br>
 
-#### Template literals
-String literals allowing embedded expressions. You can use multi-line strings and string interpolation features with them.
+#### Template Literals
+Template literals are like string literals, but allow embedded expressions. You can use multi-line strings and string interpolation features with them.
 
 <br>
 Template literals are enclosed by single quotes ( ' ) instead of double quotes, and can contain placeholders. These are indicated by the curly braces ({expression}):
@@ -143,7 +147,7 @@ print(string); # Prints the template literal, with the boolean embedded
 
 <br>
 
-### NumberLiterals
+### Numbers
 The Number datatype is used to represent numeric data. There can be double (floating point) and integer numbers
 
 [Extra Importable Math Properties](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/math.md)
@@ -202,7 +206,7 @@ print(num); # Prints the num to the console
 69
 ```
 
-### ListLiterals
+### Lists
 Lists, like arrays in other programming languages, enable the storage of a collection of multiple items under a single variable name.
 <br>
 Any datatype can be a value in the list. Including functions.
@@ -295,7 +299,7 @@ print(fruits[lastIndex]); # Prints the last element to the console
 
 <br>
 
-### ObjectLiterals
+### Objects
 Objects are used to store various keyed collections and more complex entities. It is like lists but has key-value pairs.
 <br>
 Any datatype can be a value in the object. Including functions.
@@ -410,7 +414,7 @@ developer.favouriteFunction("Hmmm"); # Calls my favourite function
 
 ### Booleans
 
-### FunctionObjects
+### Functions
 
 ### NULL
 
@@ -867,3 +871,4 @@ print(str(list)); # Prints the variable's string version
   5
 ]"
 ```
+
