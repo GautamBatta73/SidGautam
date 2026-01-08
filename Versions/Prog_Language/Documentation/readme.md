@@ -750,10 +750,10 @@ print(answer(15)); # Calls the variable function with a parameter
 
 <br>
 
-## Built-In/Native Functions
-SidGautamScript provides a lot of built-in native functions that assist with the writing of code. They are basically global constants and can not be overwritten.
+## Built-In/Native Functions & Values
+SidGautamScript provides a lot of built-in native functions and values that assist with the writing of code. They are basically global constants and can not be overwritten.
 <br>
-These functions are built straight into the runtime environment and do not need to be imported to be called.
+These functions and values are built straight into the runtime environment and do not need to be imported to be used.
 
 <br>
 
@@ -1107,7 +1107,7 @@ The errPrint() function is a built-in function that prints the objects as a conc
 Example:
 
 ```python
-print("Hello World"); # Prints the string literal
+errPrint("Hello World"); # Prints the string literal, as an Error
 
 var list = {1, 2, "gfg"}; # Declare and instantiate a list
 
@@ -1137,7 +1137,149 @@ errPrint("Age:", age); # Prints age with a string literal, as an Error
 "Name:" "Gautam"
 "Age:" 20
 ```
-(I have no clue how to make it red in Markdown)
+
+<br.
+
+### exit(\<errCode\>)
+The exit() function is a built-in function that is used to terminate the currently running Runtime Environment and exit the program immediately.
+<br>
+The errorCode is optional, and is 0 by default.
+
+<br>
+Example:
+
+```python
+print("Hello World"); # Prints the string literal
+
+exit(); # Exits the program
+
+print("Test"); # The program will exit before this line, so this won't print
+```
+```javascript
+"Hello World"
+```
 
 <br>
 
+```python
+var x = 5;
+
+unless (x == 5) { # Checks if x is 5
+  exit(); # Exits the program if x isn't 5
+}
+
+print("Test"); # Prints the string literal
+```
+```javascript
+"Test"
+```
+
+<br>
+
+### len(\<obj\>)
+The len() function is a built-in function that is used to get the number of elements in a list, or the number of characters in a string. 
+<br.
+It returns an integer value representing the length or the number of elements.
+
+<br>
+Get String Length:
+
+```python
+var string = "Hello World"; 
+
+print(len(string)); # Prints the length of the string (number of characters)
+```
+```javascript
+11
+```
+
+<br>
+Get List Length:
+
+```python
+var list = {1, 2, 3, 6, 7, 3, 9, 2}; 
+
+print(len(list)); # Prints the length of the list (number of elements)
+```
+```javascript
+8
+```
+
+<br>
+If you try to get the length of anything other than a string or list. It throws an error:
+
+```python
+var num = 52; 
+
+print(len(num)); # Try to print the length of num, but an error is thrown during execution
+```
+```javascript
+Error: len() expects list or string, at line: 3 and column: 4
+```
+
+<br>
+
+### isEmpty(\<obj\>)
+The isEmpty() function is a built-in function that is used to check if there are any elements in a list, or if a string is empty. 
+<br.
+It returns a boolean value, indicating if obj is empty or not.
+
+<br>
+Check String:
+
+```python
+var string = "Hello World"; 
+
+print(isEmpty(string)); # Prints true if the string is empty
+```
+```javascript
+false
+```
+
+<br>
+
+```python
+var string = "  "; 
+
+print(isEmpty(string)); # Prints true if the string is empty
+```
+```javascript
+true
+```
+
+<br>
+Check List:
+
+```python
+var list = {1, 2, 7, 4, 5}; 
+
+print(isEmpty(list)); # Prints true if the list is empty
+```
+```javascript
+false
+```
+
+<br>
+
+```python
+var list = {}; 
+
+print(isEmpty(list)); # Prints true if the list is empty
+```
+```javascript
+true
+```
+
+<br>
+If you try to check if anything other than a string or list is empty. It throws an error:
+
+```python
+var num = 52; 
+
+print(isEmpty(num)); # Try to check if num is empty, but an error is thrown during execution
+```
+```javascript
+Error: isEmpty() expects list or string, at line: 3 and column: 4
+```
+
+<br>
