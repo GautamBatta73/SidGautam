@@ -211,7 +211,7 @@ Lists, like arrays in other programming languages, enable the storage of a colle
 <br>
 Any datatype can be a value in the list. Including functions.
 
-Lists are zero-indexed: the first element of an array is at index 0, the second is at index 1, and so on. The last element is at the value of the array's length  minus 1.
+Lists are zero-indexed: the first element of a list is at index 0, the second is at index 1, and so on. The last element is at the value of the list's length  minus 1.
 <br>
 List elements cannot be accessed using arbitrary strings as indices, but must be accessed using non-negative integers as indices.
 
@@ -742,7 +742,13 @@ print(answer(15)); # Calls the variable function with a parameter
 
 <br>
 
-## Native Variables and Functions
+## Built-In/Native Functions
+SidGautamScript provides a lot of built-in native functions that assist with the writing of code. They are basically global constants and can not be overwritten.
+<br>
+These functions are built straight into the runtime environment and do not need to be imported to be called.
+
+<br>
+
 ### dataType(\<arg\>)
 Returns a string indicating the type of the arg's value. 
 <br>
@@ -871,4 +877,5 @@ print(str(list)); # Prints the variable's string version
   5
 ]"
 ```
+
 
