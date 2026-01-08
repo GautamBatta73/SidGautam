@@ -17,7 +17,7 @@ The String datatype is used to represent textual data. It can act as a list of c
 [Built-in Function to Convert to String](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/readme.md#strobj)
 
 <br>
-**Fun Fact- All string comparison is case-insensitive**:
+Fun Fact- All string comparison is case-insensitive:
 
 ```python
 var string = "hello world";
@@ -729,6 +729,233 @@ print(-x); # Prints the numeric negation of x
 ```
 ```javascript
 -5
+```
+
+<br>
+
+### Logical Operators
+This is how one compares a value to another.
+
+<br>
+AND:
+ 
+ ```python
+print(true && true); # Prints true if both values are true
+
+print(true && false); # Prints true if both values are true
+
+print(false && true); # Prints true if both values are true
+
+print(false && false); # Prints true if both values are true
+```
+```javascript
+true
+false
+false
+false
+```
+
+<br>
+OR:
+ 
+ ```python
+print(true || true); # Prints true if one or both values are true
+
+print(true || false); # Prints true if one or both values are true
+
+print(false || true); # Prints true if one or both values are true
+
+print(false || false); # Prints true if one or both values are true
+```
+```javascript
+true
+true
+true
+false
+```
+
+<br>
+Nullish Coalescing Operator:
+
+```python
+print(NULL ?? "Hello"); # Prints the string if the first value is a NULL datatype
+
+print(false ?? "Hello"); # Prints the number if the first value is a NULL datatype
+
+print(15 ?? "Fallback"); # Prints the string if the first value is not a NULL datatype
+
+print(0 ?? 17); # Prints the number if the first value is not a NULL datatype
+```
+```javascript
+"Hello"
+false
+15
+0
+```
+
+<br>
+NOT
+
+```python
+print(!false); # Prints true if the value is not false
+
+print(!true); # Prints false if the value is not true
+
+print(!!false); # Prints false if the value is not not false
+
+print(!!true); # Prints true if the value is not not true
+```
+```javascript
+true
+false
+false
+true
+```
+
+<br>
+
+### String Operator
+This is how one combines other values with strings.
+
+<br>
+Adding two or more strings:
+
+```python
+print("Hello" + "World"); # Prints the concatenated string
+
+print("Hello" + "World" + "!"); # Prints the concatenated string
+```
+```javascript
+"HelloWorld"
+"HelloWorld!"
+```
+
+<br>
+Adding other datatypes to strings:
+
+```python
+print("Number: " + 1); # Prints the concatenated string
+
+print("Number: " + (1 + 1)); # Prints the concatenated string
+
+print("Numbers: " + {1, 2, 3}); # Prints the concatenated string
+
+print("Null: " + NULL); # Prints the concatenated string
+```
+```javascript
+"Number: 1"
+"Number: 2"
+"Numbers: [
+  1,
+  2,
+  3
+]"
+"Null: null"
+```
+
+<br>
+
+### Property Accessor
+This is how one gets property values on objects and lists, using either dot notation (only objects) or bracket notation (both).
+
+<br>
+Dot Notation:
+
+```python
+var developer =  { # Declare and instantiate an object with many properties
+  firstName: "Gautam",
+  lastName: "Batta",
+  location: "Canada",
+  online: true,
+  followers: 420
+};
+
+print(developer.location); # Prints the location property
+```
+```javascript
+"Canada"
+```
+
+<br>
+Bracket Notation (Object):
+
+```python
+var developer =  { # Declare and instantiate an object with many properties
+  firstName: "Gautam",
+  lastName: "Batta",
+  location: "Canada",
+  online: true,
+  followers: 420
+};
+
+print(developer["location"]); # Prints the location property
+```
+```javascript
+"Canada"
+```
+
+<br>
+Bracket Notation (List) uses indices starting from 0:
+
+```python
+var list =  {1, 2, 3, 4, 5};
+
+print(list[2]); # Prints the third element
+```
+```javascript
+3
+```
+
+<br>
+
+### Optional Chaining
+The optional chaining syntax ( ?. ) allows operations on existing objects and returns NULL if the object is null or undefined.
+<br>
+Basically, the operator will check the right-most property, and if its NULL, it goes left. If it all ends up NULL, then it returns NULL.
+
+<br>
+Example:
+
+```python
+var developer =  { # Declare and instantiate an object with many properties
+  firstName: "Gautam",
+  lastName: "Batta",
+  location: "Canada",
+  online: true,
+  followers: 420
+};
+
+print(developer?.location); # Prints the location property
+```
+```javascript
+"Canada"
+```
+
+<br>
+
+```python
+var developer =  { # Declare and instantiate an object with many properties
+  firstName: "Gautam",
+  lastName: "Batta",
+  online: true,
+  followers: 420
+};
+
+print(developer?.location); # Prints the whole object as the location property does not exist
+```
+```javascript
+"Canada"
+```
+
+<br>
+
+```python
+var developer =  NULL;
+
+print(developer?.location); # Prints NULL
+```
+```javascript
+null
 ```
 
 <br>
@@ -1591,4 +1818,5 @@ print(isEmpty(num)); # Try to check if num is empty, but an error is thrown duri
 ```javascript
 Error: isEmpty() expects list or string, at line: 3 and column: 4
 ```
+
 
