@@ -814,6 +814,60 @@ true
 
 <br>
 
+### Lambda Expressions
+A lambda expression is a compact anonymous alternative to a traditional function expression.
+
+<br>
+Syntaxes:
+
+```
+() -> passed expression
+
+(param) -> passed expression
+
+(param1, paramN) -> passed expression
+
+() -> {
+  statements
+  passed expression
+}
+
+(param1, paramN) -> {
+  statements
+  passed expression
+}
+```
+
+<br>
+Examples:
+
+```python
+func test(a) { # Traditional Function Declaration
+  pass a + 100;
+}
+
+var test2 = (a) -> { # Lambda with Body Version
+  pass a + 100;
+};
+
+var test3 = (a) -> a + 100; # Lambda with Inplicit Pass Version
+
+
+# They all return the same value as they all do the same thing
+print(test(8)); # Prints the function with a parameter
+
+print(test2(8)); # Prints the function with a parameter
+
+print(test3(8)); # Prints the function with a parameter
+```
+```javascript
+108
+108
+108
+```
+
+<br>
+
 ### String Operator
 This is how one combines other values with strings.
 
@@ -1818,5 +1872,6 @@ print(isEmpty(num)); # Try to check if num is empty, but an error is thrown duri
 ```javascript
 Error: isEmpty() expects list or string, at line: 3 and column: 4
 ```
+
 
 
