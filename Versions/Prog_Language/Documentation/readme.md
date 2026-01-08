@@ -850,7 +850,7 @@ var test2 = (a) -> { # Lambda with Body Version
   pass a + 100;
 };
 
-var test3 = (a) -> a + 100; # Lambda with Inplicit Pass Version
+var test3 = (a) -> a + 100; # Lambda with Implicit Pass Version
 
 
 # They all return the same value as they all do the same thing
@@ -1872,6 +1872,7 @@ print(isEmpty(num)); # Try to check if num is empty, but an error is thrown duri
 ```javascript
 Error: isEmpty() expects list or string, at line: 3 and column: 4
 ```
+
 
 
 
