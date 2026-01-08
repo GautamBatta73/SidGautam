@@ -473,7 +473,7 @@ unless (isObject(obj)) { # Checks if obj isn't an Object
 <br>
 
 ### Functions
-Functions are like subprograms that can be called by other code, having their own body of statements. It can take parameters and return a value. In SidGautamScript, they can be passed around, returned, and assigned like other datatypes.
+Functions are like subprograms that can be called by other code, having their own body of statements. It can take parameters and return a value. In SidGautamScript, they can be passed around, returned, and assigned like other datatypes. To use a function, you must define it somewhere in the scope from which you wish to call it. Either with the full syntax or as a lambda expression.
 <br>
 They are technically a type of object, but are not treated as such.
 
@@ -528,6 +528,207 @@ print(x); # Prints NULL because x is NULL, as the parameter had no value
 ```
 ```javascript
 null
+```
+
+<br>
+
+## Expressions and Operators
+### Assignment Expression
+This is how one instantiates/assigns a value to a variable.
+
+<br>
+Incrementing a value:
+ 
+ ```python
+var x = 0; # Declare and instantiate x to 0
+
+print(x); # Prints the value of x
+
+x = x + 1; # Increments the value of x by 1
+
+print(x); # Prints the value of x
+```
+```javascript
+0
+1
+```
+
+<br>
+Decrementing a value:
+ 
+ ```python
+var x = 1; # Declare and instantiate x to 0
+
+print(x); # Prints the value of x
+
+x = x - 1; # Decrements the value of x by 1
+
+print(x); # Prints the value of x
+```
+```javascript
+1
+0
+```
+
+<br>
+
+### Comparison Operators
+This is how one compares a value to another.
+
+<br>
+Equality:
+ 
+ ```python
+var x = 50; # Declare and instantiate x to 50
+
+var y = 50; # Declare and instantiate x to 50
+
+print(x == y); # Prints true if x has the same value as y
+```
+```javascript
+true
+```
+
+<br>
+
+ ```python
+var x = "TEST"; # Declare and instantiate x to a string
+
+var y = "test"; # Declare and instantiate y to a string
+
+print(x == y); # Prints true if x has the same value as y
+```
+```javascript
+true
+```
+
+<br>
+Inequality:
+ 
+ ```python
+var x = 50; # Declare and instantiate x to 50
+
+var y = 60; # Declare and instantiate x to 60
+
+print(x != y); # Prints true if x doen't have the same value as y
+```
+```javascript
+true
+```
+
+<br>
+
+ ```python
+var x = "TEST"; # Declare and instantiate x to a string
+
+var y = "test4"; # Declare and instantiate y to a string
+
+print(x != y); # Prints true if x doen't have the same value as y
+```
+```javascript
+true
+```
+
+<br>
+Greater Than:
+ 
+ ```python
+var x = 60; # Declare and instantiate x to 60
+
+var y = 50; # Declare and instantiate x to 50
+
+print(x > y); # Prints true if x is greater than y
+```
+```javascript
+true
+```
+
+<br>
+Greater Than or Equal to:
+
+ ```python
+var x = 50; # Declare and instantiate x to 50
+
+var y = 50; # Declare and instantiate x to 50
+
+print(x >= y); # Prints true if x is greater than or equal to y
+```
+```javascript
+true
+```
+
+<br>
+Less Than:
+ 
+ ```python
+var x = 50; # Declare and instantiate x to 50
+
+var y = 60; # Declare and instantiate x to 60
+
+print(x < y); # Prints true if x is less than y
+```
+```javascript
+true
+```
+
+<br>
+Less Than or Equal to:
+
+ ```python
+var x = 50; # Declare and instantiate x to 50
+
+var y = 50; # Declare and instantiate x to 50
+
+print(x <= y); # Prints true if x is less than or equal to y
+```
+```javascript
+true
+```
+
+<br>
+
+### Arithmetic Operators
+This is how one performs arithmetic with another value.
+
+<br>
+Basic Math Operators:
+
+ ```python
+print(5 + 5); # Prints the sum of 5 and 5
+
+print(10 - 5); # Prints the difference of 10 and 5
+
+print(7 * 3); # Prints the product of 7 and 3
+
+print(1 / 2); # Prints the quotient of 1 and 2
+```
+```javascript
+10
+5
+21
+0.5
+```
+
+<br>
+Modulus:
+
+ ```python
+print(12 % 5); # Prints the remainder of 12 / 5
+```
+```javascript
+2
+```
+
+<br>
+Unary Negation:
+
+ ```python
+var x = 5; # Declare and instantiate x to 5
+
+print(-x); # Prints the numeric negation of x
+```
+```javascript
+-5
 ```
 
 <br>
@@ -749,11 +950,9 @@ Do not reassign, at line: 2 and column: 2
 
 ### func \<name\>(\<parameters\>)
 Functions are a fundamental building block in any programming language. A function is essentially a set of statements that performs a task or calculates a value, and it should take some input and return an output.
-<br>
-To use a function, you must define it somewhere in the scope from which you wish to call it. Either with the full syntax or as a lambda expression.
 
 <br>
-Example 1 (Full Syntax):
+Example 1:
 
 ```python
 func printNum(number) { # Defines a function that takes in one parameter
@@ -767,7 +966,7 @@ printNum(69); # Calls the function with a passed parameter
 ```
   
 <br>
-Example 2 (Lambda Syntax):
+Example 2:
 
 ```python
 var printNum = (number) -> print(number); # Defines a function that takes in one parameter, which prints said parameter
@@ -779,7 +978,7 @@ printNum(69); # Calls the function with a passed parameter
 ```
 
 <br>
-Example 3 (Full Syntax):
+Example 3:
 
 ```python
 var x = 8; # Declare and instantiate x to 8
@@ -799,7 +998,7 @@ print(x); # Prints the value of x
 ```
   
 <br>
-Example 4 (Lambda Syntax):
+Example 4:
 
 ```python
 var x = 8; # Declare and instantiate x to 8
@@ -1392,3 +1591,4 @@ print(isEmpty(num)); # Try to check if num is empty, but an error is thrown duri
 ```javascript
 Error: isEmpty() expects list or string, at line: 3 and column: 4
 ```
+
