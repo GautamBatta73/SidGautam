@@ -17,6 +17,18 @@ The String datatype is used to represent textual data. It can act as a list of c
 [Built-in Function to Convert to String](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/readme.md#strobj)
 
 <br>
+**Fun Fact- All string comparison is case-insensitive**:
+
+```python
+var string = "hello world";
+
+print(string == "HELLO WORLD"); # Prints true if both are equal
+```
+```javascript
+true
+```
+
+<br>
 
 #### String Literals
 
@@ -152,6 +164,10 @@ The Number datatype is used to represent numeric data. There can be double (floa
 
 [Extra Importable Math Properties](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/math.md)
 
+[Built-in Function to Convert to Integer](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/readme.md#intobj)
+
+[Built-in Function to Convert to Double](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/readme.md#doubleobj)
+
 <br>
 
 ```python
@@ -205,6 +221,8 @@ print(num); # Prints the num to the console
 ```javascript
 69
 ```
+
+<br>
 
 ### Lists
 Lists, like arrays in other programming languages, enable the storage of a collection of multiple items under a single variable name.
@@ -414,10 +432,103 @@ developer.favouriteFunction("Hmmm"); # Calls my favourite function
 <br>
 
 ### Booleans
+Boolean values can be one of two values: true or false, representing the truth value of a logical statement.
+<br>
+Boolean values come from relational and equality operators, logical NOT ( ! ), and some functions like isEmpty(). They are mainly used in conditional testing, such as unless, until, and while statements.
+
+<br>
+Examples:
+
+```python
+var isObject = (obj) -> dataType(obj) == "Object"; # Defines a lambda function that takes in one parameter, and checks if its datatype is an object
+
+var obj = {
+    name: "Gautam",
+    age: 20
+};
+
+print(isObject(obj)); # Prints true if obj is an Object
+```
+```javascript
+true
+```
+
+<br>
+
+```python
+var isObject = (obj) -> dataType(obj) == "Object"; # Defines a lambda function that takes in one parameter, and checks if its datatype is an object
+
+var obj = {}; # This is an empty list, not an object 
+
+unless (isObject(obj)) { # Checks if obj isn't an Object
+  print("Not an Object!");
+} orElse { # Checks if obj is an Object
+  print("Object!");
+}
+```
+```javascript
+"Not an Object!"
+```
+
+<br>
 
 ### Functions
+Functions are like subprograms that can be called by other code, having their own body of statements. It can take parameters and return a value. In SidGautamScript, they can be passed around, returned, and assigned like other datatypes.
+<br>
+They are technically a type of object, but are not treated as such.
+
+[More About Functions](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/readme.md#func-nameparameters)
+
+<br>
+Examples:
+
+```python
+func multiply(x, y) { # Defines a function that takes in two parameters
+  pass x * y; # Passes the product back to the caller
+}
+
+print(multiply(5, 5)); # Prints (5 * 5)
+```
+```javascript
+25
+```
+
+<br>
+You can also have a function as a variable, and do a one-liner. This is called a lambda expression:
+
+```python
+var isObject = (obj) -> dataType(obj) == "Object"; # Defines a lambda function that takes in one parameter, and checks if its datatype is an object
+
+var obj = isObject; # This is a function value
+
+print(isObject(isObject)); # Prints false, because, while it technically is an object, I consider it a separate datatype
+```
+```javascript
+false
+```
+
+<br>
 
 ### NULL
+The NULL keyword represents the absence of any object value. It is the absence of instantiation.
+<br>
+When a variable has no value, it is NULL
+
+<br>
+Example:
+
+```python
+func test(t) { # Defines a function that takes in one parameter
+  pass t; # Passes the parameter back to the caller
+}
+
+var x = test(); # Calls the function without parameters, and assigns the passed value to x
+
+print(x); # Prints NULL because x is NULL, as the parameter had no value
+```
+```javascript
+null
+```
 
 <br>
 
@@ -750,10 +861,10 @@ print(answer(15)); # Calls the variable function with a parameter
 
 <br>
 
-## Built-In/Native Functions & Values
-SidGautamScript provides a lot of built-in native functions and values that assist with the writing of code. They are basically global constants and can not be overwritten.
+## Built-In/Native Functions
+SidGautamScript provides a lot of built-in native functions that assist with the writing of code. They are basically global constants and can not be overwritten.
 <br>
-These functions and values are built straight into the runtime environment and do not need to be imported to be used.
+These functions are built straight into the runtime environment and do not need to be imported to be used.
 
 <br>
 
@@ -1281,5 +1392,3 @@ print(isEmpty(num)); # Try to check if num is empty, but an error is thrown duri
 ```javascript
 Error: isEmpty() expects list or string, at line: 3 and column: 4
 ```
-
-<br>
