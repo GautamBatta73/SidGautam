@@ -267,6 +267,7 @@ var fruits = {"Apple", "Banana"}; # Declare and instantiate a list with two elem
 print(fruits); # Prints the list to the console
 
 fruits[0] = "Tomato"; # Changes the first element from "Apple" to "Tomato"
+
 fruits[2] = "Apple"; # Adds a third element with the value of "Apple"
 
 print(fruits); # Prints the list to the console
@@ -468,6 +469,7 @@ Example 2:
 
 ```python
 var list  = {1, 2, 3, 4, 5}; # Declare and instantiate list
+
 var x = NULL; # Declare x
 
 until (x = 0, x < len(list), x = x + 1) { # Instantiates x and sets it to 0, declares ending condition as when x < length of list, then increments x by 1 every pass
@@ -496,14 +498,17 @@ Example 1:
 
 ```python
 var n = 0; # Declare and instantiate n to 0
+
 var x = 0; # Declare and instantiate x to 0
 
 though (n >= 3) { # Sets the ending condition to be if n IS more than or equal to 3
   n = n + 1; # Increments n by 1
+
   x = x + n; # Increments x by n
 }
 
 print(n); # Prints final value of n
+
 print(x); # Prints final value of x
 ```
 ```javascript
@@ -673,6 +678,7 @@ func incrementX() { # Defines a function called incrementX
 }
 
 incrementX(); # Executes the code in the function
+
 incrementX(); # Executes the code in the function, again
 
 print(x); # Prints the value of x
@@ -692,6 +698,7 @@ final incrementX = () -> { # Defines a lambda function called incrementX
 };
 
 incrementX(); # Executes the code in the function
+
 incrementX(); # Executes the code in the function, again
 
 print(x); # Prints the value of x
@@ -717,6 +724,7 @@ func getRectArea(width, height) { # Defines a function that takes 2 parameters, 
 }
 
 print(getRectArea(3, 4)); # Calls the function with parameters more than 0
+
 print(getRectArea(-3, 4)); # Calls the function with parameters less than 0
 ```
 ```javascript
@@ -750,7 +758,7 @@ These functions are built straight into the runtime environment and do not need 
 <br>
 
 ### dataType(\<arg\>)
-Returns a string indicating the type of the arg's value. 
+The dataType() function is a built-in function that returns a string indicating the type of the arg's value. 
 <br>
 This is the best way to check for NULL.
 
@@ -769,6 +777,7 @@ var add = (x, y) -> { # Defines a function that takes 2 parameters, which are as
 };
 
 print(add()); # Calls function without parameters, which means they get a NULL value
+
 print(add(7)); # Calls function with one NULL parameter
 ```
 ```javascript
@@ -878,4 +887,257 @@ print(str(list)); # Prints the variable's string version
 ]"
 ```
 
+<br>
+
+### int(\<obj\>)
+The int() function is a built-in function that takes an object as input and returns its value parsed as an integer.
+<br>
+If the value can not be properly converted into an integer, then it will return 0.
+
+<br>
+Example 1:
+
+```python
+var string = "14";
+
+print(int(string)); # Prints the value of string parsed as an integer
+```
+```javascript
+14
+```
+
+<br>
+
+```python
+var string = "14.68665";
+
+print(int(string)); # Prints the value of string parsed as an integer
+```
+```javascript
+14
+```
+
+<br>
+Example 2:
+
+```python
+var string = "Hello World";
+
+print(int(string)); # Prints the value of string parsed as an integer
+```
+```javascript
+0
+```
+
+<br>
+Example 3:
+
+```python
+var obj = {
+    name: "Gautam",
+    age: 20
+};
+
+print(int(obj)); # Prints the value of obj parsed as an integer
+```
+```javascript
+0
+```
+
+<br>
+
+```python
+var list = {1, 2, 3, 4, 5};
+
+print(int(list)); # Prints the value of obj parsed as an integer
+```
+```javascript
+0
+```
+
+<br>
+
+### double(\<obj\>)
+The double() function is a built-in function that takes an object as input and returns its value parsed as a double (floating point number).
+<br>
+If the value can not be properly converted into a double, then it will return 0.
+
+<br>
+Example 1:
+
+```python
+var string = "14";
+
+print(double(string)); # Prints the value of string parsed as a double
+```
+```javascript
+14
+```
+
+<br>
+
+```python
+var string = "14.68665";
+
+print(double(string)); # Prints the value of string parsed as a double
+```
+```javascript
+14.68665
+```
+
+<br>
+Example 2:
+
+```python
+var string = "Hello World";
+
+print(double(string)); # Prints the value of string parsed as a double
+```
+```javascript
+0
+```
+
+<br>
+Example 3:
+
+```python
+var obj = {
+    name: "Gautam",
+    age: 20
+};
+
+print(double(obj)); # Prints the value of string parsed as a double
+```
+```javascript
+0
+```
+
+<br>
+
+```python
+var list = {1, 2, 3, 4, 5};
+
+print(double(list)); # Prints the value of string parsed as a double
+```
+```javascript
+0
+```
+
+<br>
+
+### trim(\<obj\>)
+The trim() function is a built-in function that takes an object as input, converts it to a string, then removes whitespace from both ends, and returns it as a new string.
+<br>
+It basically does the same thing as str() but also trims it at the end.
+
+<br>
+Example:
+
+```python
+var string = "  SPACED?  ";
+
+print(string); # Prints the value of string
+
+print(trim(string)); # Prints the value of string trimmed
+```
+```javascript
+"  SPACED?  "
+"SPACED?"
+```
+
+<br>
+
+```python
+var num = 21;
+
+print(num); # Prints the value of num
+
+print(trim(num)); # Prints the value of num as a trimmed string
+```
+```javascript
+21
+"21"
+```
+
+<br>
+
+### print(\<...objs\>)
+The print() function is a built-in function that prints the objects as a concatenated message to the console.
+
+<br>
+Example:
+
+```python
+print("Hello World"); # Prints the string literal
+
+var list = {1, 2, "gfg"}; # Declare and instantiate a list
+
+print(list); # Prints list
+```
+```javascript
+"Hello World"
+[
+  1,
+  2,
+  "gfg"
+]
+```
+
+<br>
+
+```python
+var name = "Gautam";
+var age = 20;
+
+print("Name:", name); # Prints name with a string literal
+
+print("Age:", age); # Prints age with a string literal
+```
+```javascript
+"Name:" "Gautam"
+"Age:" 20
+```
+
+<br>
+
+### errPrint(\<...objs\>)
+The errPrint() function is a built-in function that prints the objects as a concatenated message to the console, in bolded red text.
+
+<br>
+Example:
+
+```python
+print("Hello World"); # Prints the string literal
+
+var list = {1, 2, "gfg"}; # Declare and instantiate a list
+
+errPrint(list); # Prints list, as an Error
+```
+```javascript
+"Hello World"
+[
+  1,
+  2,
+  "gfg"
+]
+```
+(I have no clue how to make it red in Markdown)
+
+<br>
+
+```python
+var name = "Gautam";
+var age = 20;
+
+errPrint("Name:", name); # Prints name with a string literal, as an Error
+
+errPrint("Age:", age); # Prints age with a string literal, as an Error
+```
+```javascript
+"Name:" "Gautam"
+"Age:" 20
+```
+(I have no clue how to make it red in Markdown)
+
+<br>
 
