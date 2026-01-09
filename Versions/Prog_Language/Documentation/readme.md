@@ -603,6 +603,39 @@ true
 ```
 
 <br>
+If you want to check for equality with objects, functions, and lists, you can try stringifying first:
+
+```python
+var test1 = { # Declare and instantiate test1 as an object
+    name: "Gautam",
+    age: 20
+};
+
+var test2 = { # Declare and instantiate test2 as an identical object
+    name: "Gautam",
+    age: 20
+};
+
+print(str(test1) == str(test2)); # Prints true if stringified test1 has the same value as stringified test2
+```
+```javascript
+true
+```
+
+<br>
+
+```python
+var test1 = {1, 2, 3, 4, 5}; # Declare and instantiate test2 as a list
+
+var test2 = {1, 2, 3, 4, 5}; # Declare and instantiate test2 as a different list
+
+print(str(test1) == str(test2));  # Prints true if stringified test1 has the same value as stringified test2
+```
+```javascript
+true
+```
+
+<br>
 Inequality:
  
  ```python
@@ -624,6 +657,39 @@ var x = "TEST"; # Declare and instantiate x to a string
 var y = "test4"; # Declare and instantiate y to a string
 
 print(x != y); # Prints true if x doen't have the same value as y
+```
+```javascript
+true
+```
+
+<br>
+If you want to check for inequality with objects, functions, and lists, you can try stringifying first:
+
+```python
+var test1 = { # Declare and instantiate test1 as an object
+    name: "Gautam",
+    age: 20
+};
+
+var test2 = { # Declare and instantiate test2 as an identical object
+    name: "Joshua",
+    age: 23
+};
+
+print(str(test1) != str(test2)); # Prints true if stringified test1 doesn't have the same value as stringified test2
+```
+```javascript
+true
+```
+
+<br>
+
+```python
+var test1 = {1, 2, 3, 4, 5}; # Declare and instantiate test2 as a list
+
+var test2 = {5, 4, 3, 2, 1}; # Declare and instantiate test2 as a different list
+
+print(str(test1) != str(test2)); # Prints true if stringified test1 doesn't have the same value as stringified test2
 ```
 ```javascript
 true
@@ -1872,6 +1938,7 @@ print(isEmpty(num)); # Try to check if num is empty, but an error is thrown duri
 ```javascript
 Error: isEmpty() expects list or string, at line: 3 and column: 4
 ```
+
 
 
 
