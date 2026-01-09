@@ -1,7 +1,7 @@
 import "ListUtils"; # Has forEach(), join(), and has()
 
 var arr = {1, 2, 3};
-arr.forEach(print); # Prints every element
+arr.forEach((el) -> print(el)); # Prints every element
 
 
 import "StringUtils"; # Has upper(), lower(), and split()

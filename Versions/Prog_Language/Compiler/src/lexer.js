@@ -89,7 +89,7 @@ function lexer(input) {
         }
 
         // Operators
-        if ("=+-*/!<>|&?".includes(char)) {
+        if ("=+-*%/!<>|&?".includes(char)) {
             let op = char;
             i++;
 

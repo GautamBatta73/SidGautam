@@ -3,25 +3,25 @@ const ProgramExit = require("./ProgramExit");
 const { Prototypes, definePrototype } = require("./prototypes.js");
 let loadModule = undefined;
 
-function runFunction(chunk, params, args, globals) {
-    globals = globals || Object.create(null);
+function runFunction(chunk, params, args, parentEnv) {
+    let localEnv = createEnv(parentEnv);
 
-    // Bind parameters
     params.forEach((name, i) => {
-        globals[name] = {
+        localEnv.vars[name] = {
             value: args[i],
             constant: false
         };
     });
 
-    return runChunk(chunk, globals, true);
+    return runChunk(chunk, localEnv, true);
 }
 
 function run(chunk) {
-    let globals = Object.create(null);
+    let globalEnv = createEnv();
     loadModule = require("../run.js");
-    addNativeFunctions(globals);
-    return runChunk(chunk, globals);
+    addNativeFunctions(globalEnv.vars);
+
+    return runChunk(chunk, globalEnv);
 }
 
 function NativeFunction(args, fn) {
@@ -32,37 +32,40 @@ function NativeFunction(args, fn) {
     };
 }
 
-function addNativeFunctions(globals) {
-    globals.str = {
+function addNativeFunctions(globalEnv) {    
+    globalEnv.true = { value: true, constant: true };
+    globalEnv.false = { value: false, constant: true };
+    globalEnv.NULL = { value: null, constant: true };
+    globalEnv.dataType = {
+        value: NativeFunction(["obj"], (args) => getDataType(args[0])),
+        constant: true
+    }
+    globalEnv.str = {
         value: NativeFunction(["obj"], (x) => {
             let str = getPrintable(x[0] ?? null);
             return String(str ?? "NULL");
         }),
         constant: true
     };
-    globals.int = {
+    globalEnv.int = {
         value: NativeFunction(["obj"], (x) => {
             let str = String(getPrintable(x[0]));
             return (isNaN(parseInt(str)) ? 0 : parseInt(str));
         }),
         constant: true
     };
-    globals.double = {
+    globalEnv.double = {
         value: NativeFunction(["obj"], (x) => {
             let str = String(getPrintable(x[0]));
             return (isNaN(parseFloat(str)) ? 0 : parseFloat(str));
         }),
         constant: true
     };
-    globals.trim = {
+    globalEnv.trim = {
         value: NativeFunction(["str"], (x) => String(getPrintable(x[0])).trim()),
         constant: true
     };
-
-    globals.true = { value: true, constant: true };
-    globals.false = { value: false, constant: true };
-    globals.NULL = { value: null, constant: true };
-    globals.__addToPrototype = {
+    globalEnv.__addToPrototype = {
         value: NativeFunction(["dataType", "name", "fn"], (args) => {
             const dataType = args[0];
             const name = args[1];
@@ -76,15 +79,14 @@ function addNativeFunctions(globals) {
         }),
         constant: true
     }
-
-    globals.exit = {
+    globalEnv.exit = {
         value: NativeFunction(["exitCode"], (args) => {
             const code = args[0] ?? 0;
             throw new ProgramExit(code);
         }),
         constant: true
     }
-    globals.print = {
+    globalEnv.print = {
         value: NativeFunction(["...obj(s)"], (args) => {
             let printableArgs = args.map(getPrintable)
             console.log(...printableArgs);
@@ -92,7 +94,7 @@ function addNativeFunctions(globals) {
         }),
         constant: true
     }
-    globals.errPrint = {
+    globalEnv.errPrint = {
         value: NativeFunction(["...obj(s)"], (args) => {
             let printableArgs = args.map(getPrintable)
             console.error(...printableArgs);
@@ -100,17 +102,17 @@ function addNativeFunctions(globals) {
         }),
         constant: true
     }
-    globals.len = {
+    globalEnv.len = {
         value: NativeFunction(["str/list"], (args) => {
             const x = args[0];
             if (Array.isArray(x) || typeof x === "string") {
                 return x.length;
             }
-            throw new Error("len() expects array or string");
+            throw new Error("len() expects list or string");
         }),
         constant: true
     }
-    globals.isEmpty = {
+    globalEnv.isEmpty = {
         value: NativeFunction(["str/list"], (args) => {
             const x = args[0];
             if (Array.isArray(x)) {
@@ -118,28 +120,8 @@ function addNativeFunctions(globals) {
             } else if (typeof x === "string") {
                 return (!x || x.trim().length === 0)
             } else {
-                throw new Error("len() expects array or string");
+                throw new Error("isEmpty() expects list or string");
             }
-        }),
-        constant: true
-    }
-    globals.dataType = {
-        value: NativeFunction(["obj"], (args) => {
-            let x = args[0];
-            if (typeof x === "number") return "Number";
-            if (typeof x === "string") return "String";
-            if (typeof x === "boolean") return "Boolean";
-            if (Array.isArray(x)) return "List";
-            if (typeof x === "object" && x !== null) {
-                if (x.type) {
-                    if (x.type === "Function" || x.type === "NativeFunction") {
-                        return "Function";
-                    }
-                }
-                return "Object";
-            }
-
-            return "NULL";
         }),
         constant: true
     }
@@ -147,21 +129,22 @@ function addNativeFunctions(globals) {
 
 function getPrintable(obj) {
     function printerize(newObj) {
-        if (Array.isArray(newObj)) {
+        let objType = getDataType(newObj);
+
+        if (objType === "List") {
             return newObj.map(printerize);
-        }
-        if (typeof newObj === "object" && newObj !== null) {
-            if (newObj.type) {
-                if (newObj.type === "Function" || newObj.type === "NativeFunction") {
-                    return `FunctionObject(${newObj.params ? newObj.params.join(", ") : ""})`;
-                }
-            }
+        } else if (objType === "Function") {
+            return `FunctionObject(${newObj.params ? newObj.params.join(", ") : ""})`;
+        } else if (objType === "Object") {
             let arr = {};
             Object.entries(newObj).forEach(([key, value]) => {
                 arr[key] = printerize(value);
             });
             return arr;
+        } else if (objType === "NULL") {
+            return null;
         }
+
         return newObj;
     }
 
@@ -174,7 +157,7 @@ function getPrintable(obj) {
     }
 }
 
-function runChunk(chunk, globals, func = false) {
+function runChunk(chunk, env, func = false) {
     const stack = [];
     let ip = 0;
 
@@ -189,7 +172,7 @@ function runChunk(chunk, globals, func = false) {
                     break;
                 }
 
-                runChunk(importedChunk, globals);
+                runChunk(importedChunk, env);
                 break;
             }
 
@@ -199,46 +182,68 @@ function runChunk(chunk, globals, func = false) {
                 break;
             }
 
-            case Op.PUSH_CONST:
-                stack.push(chunk.constants[instr.arg]);
-                break;
+            case Op.PUSH_CONST: {
+                const value = chunk.constants[instr.arg];
 
-            case Op.LOAD:
-                if (!(instr.arg in globals)) {
-                    if (instr.arg.trim() === "null")
-                        throw new Error(`I think you may have meant 'NULL', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
-                    throw new Error(`Undefined variable '${instr.arg}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
+                // If this is a function, capture the defining environment
+                if (value?.type === "Function" && !value.env) {
+                    value.env = env;
                 }
-                stack.push(globals[instr.arg].value);
+
+                stack.push(value);
                 break;
+            }
+
+            case Op.LOAD: {
+                if (instr.arg.trim() === "null")
+                    throw new Error(`I think you may have meant 'NULL', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
+
+                const slot = envGet(env, instr.arg);
+                if (!slot) throw new Error(`Undefined variable '${instr.arg}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
+                stack.push(slot.value);
+                break;
+            }
 
             case Op.LOAD_SAFE: {
                 // Safe load for optional chaining
-                stack.push(globals[instr.arg].value);
+                stack.push(env.vars[instr.arg].value);
+                break;
+            }
+
+            case Op.DECL_VAR: {    
+                const value = stack.pop();
+
+                // if (env.vars[instr.arg])
+                //     throw new Error(`Variable '${instr.arg}' redeclared, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
+                
+                env.vars[instr.arg] = {
+                    value,
+                    constant: false
+                };
                 break;
             }
 
             case Op.STORE: {
                 const value = stack.pop();
 
-                const existing = globals[instr.arg];
+                const existing = envGet(env, instr.arg);
                 if (existing?.constant) {
                     throw new Error(`Cannot reassign constant '${instr.arg}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                 }
-
-                globals[instr.arg] = { value, constant: false };
+                try {
+                    envSet(env, instr.arg, value);
+                } catch (error) {
+                    throw new Error(`${error.message}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`)
+                }
                 break;
             }
 
             case Op.STORE_CONST: {
-                const value = stack.pop();
-
-                if (instr.arg in globals) {
+                if (envGet(env, instr.arg))
                     throw new Error(`Constant '${instr.arg}' redeclared, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
-                }
 
-                globals[instr.arg] = {
-                    value,
+                env.vars[instr.arg] = {
+                    value: stack.pop(),
                     constant: true
                 };
                 break;
@@ -248,14 +253,21 @@ function runChunk(chunk, globals, func = false) {
                 stack.pop();
                 break;
 
-            case Op.ADD: case Op.SUB: case Op.MUL: case Op.DIV:
-                const b = stack.pop();
-                const a = stack.pop();
+            case Op.ADD: case Op.SUB: case Op.MUL: case Op.DIV: case Op.MOD:
+                let b = getPrintable(stack.pop());
+                let a = getPrintable(stack.pop());
+
+                if (b === 0 && instr.op === Op.DIV) {
+                    stack.push(null);
+                    break;
+                }
+
                 stack.push(
-                    instr.op === Op.ADD ? a + b :
+                    (instr.op === Op.ADD ? a + b :
                         instr.op === Op.SUB ? a - b :
                             instr.op === Op.MUL ? a * b :
-                                a / b
+                            instr.op === Op.MOD ? a % b :
+                                a / b) || 0
                 );
                 break;
 
@@ -367,9 +379,7 @@ function runChunk(chunk, globals, func = false) {
 
             case Op.JUMP_IF_NOT_NULL: {
                 const value = stack.pop();
-                if (value !== null &&
-                    value !== undefined &&
-                    value !== false) {
+                if (getDataType(value) !== "NULL") {
                     ip = instr.arg;
                 }
                 break;
@@ -377,9 +387,7 @@ function runChunk(chunk, globals, func = false) {
 
             case Op.JUMP_IF_NULL: {
                 const value = stack.pop();
-                if (value === null ||
-                    value === undefined ||
-                    value === false) {
+                if (getDataType(value) === "NULL") {
                     ip = instr.arg;
                 }
                 break;
@@ -415,7 +423,7 @@ function runChunk(chunk, globals, func = false) {
                 // User-defined function
                 if (fn.type === "Function") {
                     if (fn.obj !== null && fn.obj !== undefined) args.unshift(fn.obj);
-                    const result = runFunction(fn.chunk, fn.params, args, globals);
+                    const result = runFunction(fn.chunk, fn.params, args, fn.env);
                     stack.push(result ?? null);
                     break;
                 }
@@ -429,9 +437,7 @@ function runChunk(chunk, globals, func = false) {
                 // Peek callee
                 const callee = stack[stack.length - 1];
 
-                if (callee === null ||
-                    callee === undefined ||
-                    callee === false) {
+                if (getDataType(callee) === "NULL") {
 
                     // Remove callee
                     stack.pop();
@@ -462,7 +468,7 @@ function runChunk(chunk, globals, func = false) {
                         if (error instanceof ProgramExit) {
                             throw error;
                         }
-                        throw new Error(`${error.message}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`)
+                        throw new Error(`${error.message}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                     }
                     stack.push(result);
                     break;
@@ -471,7 +477,7 @@ function runChunk(chunk, globals, func = false) {
                 // User-defined function
                 if (fn.type === "Function") {
                     if (fn.obj !== null && fn.obj !== undefined) args.unshift(fn.obj);
-                    const result = runFunction(fn.chunk, fn.params, args, globals);
+                    const result = runFunction(fn.chunk, fn.params, args, fn.env);
                     stack.push(result ?? null);
                     break;
                 }
@@ -580,6 +586,54 @@ function runChunk(chunk, globals, func = false) {
 
     if (func) return null;
     else return stack.pop();
+}
+
+function getDataType(args) {
+    let x = args;
+    if (typeof x === "number") return "Number";
+    if (typeof x === "string") return "String";
+    if (typeof x === "boolean") return "Boolean";
+    if (Array.isArray(x)) return "List";
+    if (typeof x === "object" && x !== null) {
+        if (x.type) {
+            if (x.type === "Function" || x.type === "NativeFunction") {
+                return "Function";
+            }
+        }
+        return "Object";
+    }
+
+    return "NULL";
+}
+
+function createEnv(parent = null) {
+    return {
+        vars: Object.create(null),
+        parent
+    };
+}
+
+function envGet(env, name) {
+    while (env) {
+        if (name in env.vars) return env.vars[name];
+        env = env.parent;
+    }
+    return null;
+}
+
+function envSet(env, name, value) {
+    let cur = env;
+    while (cur) {
+        if (name in cur.vars) {
+            if (cur.vars[name].constant)
+                throw new Error(`Cannot reassign constant '${name}'`);
+            cur.vars[name].value = value;
+            return;
+        }
+        cur = cur.parent;
+    }
+
+    throw new Error(`Assignment to undeclared variable '${name}'`);
 }
 
 module.exports = run;

@@ -11,6 +11,9 @@ function fold(node) {
                 left.type === "NumberLiteral" &&
                 right.type === "NumberLiteral"
             ) {
+                if (right.value === 0 && node.operator === "/") 
+                    throw new Error(`Dividing by zero?, at line: ${node.loc?.line}, column: ${node.loc?.column}`);
+
                 let value = eval(`${left.value} ${node.operator} ${right.value}`) || 0;
                 return {
                     type: "NumberLiteral",
@@ -50,12 +53,12 @@ function fold(node) {
             const right = fold(node.right);
 
             // NULL ?? x  → x
-            if (left.type === "Identifier" && (left.name === "NULL" || left.name === "false")) {
+            if (left.type === "Identifier" && (left.name === "NULL")) {
                 return right;
             }
 
             // Literal ?? x
-            if (left.type === "StringLiteral" || left.type === "NumberLiteral" || left.name === "true") {
+            if (left.type === "StringLiteral" || left.type === "NumberLiteral") {
                 return left;
             }
 

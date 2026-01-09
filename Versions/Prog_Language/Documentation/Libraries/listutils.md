@@ -8,18 +8,29 @@ This method of List instances executes a provided function once for each list el
 import "ListUtils";
 
 var list = {1, 2, 3};
-list.forEach(print); # Prints every element on a seperate line
+
+list.forEach(print); # Prints every element on a seperate line, along with the index
+
 print(); # Prints blank new line for seperation
-list.forEach((el) -> print(el)); # Does same but easier to visualize
+
+list.forEach((el) -> print(el)); # Only prints elements
+
+print(); # Prints blank new line for seperation
+
+list.forEach((el, idx) -> print(idx)); # Only prints indices
 ```
 ```javascript
-1
-2
-3
+1 0
+2 1
+3 2
 
 1
 2
 3
+
+0
+1
+2
 ```
 
 <br>

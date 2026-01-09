@@ -54,6 +54,9 @@ function semantic(ast) {
         if (constants.has(node.left.name) || constants.has(node.left.object?.name)) {
           throw new Error(`${node.left.name ?? node.left.object?.name} is a constant.\nDo not reassign, at line: ${node.left.loc?.line} and column: ${node.left.loc?.column}`);
         }
+        if (!scope.has(node.left.name) && !scope.has(node.left.object?.name) ) {
+          throw new Error(`Assignment to undeclared variable '${node.left.name ?? node.left.object?.name}', at line: ${node.left.loc?.line} and column: ${node.left.loc?.column}`);
+        }
       } else if (node.type === "FunctionDeclaration") {
         if (scope.has(node.name)) {
           throw new Error(`Function ${node.name} redeclared, at line: ${node.loc?.line} and column: ${node.loc?.column}`);
@@ -62,15 +65,12 @@ function semantic(ast) {
           throw new Error(`Function ${node.name} is a builtin var/constant.\nDo not redeclare, at line: ${node.loc?.line} and column: ${node.loc?.column}`);
         }
 
+        let funcScope = new Set(scope);
         node.params.forEach(e => {
-          if (scope.has(e) || builtins.includes(e) || builtinConst.includes(e)) {
-            throw new Error(`Parameter ${e} already exist in global, at line: ${node.loc?.line} and column: ${node.loc?.column}`);
-          }
-          scope.add(e);
+          funcScope.add(e);
         });
         scope.add(node.name);
-
-        let funcScope = new Set(scope);
+        
         let funcConstants = new Set(constants);
         node.body.forEach(e => visit(e, funcScope, funcConstants));
       } else if (node.type === "IfStatement") {
@@ -94,6 +94,11 @@ function semantic(ast) {
       } else if (node.type === "LambdaExpression") {
         let statementScope = new Set(scope);
         let statementConstants = new Set(constants);
+ 
+        node.params.forEach(e => {
+          statementScope.add(e);
+        });
+
         Array.isArray(node.body) ?
           node.body.forEach(e => visit(e, statementScope, statementConstants)) :
           visit(node.body, statementScope, statementConstants)

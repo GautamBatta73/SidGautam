@@ -116,6 +116,7 @@ function compile(node, chunk) {
         }
 
         case "VarDeclaration":
+            chunk.emit(Op.DECL_VAR, node.name, node.loc);
             compile(node.value, chunk);
             chunk.emit(Op.STORE, node.name, node.loc);
             break;
@@ -168,6 +169,7 @@ function compile(node, chunk) {
                 "-": Op.SUB,
                 "*": Op.MUL,
                 "/": Op.DIV,
+                "%": Op.MOD,
                 "<": Op.LT,
                 ">": Op.GT,
                 "<=": Op.LTE,
@@ -282,6 +284,7 @@ function compile(node, chunk) {
             }
 
             // Ensure function returns undefined if no explicit pass
+            chunk.emit(Op.DECL_VAR, node.name, node.loc);
             fnChunk.emit(Op.PUSH_CONST, fnChunk.addConst(undefined), node.loc);
             fnChunk.emit(Op.RETURN, null, node.loc);
 

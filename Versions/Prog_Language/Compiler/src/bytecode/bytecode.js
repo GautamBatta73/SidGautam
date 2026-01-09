@@ -9,6 +9,7 @@ const Op = {
     SET_INDEX: "SET_INDEX",
     NEW_OBJECT: "NEW_OBJECT",
     SET_PROP: "SET_PROP",
+    DECL_VAR: "DECL_VAR",
     DUP: "DUP",
     COALESCE: "COALESCE",
 
@@ -16,6 +17,7 @@ const Op = {
     SUB: "SUB",
     MUL: "MUL",
     DIV: "DIV",
+    MOD: "MOD",
 
     NEG: "NEG",
     NOT: "NOT",

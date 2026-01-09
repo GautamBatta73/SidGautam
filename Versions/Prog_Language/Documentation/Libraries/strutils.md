@@ -90,3 +90,23 @@ print(list); # Prints the string's character as a list
 ```
 
 <br>
+
+### String.Prototype.concat(obj)
+This function returns a string of the obj concatenated to string, with a space.
+
+```python
+import "StringUtils";
+
+var string = "Hello";
+
+print(string.concat("World")); # Prints the string + the parameter, seperated by a space
+
+print(string.concat({"World", "\n", "- A Wise Man"})); # Prints the string + the parameter list, seperated by a space
+```
+```javascript
+"Hello World"
+"Hello World 
+ - A Wise Man"
+```
+
+<br>

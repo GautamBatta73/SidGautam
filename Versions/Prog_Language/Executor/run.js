@@ -8,7 +8,7 @@ const path = require("path");
 const exePath = __dirname || path.dirname(process.execPath);
 const chalk = require("chalk").default;
 const run = require("./src/vm");
-const VERSION = "2.2.0";
+const VERSION = "2.3.0";
 
 const originalError = console.error;
 console.error = (...args) => {
