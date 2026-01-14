@@ -430,6 +430,21 @@ developer.favouriteFunction("Hmmm"); # Calls my favourite function
 ```
 
 <br>
+If you use the 'this' identifier, you can refer to the object itself to access internal properties/methods:
+
+```python
+var obj = { # Declare and instantiate an object with a 'this' reference
+  getNum: () -> 5,
+  getSum: () -> this.getNum() + 5 # Grabs the value of 'this' object's getNum() method, adds 5, then passes it to the caller
+};
+
+print(obj.getSum()); # Prints the value of the getSum() method
+```
+```javascript
+10
+```
+
+<br>
 
 ### Booleans
 Boolean values can be one of two values: true or false, representing the truth value of a logical statement.
@@ -1938,6 +1953,7 @@ print(isEmpty(num)); # Try to check if num is empty, but an error is thrown duri
 ```javascript
 Error: isEmpty() expects list or string, at line: 3 and column: 4
 ```
+
 
 
 
