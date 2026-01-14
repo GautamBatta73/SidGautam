@@ -37,6 +37,8 @@ const Op = {
     JUMP_IF_TRUE: "JUMP_IF_TRUE",
     JUMP_IF_NOT_NULL: "JUMP_IF_NOT_NULL",
     JUMP_IF_NULL: "JUMP_IF_NULL",
+    POP_ENV: "POP_ENV",
+    PUSH_ENV: "PUSH_ENV",
 
     CALL: "CALL",
     CALL_IF_NOT_NULL: "CALL_IF_NOT_NULL",
@@ -44,7 +46,6 @@ const Op = {
     IMPORT: "IMPORT",
 
     POP: "POP"
-
 };
 
 module.exports = Op;

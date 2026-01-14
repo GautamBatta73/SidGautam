@@ -193,10 +193,12 @@ function compile(node, chunk) {
             const jumpIfTrueIdx = chunk.code.length;
             chunk.emit(Op.JUMP_IF_TRUE, null, node.loc);
 
+            chunk.emit(Op.PUSH_ENV);
             // Consequent
             for (const stmt of node.consequent) {
                 compile(stmt, chunk);
             }
+            chunk.emit(Op.POP_ENV);
 
             // Jump over alternate if present
             let jumpOverElseIdx = null;
@@ -210,9 +212,12 @@ function compile(node, chunk) {
 
             // Alternate
             if (node.alternate) {
+                chunk.emit(Op.PUSH_ENV);
                 for (const stmt of node.alternate) {
                     compile(stmt, chunk);
                 }
+                chunk.emit(Op.POP_ENV);
+
                 // Patch jumpOverElse to after else block
                 chunk.code[jumpOverElseIdx].arg = chunk.code.length;
             }
@@ -230,10 +235,12 @@ function compile(node, chunk) {
             const jumpIfTrueIdx = chunk.code.length;
             chunk.emit(Op.JUMP_IF_TRUE, null, node.loc);
 
+            chunk.emit(Op.PUSH_ENV);
             // Compile the loop body
             for (const stmt of node.body) {
                 compile(stmt, chunk);
             }
+            chunk.emit(Op.POP_ENV);
 
             // Jump back to start
             chunk.emit(Op.JUMP, loopStart, node.loc);
@@ -245,6 +252,8 @@ function compile(node, chunk) {
         }
 
         case "ForStatement": {
+            chunk.emit(Op.PUSH_ENV);
+
             // Compile initializer (runs once)
             if (node.init) compile(node.init, chunk);
 
@@ -257,10 +266,12 @@ function compile(node, chunk) {
             const jumpIfFalse = node.test ? chunk.code.length : null;
             if (node.test) chunk.emit(Op.JUMP_IF_FALSE, null, node.init.loc);
 
+            chunk.emit(Op.PUSH_ENV);
             // Compile body
             for (const stmt of node.body) {
                 compile(stmt, chunk);
             }
+            chunk.emit(Op.POP_ENV);
 
             // Compile update (runs after body)
             if (node.update) compile(node.update, chunk);
@@ -272,6 +283,7 @@ function compile(node, chunk) {
             // Patch exit jump
             if (node.test) chunk.code[jumpIfFalse].arg = chunk.code.length;
 
+            chunk.emit(Op.POP_ENV);
             break;
         }
 

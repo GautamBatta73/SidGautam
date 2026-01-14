@@ -3,8 +3,15 @@ const ProgramExit = require("./ProgramExit");
 const { Prototypes, definePrototype } = require("./prototypes.js");
 let loadModule = undefined;
 
-function runFunction(chunk, params, args, parentEnv) {
+function runFunction(chunk, params, args, parentEnv, thisObj = null) {
     let localEnv = createEnv(parentEnv);
+
+    if (thisObj !== null) {
+        localEnv.vars.this = {
+            value: thisObj,
+            constant: true
+        };
+    }
 
     params.forEach((name, i) => {
         localEnv.vars[name] = {
@@ -32,7 +39,7 @@ function NativeFunction(args, fn) {
     };
 }
 
-function addNativeFunctions(globalEnv) {    
+function addNativeFunctions(globalEnv) {
     globalEnv.true = { value: true, constant: true };
     globalEnv.false = { value: false, constant: true };
     globalEnv.NULL = { value: null, constant: true };
@@ -185,12 +192,18 @@ function runChunk(chunk, env, func = false) {
             case Op.PUSH_CONST: {
                 const value = chunk.constants[instr.arg];
 
-                // If this is a function, capture the defining environment
-                if (value?.type === "Function" && !value.env) {
-                    value.env = env;
+                if (value?.type === "Function") {
+                    // Create a fresh closure instance
+                    const fn = {
+                        ...value,
+                        env: cloneEnv(env),
+                    };
+
+                    stack.push(fn);
+                } else {
+                    stack.push(value);
                 }
 
-                stack.push(value);
                 break;
             }
 
@@ -210,14 +223,12 @@ function runChunk(chunk, env, func = false) {
                 break;
             }
 
-            case Op.DECL_VAR: {    
-                const value = stack.pop();
+            case Op.DECL_VAR: {
+                if (env.vars[instr.arg])
+                    throw new Error(`Variable '${instr.arg}' redeclared, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
 
-                // if (env.vars[instr.arg])
-                //     throw new Error(`Variable '${instr.arg}' redeclared, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
-                
                 env.vars[instr.arg] = {
-                    value,
+                    value: null,
                     constant: false
                 };
                 break;
@@ -266,8 +277,8 @@ function runChunk(chunk, env, func = false) {
                     (instr.op === Op.ADD ? a + b :
                         instr.op === Op.SUB ? a - b :
                             instr.op === Op.MUL ? a * b :
-                            instr.op === Op.MOD ? a % b :
-                                a / b) || 0
+                                instr.op === Op.MOD ? a % b :
+                                    a / b) || 0
                 );
                 break;
 
@@ -361,6 +372,14 @@ function runChunk(chunk, env, func = false) {
                 break;
             }
 
+            case Op.PUSH_ENV:
+                env = createEnv(env);
+                break;
+
+            case Op.POP_ENV:
+                env = env.parent;
+                break;
+
             case Op.JUMP:
                 ip = instr.arg;
                 break;
@@ -408,7 +427,7 @@ function runChunk(chunk, env, func = false) {
                 if (fn.type === "NativeFunction") {
                     let result = null;
                     try {
-                        if (fn.obj !== null && fn.obj !== undefined) args.unshift(fn.obj);
+                        if (fn.self !== null && fn.self !== undefined) args.unshift(fn.self);
                         result = fn.call(args) ?? null;
                     } catch (error) {
                         if (error instanceof ProgramExit) {
@@ -422,8 +441,8 @@ function runChunk(chunk, env, func = false) {
 
                 // User-defined function
                 if (fn.type === "Function") {
-                    if (fn.obj !== null && fn.obj !== undefined) args.unshift(fn.obj);
-                    const result = runFunction(fn.chunk, fn.params, args, fn.env);
+                    if (fn.self !== null && fn.self !== undefined) args.unshift(fn.self);
+                    const result = runFunction(fn.chunk, fn.params, args, fn.env, fn.this ?? null);
                     stack.push(result ?? null);
                     break;
                 }
@@ -462,7 +481,7 @@ function runChunk(chunk, env, func = false) {
                 if (fn.type === "NativeFunction") {
                     let result = null;
                     try {
-                        if (fn.obj !== null && fn.obj !== undefined) args.unshift(fn.obj);
+                        if (fn.self !== null && fn.self !== undefined) args.unshift(fn.self);
                         result = fn.call(args) ?? null;
                     } catch (error) {
                         if (error instanceof ProgramExit) {
@@ -476,8 +495,8 @@ function runChunk(chunk, env, func = false) {
 
                 // User-defined function
                 if (fn.type === "Function") {
-                    if (fn.obj !== null && fn.obj !== undefined) args.unshift(fn.obj);
-                    const result = runFunction(fn.chunk, fn.params, args, fn.env);
+                    if (fn.self !== null && fn.self !== undefined) args.unshift(fn.self);
+                    const result = runFunction(fn.chunk, fn.params, args, fn.env, fn.this ?? null);
                     stack.push(result ?? null);
                     break;
                 }
@@ -510,7 +529,7 @@ function runChunk(chunk, env, func = false) {
                         throw new Error(`String has no method '${index}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                     }
 
-                    method.obj = obj;
+                    method.self = obj;
                     stack.push(method);
                     break;
                 } else if (Array.isArray(obj)) {// Lists
@@ -522,7 +541,7 @@ function runChunk(chunk, env, func = false) {
                         throw new Error(`List has no method '${index}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                     }
 
-                    method.obj = obj;
+                    method.self = obj;
                     stack.push(method);
                     break;
                 } else if (typeof obj === "object" && obj !== null) {// Objects
@@ -535,6 +554,7 @@ function runChunk(chunk, env, func = false) {
                     const method = Prototypes["Object"][index];
                     if (typeof index === "string" && !method) {
                         if (Object.hasOwn(obj, index)) {
+                            if (typeof obj[index] === "object" && obj[index] !== null) obj[index].this = obj;
                             stack.push(obj[index]);
                         }
                         break;
@@ -542,7 +562,7 @@ function runChunk(chunk, env, func = false) {
                         throw new Error(`Object has no method '${index}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                     }
 
-                    method.obj = obj;
+                    method.self = obj;
                     stack.push(method);
                 } else {
                     throw new Error(`Cannot index non-list/non-string/non-object, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
@@ -634,6 +654,24 @@ function envSet(env, name, value) {
     }
 
     throw new Error(`Assignment to undeclared variable '${name}'`);
+}
+
+function cloneEnv(env) {
+    if (!env) return null;
+
+    const cloned = {
+        vars: Object.create(null),
+        parent: cloneEnv(env.parent)
+    };
+
+    for (const [k, v] of Object.entries(env.vars)) {
+        cloned.vars[k] = {
+            value: v.value,
+            constant: v.constant
+        };
+    }
+
+    return cloned;
 }
 
 module.exports = run;

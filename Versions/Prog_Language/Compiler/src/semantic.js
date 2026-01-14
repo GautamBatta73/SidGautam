@@ -1,5 +1,5 @@
 const builtins = [];
-const builtinConst = ["true", "false", "NULL", "print", "exit", "str", "int", "double", "trim", "__injs", "errPrint", "len", "isEmpty", "__addToPrototype"]
+const builtinConst = ["this", "true", "false", "NULL", "print", "exit", "str", "int", "double", "trim", "__injs", "errPrint", "len", "isEmpty", "__addToPrototype", "dataType"]
 
 function semantic(ast) {
   const progScope = new Set();
@@ -18,21 +18,21 @@ function semantic(ast) {
         }
         scope.add(node.name);
 
-        let varScope = new Set(scope);
-        let varConstants = new Set(constants);
+        let varScope = new Set();
+        let varConstants = new Set();
         visit(node.value, varScope, varConstants);
       } else if (node.type === "ConstDeclaration") {
         if (scope.has(node.name)) {
           throw new Error(`Constant ${node.name} redeclared, at line: ${node.loc?.line} and column: ${node.loc?.column}`);
         }
         if (builtins.includes(node.name) || builtinConst.includes(node.name)) {
-          throw new Error(`${node.name} is a builtin var/constant.\nDo not redeclare, at line: ${node.loc?.line} and column: ${node.loc?.column}`);
+          throw new Error(`${node.name} is a builtin var/constant.\n Do not redeclare, at line: ${node.loc?.line} and column: ${node.loc?.column}`);
         }
         scope.add(node.name);
         constants.add(node.name);
 
-        let varScope = new Set(scope);
-        let varConstants = new Set(constants);
+        let varScope = new Set();
+        let varConstants = new Set();
         visit(node.value, varScope, varConstants);
       } else if (node.type === "ArrayLiteral") {
         let varScope = new Set(scope);
@@ -54,9 +54,6 @@ function semantic(ast) {
         if (constants.has(node.left.name) || constants.has(node.left.object?.name)) {
           throw new Error(`${node.left.name ?? node.left.object?.name} is a constant.\nDo not reassign, at line: ${node.left.loc?.line} and column: ${node.left.loc?.column}`);
         }
-        if (!scope.has(node.left.name) && !scope.has(node.left.object?.name) ) {
-          throw new Error(`Assignment to undeclared variable '${node.left.name ?? node.left.object?.name}', at line: ${node.left.loc?.line} and column: ${node.left.loc?.column}`);
-        }
       } else if (node.type === "FunctionDeclaration") {
         if (scope.has(node.name)) {
           throw new Error(`Function ${node.name} redeclared, at line: ${node.loc?.line} and column: ${node.loc?.column}`);
@@ -65,36 +62,36 @@ function semantic(ast) {
           throw new Error(`Function ${node.name} is a builtin var/constant.\nDo not redeclare, at line: ${node.loc?.line} and column: ${node.loc?.column}`);
         }
 
-        let funcScope = new Set(scope);
+        let funcScope = new Set();
         node.params.forEach(e => {
           funcScope.add(e);
         });
         scope.add(node.name);
-        
-        let funcConstants = new Set(constants);
+
+        let funcConstants = new Set();
         node.body.forEach(e => visit(e, funcScope, funcConstants));
       } else if (node.type === "IfStatement") {
-        let statementScope = new Set(scope);
-        let statementConstants = new Set(constants);
+        let statementScope = new Set();
+        let statementConstants = new Set();
         node.alternate?.forEach(e => visit(e, statementScope, statementConstants));
 
-        statementScope = new Set(scope);
-        statementConstants = new Set(constants);
+        statementScope = new Set();
+        statementConstants = new Set();
         node.consequent.forEach(e => visit(e, statementScope, statementConstants));
       } else if (node.type === "WhileStatement") {
-        let statementScope = new Set(scope);
-        let statementConstants = new Set(constants);
+        let statementScope = new Set();
+        let statementConstants = new Set();
         node.body.forEach(e => visit(e, statementScope, statementConstants));
       } else if (node.type === "ForStatement") {
-        let statementScope = new Set(scope);
-        let statementConstants = new Set(constants);
+        let statementScope = new Set();
+        let statementConstants = new Set();
         node.body.forEach(e => visit(e, statementScope, statementConstants));
         visit(node.init, statementScope, statementConstants);
         visit(node.update, statementScope, statementConstants)
       } else if (node.type === "LambdaExpression") {
-        let statementScope = new Set(scope);
-        let statementConstants = new Set(constants);
- 
+        let statementScope = new Set();
+        let statementConstants = new Set();
+
         node.params.forEach(e => {
           statementScope.add(e);
         });
