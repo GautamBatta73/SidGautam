@@ -917,6 +917,13 @@ Syntaxes:
   statements
   passed expression
 }
+
+(() -> passed expression)()
+
+(() -> {
+  statements
+  passed expression
+})()
 ```
 
 <br>
@@ -940,8 +947,13 @@ print(test(8)); # Prints the function with a parameter
 print(test2(8)); # Prints the function with a parameter
 
 print(test3(8)); # Prints the function with a parameter
+
+
+# Immediately Invoked Function Expression
+(() -> print(8 + 100))(); # Immediately executes the function declaration, without storing the function
 ```
 ```javascript
+108
 108
 108
 108
@@ -1953,6 +1965,7 @@ print(isEmpty(num)); # Try to check if num is empty, but an error is thrown duri
 ```javascript
 Error: isEmpty() expects list or string, at line: 3 and column: 4
 ```
+
 
 
 
