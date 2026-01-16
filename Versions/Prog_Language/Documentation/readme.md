@@ -31,6 +31,7 @@ true
 <br>
 
 #### String Literals
+A string literal is a fixed, explicit sequence of characters written directly in the code.
 
 <br>
 All string literals are enclosed by double quotes ( " ), and you can add escape characters: \n \"
@@ -2018,3 +2019,4 @@ Make sure you know what you are doing, at line: 1 and column: 2
 ```
 
 <br>
+
