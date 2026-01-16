@@ -1822,7 +1822,7 @@ errPrint("Age:", age); # Prints age with a string literal, as an Error
 "Age:" 20
 ```
 
-<br.
+<br>
 
 ### exit(\<errCode\>)
 The exit() function is a built-in function that is used to terminate the currently running Runtime Environment and exit the program immediately.
@@ -1862,7 +1862,7 @@ print("Test"); # Prints the string literal
 
 ### len(\<obj\>)
 The len() function is a built-in function that is used to get the number of elements in a list, or the number of characters in a string. 
-<br.
+<br>
 It returns an integer value representing the length or the number of elements.
 
 <br>
@@ -1905,7 +1905,7 @@ Error: len() expects list or string, at line: 3 and column: 4
 
 ### isEmpty(\<obj\>)
 The isEmpty() function is a built-in function that is used to check if there are any elements in a list, or if a string is empty. 
-<br.
+<br>
 It returns a boolean value, indicating if obj is empty or not.
 
 <br>
@@ -1966,9 +1966,55 @@ print(isEmpty(num)); # Try to check if num is empty, but an error is thrown duri
 Error: isEmpty() expects list or string, at line: 3 and column: 4
 ```
 
+<br>
 
+### __addToPrototype(\<dataType\>, \<name\>, \<fn\>)
+The __addToPrototype() function is a built-in function that is used to add a function to the datatype prototype. 
+<br>
+It is used to make prototype function libraries for SidGautamScript. You shouldn't really use it if you aren't building a library, and doing so will give a warning during compilation.<br>
+<br>
+**\<dataType\>** is one of "Number", "List", "String", or "Object".<br>
+**\<name\>** is the name of the prototype function (Must be unique. You cannot overwrite existing ones), and the first parameter MUST be the value itself.<br>
+**\<fn\>** is the passed function.<br>
 
+<br>
+Create a basic forEach function for Lists:
 
+```python
+__addToPrototype("List", "forEach", (self, callBack) -> { # Create a basic forEach prototype function for Lists
+    until (var i = 0, i < len(self), i = i + 1) {
+        var el = self[i];
+        callBack(el);
+    }
+});
 
+var list = {"Hello", "World"}; # Declare and instantiate a list
 
+list.forEach((el) -> print(el)); # Use new forEach
+```
+```javascript
+Adding to a DataType Prototype can cause some issues.
+Make sure you know what you are doing, at line: 1 and column: 2
 
+"Hello"
+"World"
+```
+
+<br>
+Create a function without parameters (You still need self)
+
+```python
+__addToPrototype("String", "length", (self) -> { # Create a basic length prototype function for Strings
+    pass len(self);
+});
+
+print(("Hello").length()); # Print string length with new length() prototype function
+```
+```javascript
+Adding to a DataType Prototype can cause some issues.
+Make sure you know what you are doing, at line: 1 and column: 2
+
+5
+```
+
+<br>
