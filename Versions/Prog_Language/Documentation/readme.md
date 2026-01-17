@@ -2020,3 +2020,59 @@ Make sure you know what you are doing, at line: 1 and column: 2
 
 <br>
 
+## Other Tutorials
+For the most part, anything you can think of can be done. But, it may be hard to do some of it.
+<br>
+Here are some ways to do some things that may not be that obvious.
+
+<br>
+
+### Classes
+A programming class serves as a blueprint for creating objects, defining their properties/methods. 
+
+<br>
+This example defines a Dog class with a private name attribute, a name property getter, and a bark method. We then create an instance of the class and use it:
+
+```python
+final Dog = (nameAttr) -> { # Define a "class". I made this a constant, so it can't be changed by users
+    var _props = { # Define private properties here
+        name: str(nameAttr ?? "Sparky") # Sets the name property, with a fallback
+    };
+    
+    pass { # Think of this as the class body with public properties
+        getName: () -> _props.name,
+        bark: () -> '{_props.name} says Woof!'
+    };
+};
+
+var myDog = Dog("Buddy"); # Create an object/instance of the Dog class, with a name
+
+print('My dog\'s name is {myDog.getName()}.'); # Prints the object's name property with the public method
+
+print(myDog._props); # Tries to print the private property
+
+print(myDog.bark()); # Prints the bark
+```
+```javascript
+"My dog's name is Buddy."
+null
+"Buddy says Woof!"
+```
+
+<br>
+You can also use the 'this' keyword if you need to refer to an internal public method/property:
+
+```python
+final Dog = (nameAttr) -> {
+    var _props = {
+        name: str(nameAttr ?? "Sparky")
+    };
+    
+    pass {
+        getName: () -> _props.name,
+        bark: () -> '{this.getName()} says Woof!' # Does the same thing, but uses the public getter instead.
+    };
+};
+```
+
+<br>
