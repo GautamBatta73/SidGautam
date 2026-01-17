@@ -107,7 +107,7 @@ function addNativeFunctions(globalEnv) {
             console.error(...printableArgs);
             return null;
         }),
-        constant: true
+        constant: true 
     }
     globalEnv.len = {
         value: NativeFunction(["str/list"], (args) => {
@@ -143,11 +143,17 @@ function getPrintable(obj) {
         } else if (objType === "Function") {
             return `FunctionObject(${newObj.params ? newObj.params.join(", ") : ""})`;
         } else if (objType === "Object") {
-            let arr = {};
-            Object.entries(newObj).forEach(([key, value]) => {
-                arr[key] = printerize(value);
-            });
-            return arr;
+            if (newObj.stringify && getDataType(newObj.stringify) === "Function") {
+                let fn = newObj.stringify;
+                const result = runFunction(fn.chunk, fn.params, [], fn.env, newObj);
+                return printerize(result ?? null);
+            } else {
+                let arr = {};
+                Object.entries(newObj).forEach(([key, value]) => {
+                    arr[key] = printerize(value);
+                });
+                return arr;
+            }
         } else if (objType === "NULL") {
             return null;
         }
@@ -219,7 +225,7 @@ function runChunk(chunk, env, func = false) {
 
             case Op.LOAD_SAFE: {
                 // Safe load for optional chaining
-                stack.push(env.vars[instr.arg].value);
+                stack.push(env.vars[instr.arg]?.value);
                 break;
             }
 
@@ -554,7 +560,7 @@ function runChunk(chunk, env, func = false) {
                     const method = Prototypes["Object"][index];
                     if (typeof index === "string" && !method) {
                         if (Object.hasOwn(obj, index)) {
-                            if (typeof obj[index] === "object" && obj[index] !== null) obj[index].this = obj;
+                            if (getDataType(obj[index]) === "Object" || getDataType(obj[index]) === "Function") obj[index].this = obj;
                             stack.push(obj[index]);
                         }
                         break;
