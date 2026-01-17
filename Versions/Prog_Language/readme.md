@@ -17,15 +17,15 @@ It is a simple programming language with some basic functions. It can do your ba
 
 <a href="#downloadBtn">Skip to Download Buttton</a><br>
 
-Currently, it only runs in Windows.<br>
-- sgc.exe is the Compiler
-- sg.exe is the Executor
+Currently, it only runs in Windows and Linux.<br>
+- sgc is the Compiler
+- sg is the Executor
 
 ### How To Run:
 1. Write a .sidg source code file, or use a test file.
-2. Open the terminal/command prompt and type "{Path to sgc.exe} {Path to .sidg file}".
+2. Open the terminal/command prompt and type "{Path to sgc executable} {Path to .sidg file}".
 3. A compiled .sidgc file will be created.
-4. Open the terminal/command prompt and type "{Path to sg.exe} {Path to .sidgc file}".
+4. Open the terminal/command prompt and type "{Path to sg executable} {Path to .sidgc file}".
 5. Unless you get an error, it should execute the script's code.
 
 ### Basic Tips:
@@ -33,9 +33,13 @@ Currently, it only runs in Windows.<br>
 <br><br>
 
 Click the inconspicuous button below to go to my Google Drive, where you can download:
-- Zip with the Test Files, Compiler, and Executor (Runtime Environment) as EXE.
+- Zip with the Test Files, Compiler, and Executor (Runtime Environment) as EXEs.
+- Zip with the Test Files, Compiler, and Executor (Runtime Environment) as Linux Executables.
+
+**For Linux: Once downloaded, you may need to give execution permissions on the files to execute them properly**
 
 <a target="_blank" href="https://drive.google.com/drive/folders/1bIonQZPRfJ_bTbHw-KjHeAVaPml8VYzj?usp=sharing" id="downloadBtn">
   <img style="width: 15em;" alt="Download" src="https://github.com/user-attachments/assets/6538da9a-0f30-4a59-a7e9-c3f1268ac4e3" />
 
 </a>
+
