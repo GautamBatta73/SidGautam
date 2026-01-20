@@ -446,6 +446,22 @@ print(obj.getSum()); # Prints the value of the getSum() method
 ```
 
 <br>
+If you add a stringify method, you can control how an object is stringified (str()) or printed (print()):
+
+```python
+var person = {
+    name: "Gautam Batta",
+    age: 21,
+    stringify: () -> 'A Person named \'{this.name}\' aged {this.age} years.'
+};
+
+print(person);
+```
+```javascript
+"A Person named 'Gautam Batta' aged 21 years."
+```
+
+<br>
 
 ### Booleans
 Boolean values can be one of two values: true or false, representing the truth value of a logical statement.
@@ -2076,3 +2092,4 @@ final Dog = (nameAttr) -> {
 ```
 
 <br>
+
