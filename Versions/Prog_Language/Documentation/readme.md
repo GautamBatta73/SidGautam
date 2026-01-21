@@ -230,6 +230,8 @@ Lists, like arrays in other programming languages, enable the storage of a colle
 <br>
 Any datatype can be a value in the list. Including functions.
 
+**Lists, Functions, and Objects are passed by reference. All other datatypes are passed as value.**<br>
+
 Lists are zero-indexed: the first element of a list is at index 0, the second is at index 1, and so on. The last element is at the value of the list's length  minus 1.
 <br>
 List elements cannot be accessed using arbitrary strings as indices, but must be accessed using non-negative integers as indices.
@@ -323,6 +325,8 @@ print(fruits[lastIndex]); # Prints the last element to the console
 Objects are used to store various keyed collections and more complex entities. It is like lists but has key-value pairs.
 <br>
 Any datatype can be a value in the object. Including functions.
+
+**Lists, Functions, and Objects are passed by reference. All other datatypes are passed as value.**<br>
 
 [Extra Importable Object Utilities](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/objutils.md)
 
@@ -508,6 +512,8 @@ unless (isObject(obj)) { # Checks if obj isn't an Object
 Functions are like subprograms that can be called by other code, having their own body of statements. It can take parameters and return a value. In SidGautamScript, they can be passed around, returned, and assigned like other datatypes. To use a function, you must define it somewhere in the scope from which you wish to call it. Either with the full syntax or as a lambda expression.
 <br>
 They are technically a type of object, but are not treated as such.
+
+**Lists, Functions, and Objects are passed by reference. All other datatypes are passed as value**<br>
 
 [More About Functions](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/readme.md#func-nameparameters)
 
@@ -2092,4 +2098,5 @@ final Dog = (nameAttr) -> {
 ```
 
 <br>
+
 
