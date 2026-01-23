@@ -125,3 +125,52 @@ print(list.join("\n")); # Prints the list as a string separated by a new line
 ```
 
 <br>
+
+### List.clone(list)
+This function creates and returns a deep clone of the parameter list. Any changes to the original or clone list will not affect the other.
+
+<br>
+Example:
+
+```python
+import "ListUtils";
+
+var list = {1, 2, 3};
+var clone = List.clone(list);
+
+print("Original List: " + list); # Prints the original list
+print("Cloned List: " + clone); # Prints the cloned list
+
+clone[0] = 10; # Modify the cloned list
+print("\nAfter modification:\n");
+
+print("Original List: " + list); # Prints the original list
+print("Cloned List: " + clone); # Prints the cloned list
+```
+```javascript
+"Original List:" [
+  1,
+  2,
+  3
+]
+"Cloned List:" [
+  1,
+  2,
+  3
+]
+
+"After modification:"
+
+"Original List:" [
+  1,
+  2,
+  3
+]
+"Cloned List:" [
+  10,
+  2,
+  3
+]
+```
+
+<br>
