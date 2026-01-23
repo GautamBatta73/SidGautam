@@ -8,7 +8,7 @@ const path = require("path");
 const exePath = __dirname || path.dirname(process.execPath);
 const chalk = require("chalk").default;
 const run = require("./src/vm");
-const VERSION = "2.5.0";
+const VERSION = "2.5.5";
 
 const originalError = console.error;
 console.error = (...args) => {
@@ -39,7 +39,7 @@ program
     .version(VERSION)
     .description("An executor for Compiled SidGautamScript")
     .argument('<file>', ".sidgc File to Run")
-    .action(options => {
+    .action(() => {
         moduleCache = new Map();
         let fileName = program.args[0]
         let file = fileName ? fs.existsSync(fileName) : false
@@ -51,7 +51,10 @@ program
                     let decompiledCode = JSON.parse(compiledCode);
                     let decompiledChunk = Object.assign(new Chunk(), decompiledCode);
 
-                    run(decompiledChunk)
+                    process.env.EXE_PATH = exePath;
+                    process.env.MODULE_PATH = path.join(exePath, "modules/");
+                    process.env.RUN_PATH = filePath;
+                    run(decompiledChunk);
                 } catch (error) {
                     if (error instanceof ProgramExit) {
                         process.exit(error.code);
@@ -64,6 +67,7 @@ program
         } else {
             console.error("Error: Parameter must be a .sidgc file.")
         }
+        process.exit(0);
     });
 
 function loadModule(filename) {
@@ -90,7 +94,7 @@ function loadModule(filename) {
             let decompiledCode = JSON.parse(compiledCode);
             let decompiledChunk = Object.assign(new Chunk(), decompiledCode);
 
-            moduleCache.set(fullPath.toLowerCase(), true);
+            moduleCache.set(fullPath.toLowerCase());
 
             return decompiledChunk;
         } catch (error) {

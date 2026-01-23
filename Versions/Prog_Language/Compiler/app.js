@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk").default;
 const compile = require("./src/compiler.js")
-const VERSION = "2.5.0";
+const VERSION = "2.5.5";
 
 const originalError = console.error;
 console.error = (...args) => {
@@ -34,7 +34,7 @@ program
     .version(VERSION)
     .description("A compiler for SidGautamScript")
     .argument('<file>', ".sidg File to Compile")
-    .action(options => {
+    .action(() => {
         let fileName = program.args[0]
         let file = fileName ? fs.existsSync(fileName) : false
         if (file) {
@@ -49,7 +49,6 @@ program
                     let compileFile = path.basename(fileName, path.extname(fileName)) + ".sidgc"
                     fs.writeFileSync(path.join(filePath, compileFile), compiledCode, 'utf8');
                     console.log("Compiled!");
-                    //console.log("\n", translatedCode, "\n");
                 } catch (error) {
                     console.error(error.message);
                 }
@@ -59,6 +58,7 @@ program
         } else {
             console.error("Error: Parameter must be a .sidg file.")
         }
+        process.exit(0);
     });
 
 program.parse(process.argv)

@@ -107,7 +107,7 @@ function addNativeFunctions(globalEnv) {
             console.error(...printableArgs);
             return null;
         }),
-        constant: true 
+        constant: true
     }
     globalEnv.len = {
         value: NativeFunction(["str/list"], (args) => {
@@ -205,6 +205,10 @@ function runChunk(chunk, env, func = false) {
                         env: cloneEnv(env),
                     };
 
+                    fn.env.vars[fn.name] = {
+                        value: fn,
+                        constant: true
+                    };
                     stack.push(fn);
                 } else {
                     stack.push(value);
