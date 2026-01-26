@@ -7,7 +7,7 @@ I think the story went something like: <br>
 I was using JQuery in my Web Programming Class, and I hated the syntax. So, I was like 'I'll make my own JS Library', and SidGautamJS was born. Then I decided to make one in Java, and SidGautamJava was born (never released). Then I guess I wanted to make my own programming language. I never actually thought I would do it, but after graduating in 2026 and being unable to find a job, I learned how and ended up writing the compiler in NodeJS.
 <br><br>
 
-It is a simple programming language with some basic functions. It can do your basic program stuff, and I even include built in libraries, like Math.
+It is a simple programming language with some basic functions. It can do your basic program stuff, and I even include built in libraries, like Math and FileUtils (fs).
 
 <br>
 

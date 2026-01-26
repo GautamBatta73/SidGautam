@@ -23,3 +23,7 @@ The same applies to all built-in libraries, but replace 'Math' with the name of 
 3. **[ListUtils](./listutils.md)**: Has some extra helpful utilities for Lists.
 
 4. **[StringUtils](./strutils.md)**: Has some extra helpful utilities for Strings.
+
+5. **[FileUtils](./fileutils.md)**: Has some extra helpful utilities for File Manipulation.
+
+6. **[ExtraUtils](./extrautils.md)**: Has some extra helpful utilities, like prompt() and wait().

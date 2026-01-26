@@ -8,7 +8,7 @@ const path = require("path");
 const exePath = __dirname || path.dirname(process.execPath);
 const chalk = require("chalk").default;
 const run = require("./src/vm");
-const VERSION = "2.5.5";
+const VERSION = "2.5.7";
 
 const originalError = console.error;
 console.error = (...args) => {
@@ -53,7 +53,7 @@ program
 
                     process.env.EXE_PATH = exePath;
                     process.env.MODULE_PATH = path.join(exePath, "modules/");
-                    process.env.RUN_PATH = filePath;
+                    process.env.RUN_PATH = path.resolve(filePath);
                     run(decompiledChunk);
                 } catch (error) {
                     if (error instanceof ProgramExit) {

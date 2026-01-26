@@ -1,0 +1,1 @@
+var n=require("fs"),r=require("path");module.exports={getExt:e=>r.extname(e).toLowerCase(),join:(...e)=>r.join(...e),toAbsolute:e=>r.resolve(e),write:(e,t)=>n.writeFileSync(e,t,"utf8"),append:(e,t)=>n.appendFileSync(e,t,"utf8"),getName:e=>{let t=r.extname(e);return r.basename(e,t).toLowerCase()},read:e=>{let t="";return n.existsSync(e)&&(t=n.readFileSync(e,"utf8")),t}};

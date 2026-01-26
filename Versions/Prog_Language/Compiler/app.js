@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk").default;
 const compile = require("./src/compiler.js")
-const VERSION = "2.5.5";
+const VERSION = "2.5.7";
 
 const originalError = console.error;
 console.error = (...args) => {
