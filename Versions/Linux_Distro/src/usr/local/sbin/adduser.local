@@ -1,0 +1,9 @@
+#!/bin/bash
+
+HOME_DIR=$4
+
+echo "file://$HOME_DIR/Documents/ Documents" > $HOME_DIR/.config/gtk-3.0/bookmarks
+echo "file://$HOME_DIR/Music/ Music" >> $HOME_DIR/.config/gtk-3.0/bookmarks
+echo "file://$HOME_DIR/Pictures/ Pictures" >> $HOME_DIR/.config/gtk-3.0/bookmarks
+echo "file://$HOME_DIR/Videos/ Videos" >> $HOME_DIR/.config/gtk-3.0/bookmarks
+echo "file://$HOME_DIR/Downloads/ Downloads" >> $HOME_DIR/.config/gtk-3.0/bookmarks
