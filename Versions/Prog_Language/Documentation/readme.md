@@ -1186,7 +1186,6 @@ until (x = 0, x < len(list), x = x + 1) { # Instantiates x and sets it to 0, dec
 }
 
 print("Final:", x); # Prints the final value of x
-}
 ```
 ```javascript
 1
@@ -2098,5 +2097,6 @@ final Dog = (nameAttr) -> {
 ```
 
 <br>
+
 
 
