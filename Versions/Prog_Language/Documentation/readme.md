@@ -562,7 +562,7 @@ func test(t) { # Defines a function that takes in one parameter
 
 var x = test(); # Calls the function without parameters, and assigns the passed value to x
 
-print(x); # Prints NULL because x is NULL, as the parameter had no value
+print(x); # Prints null because x is null, as the parameter had no value
 ```
 ```javascript
 null
@@ -2093,8 +2093,164 @@ Make sure you know what you are doing, at line: 1 and column: 2
 
 <br>
 
+### Error(\<msg\>)
+The Error() function is a built-in function that throws an error, stopping all execution of code and printing the message in the console.
+
+<br>
+Example:
+
+```python
+print("Hello"); # Prints the string literal
+
+Error("An error occurred"); # Throws an error with the given message
+
+print("World"); # This line will not be executed due to the error above
+```
+```javascript
+"Hello"
+An error occurred
+```
+
+<br>
+
+### catchError(\<fn\>)
+The catchError() function is a built-in function that catches an error in the provided function, allowing for the safe execution of code with potential errors.
+<br>
+It returns an object indicating whether the code succeeded or not, along with the message of any error that was thrown. It then continues executing the rest of the program.
+
+<br>
+Examples:
+
+```python
+var x = NULL; # Declare x as NULL
+
+final err = catchError(() -> {
+    x = 5; # Assign 5 to x (Which may or may not throw an error)
+});
+
+print(err); # Print the error catch object
+
+print(x); # Print the value of x after the operation
+```
+```javascript
+{
+  "success": true,
+  "message": null
+}
+5
+```
+
+<br>
+Note: Dividing by 0 fails at compilation, i.e. a catchError won't save you unless you don't use NumberLiterals
+
+```python
+var x = NULL; # Declare x as NULL
+
+final err = catchError(() -> {
+    x = 10 / 0; # Attempt to divide by zero
+});
+
+print(err); # Print the error catch object
+
+print(x); # Print the value of x after the operation
+```
+```javascript
+Error: Dividing by zero?, at line: 3, column: 10
+```
+
+<br>
+
+```python
+var x = 10; # Declare x and instantiate as 10
+
+final err = catchError(() -> {
+    x = x / 0; # Attempt to divide by zero
+});
+
+print(err); # Print the error catch object
+
+print(x); # Print the value of x after the operation
+```
+```javascript
+{
+  "success": true,
+  "message": null
+}
+null
+```
+Note: During Execution, dividing by 0 returns NULL and doesn't throw any error anyway.
+
+<br>
+Reassigning a constant
+
+```python
+final x = 10; # Declare x as constant and instantiate as 10
+
+final err = catchError(() -> {
+    x = 15; # Attempt to assign a new value to x
+});
+
+print(err); # Print the error catch object
+
+print(x); # Print the value of x after the operation
+```
+```javascript
+{
+  "success": false,
+  "message": "Cannot reassign constant 'x', at line: 3 and column: 6"
+}
+10
+```
+
+<br>
+
+## Features
+Here are some extra useful features that can't really be any of the other categories.
+
+<br>
+
+### Command-Line Arguments
+These are optional inputs supplied to the program when it is **executed** from the terminal or command prompt. This means that, at compilation, these values are NULL.
+<br>
+All arguments are stored as a list of strings in the global constant '__ARGS'.
+
+<br>
+If we pass no arguments:
+
+```python
+print(__ARGS); # Prints an empty list, as no arguments were passed.
+```
+```javascript
+> sg .\testFiles\test2.sidgc
+[]
+```
+
+<br>
+If we pass some arguments:
+
+```javascript
+> sg .\testFiles\test2.sidgc hello world
+[
+  "hello",
+  "world"
+]
+```
+
+<br>
+If we pass full quoted strings:
+
+```javascript
+> sg .\testFiles\test2.sidgc "Hello World" "Test World!"
+[
+  "Hello World",
+  "Test World!"
+]
+```
+
+<br>
+
 ## Other Tutorials
-For the most part, anything you can think of can be done. But, it may be hard to do some of it.
+For the most part, anything you can think of can be done. But it may be hard to do some of it.
 <br>
 Here are some ways to do some things that may not be that obvious.
 
@@ -2149,7 +2305,3 @@ final Dog = (nameAttr) -> {
 ```
 
 <br>
-
-
-
-
