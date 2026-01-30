@@ -28,9 +28,7 @@ function compile(node, chunk) {
             chunk.emit(Op.NEW_OBJECT);
 
             for (const prop of node.properties) {
-                chunk.emit(Op.DUP);
-
-                // ---- FIX HERE ----
+                
                 if (prop.key.type === "Identifier") {
                     // Identifier keys become string literals
                     const keyIdx = chunk.addConst(prop.key.name);
@@ -376,7 +374,7 @@ function compile(node, chunk) {
             compile(node.left, chunk);
 
             // Duplicate it for checking
-            chunk.emit(Op.DUP, null, node.loc);
+            chunk.emit(Op.DUP);
 
             // If NOT null, jump over RHS
             const jumpIfNotNull = chunk.code.length;

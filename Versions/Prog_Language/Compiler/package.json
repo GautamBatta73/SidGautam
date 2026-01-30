@@ -1,6 +1,6 @@
 {
   "name": "sidgautamcompiler",
-  "version": "2.5.7",
+  "version": "2.6.0",
   "description": "A compiler for SidGautamScript",
   "license": "ISC",
   "author": "Gautam Batta",

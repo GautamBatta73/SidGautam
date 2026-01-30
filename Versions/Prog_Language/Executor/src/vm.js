@@ -1,5 +1,5 @@
 const Op = require("./bytecode");
-const ProgramExit = require("./ProgramExit");
+const { ProgramExit, ThrownError } = require("./ScriptErrors");
 const { Prototypes, definePrototype } = require("./prototypes.js");
 let loadModule = undefined;
 
@@ -43,6 +43,7 @@ function addNativeFunctions(globalEnv) {
     globalEnv.true = { value: true, constant: true };
     globalEnv.false = { value: false, constant: true };
     globalEnv.NULL = { value: null, constant: true };
+    globalEnv.__ARGS = { value: (process.env.ARGS ? process.env.ARGS.split("\n") : []), constant: true };
     globalEnv.dataType = {
         value: NativeFunction(["obj"], (args) => getDataType(args[0])),
         constant: true
@@ -78,7 +79,9 @@ function addNativeFunctions(globalEnv) {
             const name = args[1];
             const fn = args[2];
 
-            if (fn.type !== "Function" && fn.type !== "NativeFunction") {
+            if (fn.type == "NativeFunction") {
+                throw new Error("__addToPrototype() expects a Non-Native Function");
+            } else if (fn.type !== "Function") {
                 throw new Error("__addToPrototype() expects a DataType, FunctionName, FunctionObject");
             }
 
@@ -90,6 +93,38 @@ function addNativeFunctions(globalEnv) {
         value: NativeFunction(["exitCode"], (args) => {
             const code = args[0] ?? 0;
             throw new ProgramExit(code);
+        }),
+        constant: true
+    }
+    globalEnv.Error = {
+        value: NativeFunction(["message"], (args) => {
+            const message = args[0] ?? "An Unexpected Error Occurred";
+            throw new ThrownError(message);
+        }),
+        constant: true
+    }
+    globalEnv.catchError = {
+        value: NativeFunction(["fn"], (args) => {
+            const fn = args[0];
+            let returnObj = {
+                success: true,
+                message: null
+            }
+
+            if (fn.type == "NativeFunction") {
+                throw new Error("catchError() expects a Non-Native Function");
+            } else if (fn.type !== "Function") {
+                throw new Error("catchError() expects a FunctionObject");
+            }
+
+            try {
+                runFunction(fn.chunk, fn.params, [], fn.env, fn.this ?? null);
+            } catch (error) {
+                returnObj.success = false;
+                returnObj.message = error.message ?? String(error);
+            }
+
+            return returnObj;
         }),
         constant: true
     }
@@ -202,13 +237,9 @@ function runChunk(chunk, env, func = false) {
                     // Create a fresh closure instance
                     const fn = {
                         ...value,
-                        env: cloneEnv(env),
+                        env,
                     };
-
-                    fn.env.vars[fn.name] = {
-                        value: fn,
-                        constant: true
-                    };
+                    
                     stack.push(fn);
                 } else {
                     stack.push(value);
@@ -440,10 +471,10 @@ function runChunk(chunk, env, func = false) {
                         if (fn.self !== null && fn.self !== undefined) args.unshift(fn.self);
                         result = fn.call(args) ?? null;
                     } catch (error) {
-                        if (error instanceof ProgramExit) {
+                        if (error instanceof ProgramExit || error instanceof ThrownError) {
                             throw error;
                         }
-                        throw new Error(`${error.message}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`)
+                        throw new Error(`${error.message ?? String(error)}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`)
                     }
                     stack.push(result);
                     break;
@@ -494,10 +525,10 @@ function runChunk(chunk, env, func = false) {
                         if (fn.self !== null && fn.self !== undefined) args.unshift(fn.self);
                         result = fn.call(args) ?? null;
                     } catch (error) {
-                        if (error instanceof ProgramExit) {
+                        if (error instanceof ProgramExit || error instanceof ThrownError) {
                             throw error;
                         }
-                        throw new Error(`${error.message}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
+                        throw new Error(`${error.message ?? String(error)}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                     }
                     stack.push(result);
                     break;
@@ -564,7 +595,7 @@ function runChunk(chunk, env, func = false) {
                     const method = Prototypes["Object"][index];
                     if (typeof index === "string" && !method) {
                         if (Object.hasOwn(obj, index)) {
-                            if (getDataType(obj[index]) === "Object" || getDataType(obj[index]) === "Function") obj[index].this = obj;
+                            if (getDataType(obj[index]) === "Function") obj[index].this = obj;
                             stack.push(obj[index]);
                         }
                         break;

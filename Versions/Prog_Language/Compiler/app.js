@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk").default;
 const compile = require("./src/compiler.js")
-const VERSION = "2.5.7";
+const VERSION = "2.6.0";
 
 const originalError = console.error;
 console.error = (...args) => {
@@ -30,7 +30,7 @@ console.warn = (...args) => {
 };
 
 program
-    .name("SidGautamScript Compiler")
+    .name("SGC")
     .version(VERSION)
     .description("A compiler for SidGautamScript")
     .argument('<file>', ".sidg File to Compile")

@@ -1,5 +1,5 @@
 const builtins = [];
-const builtinConst = ["this", "true", "false", "NULL", "print", "exit", "str", "int", "double", "trim", "__injs", "errPrint", "len", "isEmpty", "__addToPrototype", "dataType"]
+const builtinConst = ["this", "true", "false", "NULL", "print", "exit", "str", "int", "double", "trim", "__injs", "errPrint", "len", "isEmpty", "__addToPrototype", "dataType", "__ARGS", "Error", "catchError"]
 
 function semantic(ast) {
   const progScope = new Set();

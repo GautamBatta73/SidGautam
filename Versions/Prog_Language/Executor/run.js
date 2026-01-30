@@ -2,13 +2,13 @@ const { program } = require("commander");
 let moduleCache = new Map();
 let filePath = "";
 const Chunk = require("./src/chunk");
-const ProgramExit = require("./src/ProgramExit");
+const {ProgramExit} = require("./src/ScriptErrors");
 const fs = require("fs");
 const path = require("path");
 const exePath = __dirname || path.dirname(process.execPath);
 const chalk = require("chalk").default;
 const run = require("./src/vm");
-const VERSION = "2.5.7";
+const VERSION = "2.6.0";
 
 const originalError = console.error;
 console.error = (...args) => {
@@ -35,11 +35,12 @@ console.warn = (...args) => {
 };
 
 program
-    .name("SidGautamScript Executor")
+    .name("SG")
     .version(VERSION)
     .description("An executor for Compiled SidGautamScript")
     .argument('<file>', ".sidgc File to Run")
-    .action(() => {
+    .argument('[args...]', "Optional Arguments To Pass To The Script")
+    .action((cmd, ...args) => {
         moduleCache = new Map();
         let fileName = program.args[0]
         let file = fileName ? fs.existsSync(fileName) : false
@@ -52,6 +53,7 @@ program
                     let decompiledChunk = Object.assign(new Chunk(), decompiledCode);
 
                     process.env.EXE_PATH = exePath;
+                    process.env.ARGS = args[0].join("\n") || "";
                     process.env.MODULE_PATH = path.join(exePath, "modules/");
                     process.env.RUN_PATH = path.resolve(filePath);
                     run(decompiledChunk);
