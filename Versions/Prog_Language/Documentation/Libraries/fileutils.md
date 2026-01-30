@@ -134,3 +134,55 @@ print(fileContent); # Prints the content of the test file
 ```
 
 <br>
+
+### File.exists(filePath)
+This method returns a boolean indicating if the passed file/directory exists. 
+
+```python
+import "FileUtils";
+
+var newFile = "../test.txt"; # File that may or may not exist
+
+unless (File.exists(newFile)) { # Unless this file doesn't exist, create it and write a string to it
+    File.write(newFile, "Hello World");
+}
+
+print(File.read(newFile)); # Prints the contents of the file
+```
+```javascript
+"Hello World"
+```
+
+<br>
+
+### File.createDir(dirPath)
+This method creates the specified directory if it does not already exist. 
+
+```python
+import "FileUtils";
+
+var newDir = "../testDir/";
+
+File.createDir(newDir); # Create a new directory
+
+print(File.exists(newDir)); # Prints true if the directory exists
+```
+```javascript
+true
+```
+
+<br>
+You can even recurse directories:
+
+```python
+import "FileUtils";
+
+var newDir = "../testDir/test/";
+
+File.createDir(newDir); # Create the new directories
+
+print(File.exists(newDir)); # Prints true if the directories exists
+```
+```javascript
+true
+```
