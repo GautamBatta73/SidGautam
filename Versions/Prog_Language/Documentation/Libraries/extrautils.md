@@ -58,3 +58,79 @@ print("World"); # Prints "World"
 "Hello"
 "World"
 ```
+
+<br>
+
+### exec(command, args)
+This function executes the command with the list of arguments in the shell terminal, and then returns the result.
+<br>
+Note: It runs commands based on your current directory, NOT THE SCRIPT'S DIRECTORY.
+
+<br>
+
+```python
+import "ExtraUtils";
+
+var echoed = exec("echo", {"Hello World!"}); # Executes ' echo "Hello World!" ' in a terminal and returns the result
+
+print("Echoed Output: " + echoed); # Prints the result
+```
+```javascript
+"Echoed Output: Hello World!"
+```
+
+<br>
+
+```python
+import "ExtraUtils";
+
+var cmd = exec("dir", {"/B"}); # Executes "dir /B" in a terminal and returns the result
+
+print("Directory listing:");
+print(cmd); # Prints the result
+```
+```javascript
+"Directory listing:"
+imports.sidg
+imports.sidgc
+test1.sidg
+test1.sidgc
+test2.sidg
+test2.sidgc
+```
+
+<br>
+You can only execute the commands from the user's OS, i.e. "ls" doesn't work on Windows:
+
+```python
+import "ExtraUtils";
+
+var cmd = exec("ls", {"-lh"}); # Tries to execute ls, but I am currently on Windows
+
+print("Directory listing:");
+print(cmd); # Will not print as error was thrown
+```
+```javascript
+Error: 'ls' is not recognized as an internal or external command,
+operable program or batch file.
+, at line: 16 and column: 12
+```
+
+<br>
+
+### getOS()
+This function returns the current Operating System type of the user.
+<br>
+If on Windows: "Windows"
+If on Linux: "Linux"
+
+<br>
+
+```python
+import "ExtraUtils";
+
+print(getOS()); # Prints the operating system name
+```
+```javascript
+"Windows"
+```
