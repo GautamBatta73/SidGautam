@@ -64,7 +64,7 @@ print("World"); # Prints "World"
 ### exec(command, args)
 This function executes the command with the list of arguments in the shell terminal, and then returns the result.
 <br>
-Note: It runs commands based on your current directory, NOT THE SCRIPT'S DIRECTORY.
+**Note: It runs commands based on your current directory, NOT THE SCRIPT'S DIRECTORY.**
 
 <br>
 
@@ -80,11 +80,34 @@ print("Echoed Output: " + echoed); # Prints the result
 ```
 
 <br>
+I am executing the script from the script's directory, so "dir /B" will execute from there.
 
 ```python
 import "ExtraUtils";
 
 var cmd = exec("dir", {"/B"}); # Executes "dir /B" in a terminal and returns the result
+
+print("Directory listing:");
+print(cmd); # Prints the result
+```
+```javascript
+"Directory listing:"
+imports.sidg
+imports.sidgc
+test1.sidg
+test1.sidgc
+test2.sidg
+test2.sidgc
+```
+
+<br>
+If I am not in the script's directory, I can leverage the FileUtils' currentDir property. In this example, I am one directory above the script's directory:
+
+```python
+import "FileUtils";
+import "ExtraUtils";
+
+var cmd = exec("dir", {"/B", File.currentDir}); # Executes "dir /B .\testFiles\" in a terminal and returns the result
 
 print("Directory listing:");
 print(cmd); # Prints the result
@@ -134,3 +157,4 @@ print(getOS()); # Prints the operating system name
 ```javascript
 "Windows"
 ```
+
