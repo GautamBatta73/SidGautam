@@ -3,6 +3,11 @@
 ## Methods
 ### prompt()
 This function allows a user to input a string into the program. The inputted string is returned.
+<br>
+
+**Big thanks to heapwolf's node [prompt-sync](https://www.npmjs.com/package/prompt-sync) package, as that is what I modified and compressed to make the prompt() function usable in SidGuatamScript.**
+
+<br>
 
 ```python
 import "ExtraUtils";
@@ -157,4 +162,5 @@ print(getOS()); # Prints the operating system name
 ```javascript
 "Windows"
 ```
+
 
