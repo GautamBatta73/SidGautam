@@ -1,6 +1,6 @@
 {
   "name": "sidgautamexecutor",
-  "version": "2.6.0",
+  "version": "2.6.5",
   "description": "An executor for Compiled SidGautamScript",
   "license": "ISC",
   "author": "Gautam Batta",

@@ -22,6 +22,7 @@ function parser(tokens) {
     const PRECEDENCE = {
         ".": 100,
         "?.": 100,
+        "?[": 100,
         "(": 90,
         "[": 40,
         "*": 20,
@@ -287,7 +288,20 @@ function parser(tokens) {
                 loc: left.loc
             };
         }
-        if (token.value === "?.") {
+        if (token.value === "?." || token.value === "?[") {
+            if (token.value === "?[") {
+                const index = parseExpression();
+                expect("]");
+
+                return {
+                    type: "OptionalChainExpression",
+                    object: left,
+                    property: index,
+                    computed: true,
+                    loc: { line: token.line, column: token.column }
+                };
+            }
+            
             const prop = consume();
 
             if (prop.type !== "IDENT") {

@@ -104,7 +104,7 @@ function lexer(input) {
                 op += input[i++];
             } else if (
                 op === "?" &&
-                (input[i] === "?" || input[i] === ".")
+                (input[i] === "?" || input[i] === "." || input[i] === "[")
             ) {
                 op += input[i++];
             }

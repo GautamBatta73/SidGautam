@@ -120,6 +120,9 @@ function addNativeFunctions(globalEnv) {
             try {
                 runFunction(fn.chunk, fn.params, [], fn.env, fn.this ?? null);
             } catch (error) {
+                if (error instanceof ProgramExit) {
+                    throw error;
+                }
                 returnObj.success = false;
                 returnObj.message = error.message ?? String(error);
             }
@@ -239,7 +242,7 @@ function runChunk(chunk, env, func = false) {
                         ...value,
                         env,
                     };
-                    
+
                     stack.push(fn);
                 } else {
                     stack.push(value);
@@ -474,7 +477,7 @@ function runChunk(chunk, env, func = false) {
                         if (error instanceof ProgramExit || error instanceof ThrownError) {
                             throw error;
                         }
-                        throw new Error(`${error.message ?? String(error)}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`)
+                        throw new Error(`${error.message ?? String(error).trimEnd()}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`)
                     }
                     stack.push(result);
                     break;
@@ -528,7 +531,7 @@ function runChunk(chunk, env, func = false) {
                         if (error instanceof ProgramExit || error instanceof ThrownError) {
                             throw error;
                         }
-                        throw new Error(`${error.message ?? String(error)}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
+                        throw new Error(`${error.message ?? String(error).trimEnd()}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                     }
                     stack.push(result);
                     break;
