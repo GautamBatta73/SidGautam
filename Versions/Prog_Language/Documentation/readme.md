@@ -1079,12 +1079,15 @@ print(list[2]); # Prints the third element
 <br>
 
 ### Optional Chaining
-The optional chaining syntax ( ?. ) allows operations on existing objects and returns NULL if the object or property is NULL.
+The optional chaining syntax ( ?. or ?\[""] ) allows operations on existing objects and returns NULL if the object or property is NULL.
 <br>
 Basically, the operator will check the left identifier (relative to the operator), and if its NULL, it returns NULL. Otherwise, it continues rightward until it hits another optional chain operator or NULLs out.
 
 <br>
-Example:
+
+#### Dot Notation:
+
+Examples:
 
 ```python
 var developer =  { # Declare and instantiate an object with many properties
@@ -1175,6 +1178,105 @@ var developer =  { # Declare and instantiate an object with many properties
 };
 
 print(developer?.location?.city); # Prints null as developer exists, but location doesn't, and city doesn't.
+```
+```javascript
+null
+```
+<br>
+
+#### Bracket Notation:
+
+Examples:
+
+```python
+var developer =  { # Declare and instantiate an object with many properties
+  firstName: "Gautam",
+  lastName: "Batta",
+  location: "Canada",
+  online: true,
+  followers: 420
+};
+
+print(developer?["location"]); # Prints the location property, as developer exists
+```
+```javascript
+"Canada"
+```
+
+<br>
+
+```python
+var developer =  { # Declare and instantiate an object with many properties
+  firstName: "Gautam",
+  lastName: "Batta",
+  online: true,
+  followers: 420
+};
+
+print(developer?["location"]); # Prints null as the location property does not exist, but developer does
+```
+```javascript
+null
+```
+
+<br>
+
+```python
+var developer =  NULL;
+
+print(developer?["location"]); # Prints developer, which is NULL
+```
+```javascript
+null
+```
+
+<br>
+
+```python
+var developer =  { # Declare and instantiate an object with many properties
+  firstName: "Gautam",
+  lastName: "Batta",
+  online: true,
+  location: {
+    city: "Ottawa",
+    country: "Canada"
+  },
+  followers: 420
+};
+
+print(developer?["location"].city); # Prints the location property's city property as developer exists, and location exists
+```
+```javascript
+"Ottawa"
+```
+
+<br>
+
+```python
+var developer =  { # Declare and instantiate an object with many properties
+  firstName: "Gautam",
+  lastName: "Batta",
+  online: true,
+  followers: 420
+};
+
+print(developer?["location"].city); # Errors out as developer exists, location doesn't, and it can't get the property of a non-existent property's property
+```
+```javascript
+Error: Cannot index non-list/non-string/non-object, at line: 7 and column: 7
+```
+
+<br>
+
+```python
+var developer =  { # Declare and instantiate an object with many properties
+  firstName: "Gautam",
+  lastName: "Batta",
+  online: true,
+  followers: 420
+};
+
+print(developer?["location"]?["city"]); # Prints null as developer exists, but location doesn't, and city doesn't.
 ```
 ```javascript
 null
@@ -2305,3 +2407,4 @@ final Dog = (nameAttr) -> {
 ```
 
 <br>
+
