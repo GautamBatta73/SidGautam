@@ -2351,6 +2351,22 @@ If we pass full quoted strings:
 
 <br>
 
+### SGC Compiler Command Flags
+These are optional flags that can be supplied to the compiler:<br>
+- **-s or --silent** omits all output to the console, so the compiler can be silent.
+
+<br>
+
+### SGC Install Command Flags
+These are optional flags that can be supplied to the library installer:<br>
+- **-s or --silent** omits all output to the console, so the installer can be silent.
+- **-g or --global** installs the specified library globally on the system, making it available in the executable's path, so it can be called from any directory, as opposed to being installed only within the local project's folder.
+<br>
+
+More Info on Installing Libraries: [At This Repo](https://github.com/GautamBatta73/sidgautamscript-libraries/blob/main/README.md)
+
+<br>
+
 ## Other Tutorials
 For the most part, anything you can think of can be done. But it may be hard to do some of it.
 <br>
@@ -2407,4 +2423,3 @@ final Dog = (nameAttr) -> {
 ```
 
 <br>
-
