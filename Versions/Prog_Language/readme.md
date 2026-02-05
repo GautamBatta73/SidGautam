@@ -18,7 +18,7 @@ It is a simple programming language with some basic functions. It can do your ba
 <a href="#downloadBtn">Skip to Download Buttton</a><br>
 
 Currently, it only runs in Windows and Linux.<br>
-- sgc is the Compiler
+- sgc is the Compiler and Library Installer
 - sg is the Executor
 
 ### How To Run:
@@ -42,4 +42,5 @@ Click the inconspicuous button below to go to my Google Drive, where you can dow
   <img style="width: 15em;" alt="Download" src="https://github.com/user-attachments/assets/6538da9a-0f30-4a59-a7e9-c3f1268ac4e3" />
 
 </a>
+
 
