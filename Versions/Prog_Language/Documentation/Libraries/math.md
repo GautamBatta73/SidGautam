@@ -17,8 +17,39 @@ print(Math.PI); # Prints pi
 <br>
 
 ## Methods
+### Math.rnd(num, decPoints)
+This method returns the value of num rounded to 'decPoints' decimal points.
+
+<br>
+
+```python
+import "Math";
+
+var num = 7.99998675; # Declare and instantiate num as a decimal number
+
+print(Math.rnd(num)); # Prints num rounded to (default) 0 decimal points
+```
+```javascript
+8
+```
+
+<br>
+
+```python
+import "Math";
+
+var num = 7.9193189; # Declare and instantiate num as a decimal number
+
+print(Math.rnd(num, 2)); # Prints num rounded to 2 decimal points
+```
+```javascript
+7.92
+```
+
+<br>
+
 ### Math.pow(base, exp)
-This function returns the value of base raised to the power of exp.
+This method returns the value of base raised to the power of exp.
 <br>
 Math.pow(x, y) = x<sup> y</sup>
 
@@ -34,7 +65,7 @@ print(Math.pow(7, 3)); # Prints (7 * 7 * 7)
 <br>
 
 ### Math.root(base, xroot)
-This function returns the x root of a number.
+This method returns the x root of a number.
 <br>
 Math.root(x, y) = x<sup> 1/y</sup>
 
@@ -53,7 +84,7 @@ print("Cube Root:", Math.root(64, 3)); # Prints a string, and the cube root of 6
 <br>
 
 ### Math.random(min, max)
-This function returns a pseudo-random decimal or integer number, depending on the parameters given.
+This method returns a pseudo-random decimal or integer number, depending on the parameters given.
 
 <br>
 If no parameters are given, it returns a decimal number between 0 and 1 (exclusive), rounded to the hundred-thousandths (eg -> 0.44532).
