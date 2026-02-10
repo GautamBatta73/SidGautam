@@ -4,8 +4,10 @@ const path = require("path");
 const chalk = require("chalk").default;
 const fetch = require("node-fetch").default;
 const exePath = __dirname || path.dirname(process.execPath);
+const ProgressBar = require("progress");
+const Zip = require("adm-zip");
 const compile = require("./src/compiler.js");
-const VERSION = "2.6.5";
+const VERSION = "2.7.0";
 
 const originalError = console.error;
 console.error = (...args) => {
@@ -81,7 +83,7 @@ program
                 try {
                     const installDir = (!args.global ? process.cwd() : exePath);
                     await installLibraries(el, installDir);
-                    if (!args.silent) console.log(`Installed '${el}' library!`);
+                    if (!args.silent) console.log(`Installed '${el}' library!\n`);
                 } catch (error) {
                     if (!args.silent) {
                         if (error.code && error.code === "ENOTFOUND") {
@@ -100,9 +102,9 @@ program
 
 async function installLibraries(libName, installDir) {
     const encodedLibName = encodeURIComponent(libName ?? "");
-    const url = `https://raw.githack.com/GautamBatta73/sidgautamscript-libraries/main/libraries/${encodedLibName}/lib.sidgc`;
+    const url = `https://raw.githack.com/GautamBatta73/sidgautamscript-libraries/main/libraries/${encodedLibName}/`;
 
-    const response = await fetch(url);
+    const response = await fetch(url + "packed.zip");
     if (!response.ok) {
         if (response.status === 404) {
             throw new Error(`Error: Could not find '${libName}' library`);
@@ -110,10 +112,37 @@ async function installLibraries(libName, installDir) {
         throw new Error(`Error: Could not fetch '${libName}' library`);
     }
 
-    const result = await response.text();
-    let filePath = path.join(installDir, `${libName}.sidgc`);
+    const libInfo = await fetch(url + "info.json").then(res => res.json());
 
-    fs.writeFileSync(filePath, result);
+    const totalLength = parseInt((libInfo?.size ?? 0), 10);
+    const progressBar = new ProgressBar(`> ${libName} [:bar] :percent`, {
+        width: 40,
+        complete: '=',
+        incomplete: ' ',
+        renderThrottle: 1,
+        total: totalLength + (totalLength * 0.1)
+    });
+
+    const reader = response.body;
+    let zipFilePath = path.join(installDir, `${libName}.zip`);
+
+    const fileStream = fs.createWriteStream(zipFilePath);
+    reader.on("data", (chunk) => progressBar.tick(chunk.length));
+    reader.pipe(fileStream);
+
+    return new Promise((resolve, reject) => {
+        fileStream.on('close', () => {
+            let newFilePath = path.join(installDir, `${libName}/`);
+            if (!fs.existsSync(newFilePath)) fs.mkdirSync(newFilePath);
+            const zipped = new Zip(zipFilePath);
+
+            zipped.extractAllTo(newFilePath, true);
+            fs.rmSync(zipFilePath);
+            progressBar.tick(totalLength * 0.1)
+            resolve();
+        });
+        fileStream.on('error', reject);
+    })
 }
 
-program.parse(process.argv)
+program.parse(process.argv);

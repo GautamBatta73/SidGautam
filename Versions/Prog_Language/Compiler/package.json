@@ -1,6 +1,6 @@
 {
   "name": "sidgautamcompiler",
-  "version": "2.6.5",
+  "version": "2.7.0",
   "description": "A compiler for SidGautamScript",
   "license": "ISC",
   "author": "Gautam Batta",
@@ -13,9 +13,11 @@
     "./src/*"
   ],
   "dependencies": {
+    "adm-zip": "^0.5.16",
     "chalk": "^5.6.2",
-    "commander": "^14.0.2",
-    "node-fetch": "^3.3.2"
+    "commander": "^14.0.3",
+    "node-fetch": "^3.3.2",
+    "progress": "^2.0.3"
   },
   "bin": {
     "sgc": "./app.js"

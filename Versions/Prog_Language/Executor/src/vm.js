@@ -1,7 +1,7 @@
 const Op = require("./bytecode");
 const { ProgramExit, ThrownError } = require("./ScriptErrors");
 const { Prototypes, definePrototype } = require("./prototypes.js");
-let loadModule = undefined;
+let loadLibrary = undefined;
 
 function runFunction(chunk, params, args, parentEnv, thisObj = null) {
     let localEnv = createEnv(parentEnv);
@@ -25,17 +25,18 @@ function runFunction(chunk, params, args, parentEnv, thisObj = null) {
 
 function run(chunk) {
     let globalEnv = createEnv();
-    loadModule = require("../run.js");
+    loadLibrary = require("../run.js").loadLibrary;
     addNativeFunctions(globalEnv.vars);
 
     return runChunk(chunk, globalEnv);
 }
 
-function NativeFunction(args, fn) {
+function NativeFunction(args, fn, name = null) {
     return {
         type: "NativeFunction",
         params: args || [],
-        call: fn
+        call: fn,
+        name
     };
 }
 
@@ -44,6 +45,7 @@ function addNativeFunctions(globalEnv) {
     globalEnv.false = { value: false, constant: true };
     globalEnv.NULL = { value: null, constant: true };
     globalEnv.__ARGS = { value: (process.env.ARGS ? process.env.ARGS.split("\n") : []), constant: true };
+    globalEnv.__SCRIPT_DIR = { value: process.env.RUN_PATH, constant: true };
     globalEnv.dataType = {
         value: NativeFunction(["obj"], (args) => getDataType(args[0])),
         constant: true
@@ -78,6 +80,7 @@ function addNativeFunctions(globalEnv) {
             const dataType = args[0];
             const name = args[1];
             const fn = args[2];
+            const proto = args[3];
 
             if (fn.type == "NativeFunction") {
                 throw new Error("__addToPrototype() expects a Non-Native Function");
@@ -85,8 +88,8 @@ function addNativeFunctions(globalEnv) {
                 throw new Error("__addToPrototype() expects a DataType, FunctionName, FunctionObject");
             }
 
-            definePrototype(dataType, name, fn)
-        }),
+            definePrototype(dataType, name, fn, proto)
+        }, "__addToPrototype"),
         constant: true
     }
     globalEnv.exit = {
@@ -217,13 +220,23 @@ function runChunk(chunk, env, func = false) {
         switch (instr.op) {
             case Op.IMPORT: {
                 const path = chunk.constants[instr.arg];
-                const importedChunk = loadModule(path);
+                const { libName, libPath, importedChunk } = loadLibrary(path, envGet(env, "__SCRIPT_DIR")?.value);
 
-                if (!importedChunk) {
+                if (envGet(env, libName, true)) {
                     break;
+                } else {
+                    env.libraries.push(libName);
                 }
 
-                runChunk(importedChunk, env);
+                const libEnv = createEnv(env);
+                libEnv.vars.__SCRIPT_DIR = { value: libPath, constant: true };
+
+                runChunk(importedChunk, libEnv);
+
+                let [{ __SCRIPT_DIR, ...tempVars }, tempLibs, tempProto] = [libEnv.vars, libEnv.libraries, libEnv.prototypes];
+                Object.assign(env.vars, tempVars);
+                Object.assign(env.libraries, tempLibs);
+                Object.assign(env.prototypes, tempProto);
                 break;
             }
 
@@ -263,7 +276,8 @@ function runChunk(chunk, env, func = false) {
 
             case Op.LOAD_SAFE: {
                 // Safe load for optional chaining
-                stack.push(env.vars[instr.arg]?.value);
+                const slot = envGet(env, instr.arg);
+                stack.push(slot?.value);
                 break;
             }
 
@@ -430,29 +444,27 @@ function runChunk(chunk, env, func = false) {
 
             case Op.JUMP_IF_TRUE: {
                 const cond = stack.pop();
+                if (typeof cond !== "boolean") throw new Error(`Unless and Though statements must use boolean conditions, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                 if (cond) ip = instr.arg;
                 break;
             }
 
             case Op.JUMP_IF_FALSE: {
                 const cond = stack.pop();
+                if (typeof cond !== "boolean") throw new Error(`Until loops must use boolean conditions, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                 if (!cond) ip = instr.arg;
                 break;
             }
 
             case Op.JUMP_IF_NOT_NULL: {
                 const value = stack.pop();
-                if (getDataType(value) !== "NULL") {
-                    ip = instr.arg;
-                }
+                if (getDataType(value) !== "NULL") ip = instr.arg;
                 break;
             }
 
             case Op.JUMP_IF_NULL: {
                 const value = stack.pop();
-                if (getDataType(value) === "NULL") {
-                    ip = instr.arg;
-                }
+                if (getDataType(value) === "NULL") ip = instr.arg;
                 break;
             }
 
@@ -472,6 +484,7 @@ function runChunk(chunk, env, func = false) {
                     let result = null;
                     try {
                         if (fn.self !== null && fn.self !== undefined) args.unshift(fn.self);
+                        else if (fn.name === "__addToPrototype") args.push(env.prototypes);
                         result = fn.call(args) ?? null;
                     } catch (error) {
                         if (error instanceof ProgramExit || error instanceof ThrownError) {
@@ -526,6 +539,7 @@ function runChunk(chunk, env, func = false) {
                     let result = null;
                     try {
                         if (fn.self !== null && fn.self !== undefined) args.unshift(fn.self);
+                        else if (fn.name === "__addToPrototype") args.push(env.prototypes);
                         result = fn.call(args) ?? null;
                     } catch (error) {
                         if (error instanceof ProgramExit || error instanceof ThrownError) {
@@ -565,11 +579,13 @@ function runChunk(chunk, env, func = false) {
                 const obj = stack.pop();
 
                 if (typeof obj === "string") {// Strings
-                    const method = Prototypes["String"][index];
                     if (typeof index === "number") {
                         stack.push(obj[index]);
                         break;
-                    } else if (!method) {
+                    }
+
+                    const method = prototypesGet(env, "String", index);
+                    if (!method) {
                         throw new Error(`String has no method '${index}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                     }
 
@@ -577,11 +593,13 @@ function runChunk(chunk, env, func = false) {
                     stack.push(method);
                     break;
                 } else if (Array.isArray(obj)) {// Lists
-                    const method = Prototypes["List"][index];
                     if (typeof index === "number") {
                         stack.push(obj[index]);
                         break;
-                    } else if (!method) {
+                    }
+
+                    const method = prototypesGet(env, "List", index);
+                    if (!method) {
                         throw new Error(`List has no method '${index}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                     }
 
@@ -595,23 +613,26 @@ function runChunk(chunk, env, func = false) {
                         }
                     }
 
-                    const method = Prototypes["Object"][index];
-                    if (typeof index === "string" && !method) {
+                    if (typeof index === "string") {
                         if (Object.hasOwn(obj, index)) {
                             if (getDataType(obj[index]) === "Function") obj[index].this = obj;
                             stack.push(obj[index]);
-                        }
-                        break;
-                    } else if (!method) {
-                        throw new Error(`Object has no method '${index}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
-                    }
+                            break;
+                        } else {
+                            const method = prototypesGet(env, "Object", index);
+                            if (method) {
+                                method.self = obj;
+                            }
 
-                    method.self = obj;
-                    stack.push(method);
+                            stack.push(method);
+                            break;
+                        }
+                    } else {
+                        stack.push(null);
+                    }
                 } else {
                     throw new Error(`Cannot index non-list/non-string/non-object, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                 }
-
                 break;
             }
 
@@ -673,13 +694,24 @@ function getDataType(args) {
 function createEnv(parent = null) {
     return {
         vars: Object.create(null),
-        parent
+        parent,
+        libraries: [],
+        prototypes: Prototypes()
     };
 }
 
-function envGet(env, name) {
+function prototypesGet(env, type, name) {
     while (env) {
-        if (name in env.vars) return env.vars[name];
+        if (env.prototypes[type][name]) return env.prototypes[type][name];
+        env = env.parent;
+    }
+    return null;
+}
+
+function envGet(env, name, lib = false) {
+    while (env) {
+        if (lib && env.libraries.includes(name)) return name;
+        else if (name in env.vars) return env.vars[name];
         env = env.parent;
     }
     return null;
@@ -700,22 +732,22 @@ function envSet(env, name, value) {
     throw new Error(`Assignment to undeclared variable '${name}'`);
 }
 
-function cloneEnv(env) {
-    if (!env) return null;
+// function cloneEnv(env) {
+//     if (!env) return null;
 
-    const cloned = {
-        vars: Object.create(null),
-        parent: cloneEnv(env.parent)
-    };
+//     const cloned = {
+//         vars: Object.create(null),
+//         parent: cloneEnv(env.parent)
+//     };
 
-    for (const [k, v] of Object.entries(env.vars)) {
-        cloned.vars[k] = {
-            value: v.value,
-            constant: v.constant
-        };
-    }
+//     for (const [k, v] of Object.entries(env.vars)) {
+//         cloned.vars[k] = {
+//             value: v.value,
+//             constant: v.constant
+//         };
+//     }
 
-    return cloned;
-}
+//     return cloned;
+// }
 
 module.exports = run;

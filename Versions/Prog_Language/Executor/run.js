@@ -1,14 +1,14 @@
 const { program } = require("commander");
-let moduleCache = new Map();
+let libraryCache = new Map();
 let filePath = "";
 const Chunk = require("./src/chunk");
-const {ProgramExit} = require("./src/ScriptErrors");
+const { ProgramExit } = require("./src/ScriptErrors");
 const fs = require("fs");
 const path = require("path");
 const exePath = __dirname || path.dirname(process.execPath);
 const chalk = require("chalk").default;
 const run = require("./src/vm");
-const VERSION = "2.6.5";
+const VERSION = "2.7.0";
 
 const originalError = console.error;
 console.error = (...args) => {
@@ -41,7 +41,8 @@ program
     .argument('<file>', ".sidgc File to Run")
     .argument('[args...]', "Optional Arguments To Pass To The Script")
     .action((cmd, args) => {
-        moduleCache = new Map();
+        libraryCache = new Map();
+        module.exports["libraryCache"] = libraryCache;
         let fileName = cmd;
         let file = fileName ? fs.existsSync(fileName) : false
         if (file) {
@@ -72,33 +73,40 @@ program
         process.exit(0);
     });
 
-function loadModule(filename) {
+function loadLibrary(filename, scriptPath) {
+    let libName = "";
     if (filename.startsWith('./') || filename.startsWith('../')) {
-        filename = path.join(filePath, filename);
+        filename = path.join(scriptPath, filename);
     } else {
         filename = path.join(exePath, filename);
     }
 
-    if (!filename.endsWith(".sidgc")) {
-        filename += ".sidgc";
+    if (fs.existsSync(filename) || fs.existsSync(filename + ".sidgc")) {
+        libName = path.basename(filename);
+
+        if (!filename.endsWith(".sidgc")) {
+            if (fs.existsSync(filename + ".sidgc") && fs.statSync(filename + ".sidgc").isFile()) filename += ".sidgc";
+            else if (fs.existsSync(filename) && fs.statSync(filename).isDirectory()) filename = path.join(filename, "lib.sidgc");
+        } else libName = path.basename(filename, ".sidgc");
     }
 
     let file = filename ? fs.existsSync(filename) : false
     if (file) {
         try {
             let fullPath = path.resolve(filename);
+            let libPath = path.dirname(fullPath.toLowerCase());
 
-            if (moduleCache.has(fullPath.toLowerCase())) {
-                return;
+            if (libraryCache.has(libName)) {
+                return {libName, libPath, importedChunk: libraryCache.get(libName)["importedChunk"]};
             }
 
             let compiledCode = fs.readFileSync(filename, "utf8");
             let decompiledCode = JSON.parse(compiledCode);
             let decompiledChunk = Object.assign(new Chunk(), decompiledCode);
 
-            moduleCache.set(fullPath.toLowerCase());
+            libraryCache.set(libName, { libPath, importedChunk: decompiledChunk });
 
-            return decompiledChunk;
+            return { libName, libPath, importedChunk: decompiledChunk };
         } catch (error) {
             if (error instanceof ProgramExit) {
                 process.exit(error.code);
@@ -109,5 +117,5 @@ function loadModule(filename) {
     throw new Error("Import must point to a valid .sidgc file");
 }
 
-module.exports = loadModule;
+module.exports = { loadLibrary };
 program.parse(process.argv);

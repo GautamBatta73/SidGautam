@@ -1,18 +1,18 @@
-const Prototypes = {
+const Prototypes = () => ({
     Number: Object.create(null),
     String: Object.create(null),
     List: Object.create(null),
     Object: Object.create(null),
-};
+});
 
-function definePrototype(type, name, fn) {
-    if (!Prototypes[type]) {
+function definePrototype(type, name, fn, proto = {}) {
+    if (!proto[type]) {
         throw new Error(`Unknown prototype type '${type}'`);
-    } else if (Prototypes[type][name]) {
+    } else if (proto[type][name]) {        
         throw new Error(`Cannot overwrite the ${type} Prototypes's Existing Methods`);
     }
 
-    Prototypes[type][name] = fn;
+    proto[type][name] = fn;
 }
 
 module.exports = {
