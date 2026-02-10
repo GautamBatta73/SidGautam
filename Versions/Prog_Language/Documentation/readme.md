@@ -837,6 +837,17 @@ print(-x); # Prints the numeric negation of x
 
 <br>
 
+ ```python
+var x = -5; # Declare and instantiate x to -5
+
+print(-x); # Prints the numeric negation of -x (two negatives make a positive)
+```
+```javascript
+5
+```
+
+<br>
+
 ### Logical Operators
 This is how one compares a value to another.
 
@@ -1267,16 +1278,34 @@ Error: Cannot index non-list/non-string/non-object, at line: 7 and column: 7
 ```
 
 <br>
+This also works on lists as it uses Bracket Notation:
 
 ```python
-var developer =  { # Declare and instantiate an object with many properties
-  firstName: "Gautam",
-  lastName: "Batta",
-  online: true,
-  followers: 420
-};
+var nums = { 1, 2, 3, 4}; # Declare and instantiate a list with many elements
 
-print(developer?["location"]?["city"]); # Prints null as developer exists, but location doesn't, and city doesn't.
+print(nums?[2]); # Prints 3 as nums exists, and there is an element at index 2.
+```
+```javascript
+null
+```
+
+<br>
+
+```python
+var nums = { 1, 2, 3, 4}; # Declare and instantiate a list with many elements
+
+print(nums?[5]); # Prints null as nums exists, but the element at index 5 does not.
+```
+```javascript
+null
+```
+
+<br>
+
+```python
+var nums = { 1, 2, 3, 4}; # Declare and instantiate a list with many elements
+
+print(nums[5]?[4]); # Prints null as nums exists, but the element at index 5 does not, and anything after that cancels out.
 ```
 ```javascript
 null
@@ -2423,3 +2452,4 @@ final Dog = (nameAttr) -> {
 ```
 
 <br>
+
