@@ -18,7 +18,7 @@ It is a simple programming language with some basic functions. It can do your ba
 <a href="#downloadBtn">Skip to Download Buttton</a><br>
 
 Currently, it only runs in Windows and Linux.<br>
-- sgc is the Compiler and Library Installer
+- sgc is the Compiler and Library/Package Installer
 - sg is the Executor
 
 ### How To Run:

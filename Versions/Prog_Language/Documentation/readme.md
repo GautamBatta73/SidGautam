@@ -1314,11 +1314,11 @@ null
 <br>
 
 ## Statements
-### import \<module\>
+### import \<library/package\>
 Imports the functions and variables of compiled files into the current script.
 
 <br>
-The following snippet imports the Math library, packaged with the files.
+The following snippet imports the Math library, packaged with the compiler and runtime environment.
 
 ```python
 import "Math";
@@ -1329,6 +1329,27 @@ The following snippet imports a compiled sidgc file from the same directory as t
 
 ```python
 import "./functions";
+```
+
+<br>
+The following snippet does the same as above.
+
+```python
+import "./functions.sidgc";
+```
+
+<br>
+The following snippet does imports a package (A directory that can have multiple library files and modules).
+
+```python
+import "./Test";
+```
+
+<br>
+The following snippet does the same as above, but can cause some issues.
+
+```python
+import "./Test/lib.sidgc";
 ```
 
 <br>
@@ -2387,12 +2408,12 @@ These are optional flags that can be supplied to the compiler:<br>
 <br>
 
 ### SGC Install Command Flags
-These are optional flags that can be supplied to the library installer:<br>
+These are optional flags that can be supplied to the package installer:<br>
 - **-s or --silent** omits all output to the console, so the installer can be silent.
-- **-g or --global** installs the specified library globally on the system, making it available in the executable's path, so it can be called from any directory, as opposed to being installed only within the local project's folder.
+- **-g or --global** installs the specified package globally on the system, making it available in the executable's path, so it can be called from any directory, as opposed to being installed only within the local project's folder.
 <br>
 
-More Info on Installing Libraries: [At This Repo](https://github.com/GautamBatta73/sidgautamscript-libraries/blob/main/README.md)
+More Info on Installing Packages: [At This Repo](https://github.com/GautamBatta73/sidgautamscript-libraries/blob/main/README.md)
 
 <br>
 
