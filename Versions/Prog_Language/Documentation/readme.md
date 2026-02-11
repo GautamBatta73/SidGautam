@@ -1404,6 +1404,9 @@ print("Final:", x); # Prints the final value of x
 
 ### though (\<condition\>)
 A though statement executes its statements as long as a specified condition evaluates to false.
+<br>
+
+**Unless and Though require a boolean condition (not falsy or truthy, just straight false or true).**
 
 <br>
 Example 1:
@@ -1450,6 +1453,9 @@ though (false) { # Sets the ending condition to false. i.e. It will never end
 
 ### unless (\<condition\>) orElse
 The unless...orElse statement executes a statement if a specified condition is false. If the condition is false, another statement in the optional orElse clause will be executed.
+<br>
+
+**Unless and Though require a boolean condition (not falsy or truthy, just straight false or true).**
 
 <br>
 Example 1:
@@ -1660,10 +1666,49 @@ print(answer(15)); # Calls the variable function with a parameter
 
 <br>
 
-## Built-In/Native Functions
-SidGautamScript provides a lot of built-in native functions that assist with the writing of code. They are basically global constants and can not be overwritten.
+## Built-In/Native Functions/Constants
+SidGautamScript provides a lot of built-in native functions/constants that assist with the writing of code. They are basically global variables and can not be overwritten.
 <br>
-These functions are built straight into the runtime environment and do not need to be imported to be used.
+These functions/constants are built straight into the runtime environment and do not need to be imported to be used.
+
+<br>
+
+### __SCRIPT_DIR
+This is a built-in constant that returns a string of the absolute directory path to the current script file. 
+<br>
+This differs from the File.currentDir property, which returns the **EXECUTION PATH** of the program (i.e. the directory path of the script which was originally executed).<br>
+This constant returns the current file's directory path, rather than the directory path of the executing script.
+
+<br>
+This is a file which we will import later.
+
+```python
+import "FileUtils";
+
+print("Library: ");
+print(__SCRIPT_DIR); # Prints the current library's directory
+print(File.currentDir); # Prints the execution script's directory
+```
+
+<br>
+This is the script we have the import in, and the one we will run.
+
+```python
+import "../imports";
+
+print("\nScript: ");
+print(__SCRIPT_DIR); # Prints the current script's directory
+print(File.currentDir); # Prints the execution script's directory
+```
+```javascript
+"Library: "
+"d:\stuff\sidgautamscript" // The library script's directory
+"d:\stuff\SidGautamScript\testFiles" // The directory where the script was called to run
+
+"Script: "
+"d:\stuff\SidGautamScript\testFiles" // The execution script's directory
+"d:\stuff\SidGautamScript\testFiles" // The directory where the script was called to run
+```
 
 <br>
 
@@ -2473,4 +2518,5 @@ final Dog = (nameAttr) -> {
 ```
 
 <br>
+
 
