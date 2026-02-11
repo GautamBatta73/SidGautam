@@ -1676,7 +1676,7 @@ These functions/constants are built straight into the runtime environment and do
 ### __SCRIPT_DIR
 This is a built-in constant that returns a string of the absolute directory path to the current script file. 
 <br>
-This differs from the File.currentDir property, which returns the **EXECUTION PATH** of the program (i.e. the directory path of the script which was originally executed).<br>
+This differs from the File.execDir property, which returns the **EXECUTION PATH** of the program (i.e. the directory path of the script which was originally executed).<br>
 This constant returns the current file's directory path, rather than the directory path of the executing script.
 
 <br>
@@ -1687,18 +1687,18 @@ import "FileUtils";
 
 print("Library: ");
 print(__SCRIPT_DIR); # Prints the current library's directory
-print(File.currentDir); # Prints the execution script's directory
+print(File.execDir); # Prints the execution script's directory
 ```
 
 <br>
-This is the script we have the import in, and the one we will run.
+This is the script we have imported the file, and the one we will run.
 
 ```python
 import "../imports";
 
 print("\nScript: ");
 print(__SCRIPT_DIR); # Prints the current script's directory
-print(File.currentDir); # Prints the execution script's directory
+print(File.execDir); # Prints the execution script's directory
 ```
 ```javascript
 "Library: "
@@ -2518,5 +2518,6 @@ final Dog = (nameAttr) -> {
 ```
 
 <br>
+
 
 
