@@ -1,13 +1,13 @@
 # SidGautamScript FileUtils Library
 
 ## Properties
-### File.currentDir
-This property returns the current absolute directory where the script was compiled and/or ran.
+### File.execDir
+This property returns the current absolute directory where the executing script was run.
 
 ```python
 import "FileUtils";
 
-print(File.currentDir); # Prints the current script's directory
+print(File.execDir); # Prints the current script's directory
 ```
 ```javascript
 "D:\stuff\SidGautamScript\testFiles"
@@ -22,7 +22,7 @@ This method joins multiple paths together, and returns the joined path.
 ```python
 import "FileUtils";
 
-var randomFile = File.joinPath({File.currentDir, "./importables/imports.sidg"}); # Joins the absolute path of the script directory with a file path
+var randomFile = File.joinPath({File.execDir, "./importables/imports.sidg"}); # Joins the absolute path of the script directory with a file path
 print(randomFile); # Prints the joined path, relative to the current directory
 ```
 ```javascript
@@ -62,27 +62,27 @@ print(File.getExt(randomFile)); # Prints the extension of the file without the n
 <br>
 
 ### File.toAbsolute(path)
-This method returns the absolute path of a specified path.
+This method returns the absolute path of a specified path, relative to the Current Working Directory.
 
 ```python
 import "FileUtils";
 
-var randomFile = "../modules/Math.sidg"; # Declare and instantiate a relative file path from the script directory
+var randomFile = "./modules/Math.sidg"; # Declare and instantiate a relative file path
 print(File.toAbsolute(randomFile)); # Prints the absolute path of the file
 ```
 ```javascript
-"D:\stuff\SidGautamScript\modules\Math.sidg"
+"D:\stuff\SidGautamScript\modules\Math.sidg" // I am currently in the parent dir ('SidGautamScript') of the script's dir
 ```
 
 <br>
 
 ### File.read(filePath)
-This method reads the contents of a specified file, and returns it as a string.
+This method reads the contents of a specified file at the path, relative to the Current Working Directory, and returns it as a string.
 
 ```python
 import "FileUtils";
 
-var testFile = "./test.txt"; # This script and the test file share a directory
+var testFile = File.joinPath({File.execDir, "./test.txt"}); # This script and the test file share a directory
 
 var fileContent = File.read(testFile); # Reads the content of the testFile
 
@@ -95,12 +95,12 @@ print(fileContent); # Prints the content of the test file
 <br>
 
 ### File.append(filePath, content)
-This method appends the specified content to the end of the specified file, creating the file if it does not exist.
+This method appends the specified content to the end of the specified file at the path, relative to the Current Working Directory, creating the file if it does not exist.
 
 ```python
 import "FileUtils";
 
-var testFile = "./test.txt"; # This script and the test file share a directory
+var testFile = File.joinPath({__SCRIPT_DIR, "./test.txt"}); # This script and the test file share a directory
 
 File.append(testFile, "\nNew line added to the file."); # Appends a new line to the test file
 
@@ -116,12 +116,12 @@ print(fileContent); # Prints the content of the test file
 <br>
 
 ### File.write(filePath, content)
-This method writes the specified content to the specified file, creating the file if it does not exist and overwriting any existing content. 
+This method writes the specified content to the specified file at the path, relative to the Current Working Directory, creating the file if it does not exist and overwriting any existing content. 
 
 ```python
 import "FileUtils";
 
-var testFile = "./test.txt"; # This script and the test file share a directory
+var testFile = File.joinPath({File.execDir, "./test.txt"}); # This script and the test file share a directory
 
 File.write(testFile, "Imma overwrite this real quick."); # Overwrites the test file
 
@@ -136,12 +136,12 @@ print(fileContent); # Prints the content of the test file
 <br>
 
 ### File.exists(filePath)
-This method returns a boolean indicating if the passed file/directory exists. 
+This method returns a boolean indicating if the passed file/directory exists, relative to the Current Working Directory. 
 
 ```python
 import "FileUtils";
 
-var newFile = "../test.txt"; # File that may or may not exist
+var newFile = "./test.txt"; # File that may or may not exist
 
 unless (File.exists(newFile)) { # Unless this file doesn't exist, create it and write a string to it
     File.write(newFile, "Hello World");
@@ -156,7 +156,7 @@ print(File.read(newFile)); # Prints the contents of the file
 <br>
 
 ### File.createDir(dirPath)
-This method creates the specified directory if it does not already exist. 
+This method creates the specified directory if it does not already exist, relative to the Current Working Directory.
 
 ```python
 import "FileUtils";
@@ -186,3 +186,4 @@ print(File.exists(newDir)); # Prints true if the directories exists
 ```javascript
 true
 ```
+
