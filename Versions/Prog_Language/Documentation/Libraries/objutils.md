@@ -145,3 +145,66 @@ print(test2); # Prints test2
 ```
 
 <br>
+
+### Object.parse(string)
+This method parses a string into an object. If the string is not in a valid format, it will throw an error. This can be used to convert a stringified object into an actual object that can be manipulated in code.
+
+<br>
+Examples:
+
+```python
+import "ObjectUtils";
+
+var obj = {a: 1, b: 2}; # Creates an object with two key-value pairs
+
+var stringedObj = str(obj); # Converts the object to a string
+
+print(dataType(stringedObj));
+print(stringedObj); # Prints the string representation of the object
+
+var parsedObj = Object.parse(stringedObj); # Parses the string back into an object
+
+print("\n", dataType(parsedObj));
+print(parsedObj); # Prints the object
+```
+```javascript
+"String"
+{
+  "a": 1,
+  "b": 2
+}
+
+" Object"
+{
+  "a": 1,
+  "b": 2
+}
+```
+
+<br>
+
+```python
+import "ObjectUtils";
+
+var obj = '\{"a": 1, "b": 2\}'; # Declare and instantiate stringified object
+
+print(dataType(obj));
+print(obj); # Prints the string
+
+var parsedObj = Object.parse(obj); # Parses the string back into an object
+
+print("\n", dataType(parsedObj));
+print(parsedObj); # Prints the object
+```
+```javascript
+"String"
+'{"a": 1, "b": 2}'
+
+" Object"
+{
+  "a": 1,
+  "b": 2
+}
+```
+
+<br>
