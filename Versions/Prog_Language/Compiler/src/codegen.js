@@ -28,7 +28,7 @@ function compile(node, chunk) {
             chunk.emit(Op.NEW_OBJECT);
 
             for (const prop of node.properties) {
-                
+
                 if (prop.key.type === "Identifier") {
                     // Identifier keys become string literals
                     const keyIdx = chunk.addConst(prop.key.name);
@@ -85,7 +85,28 @@ function compile(node, chunk) {
             // a = value
             if (node.left.type === "Identifier") {
                 // compile RHS first (value is on stack)
-                compile(node.right, chunk);
+                if (node.operator === "+=" ||
+                    node.operator === "-=" ||
+                    node.operator === "*=" ||
+                    node.operator === "/=" ||
+                    node.operator === "%="
+                ) {
+                    compile(node.left, chunk);
+                    compile(node.right, chunk);
+
+                    const map = {
+                        "+=": Op.ADD,
+                        "-=": Op.SUB,
+                        "*=": Op.MUL,
+                        "/=": Op.DIV,
+                        "%=": Op.MOD
+                    };
+
+                    const opcode = map[node.operator];
+                    chunk.emit(opcode, null, node.loc);
+                } else {
+                    compile(node.right, chunk);
+                }
 
                 // store into LHS variable
                 chunk.emit(Op.STORE, node.left.name, node.left.loc);
@@ -101,7 +122,24 @@ function compile(node, chunk) {
                 compile(node.left.index, chunk);
 
                 // value
-                compile(node.right, chunk);
+                if (node.operator === "+=" || node.operator === "-=" || node.operator === "*=" || node.operator === "/=" || node.operator === "%=") {
+                    compile(node.left, chunk);
+                    compile(node.right, chunk);
+
+                    const map = {
+                        "+=": Op.ADD,
+                        "-=": Op.SUB,
+                        "*=": Op.MUL,
+                        "/=": Op.DIV,
+                        "%=": Op.MOD
+                    };
+
+                    const opcode = map[node.operator];
+                    if (!opcode) throw new Error(`Unknown assignment operator: ${node.operator}, at line: ${node.loc?.line} and column: ${node.loc?.column}`);
+                    chunk.emit(opcode, null, node.loc);
+                } else {
+                    compile(node.right, chunk);
+                }
 
                 // perform write
                 chunk.emit(Op.SET_INDEX, null, node.left.loc);

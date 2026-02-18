@@ -43,7 +43,12 @@ function parser(tokens) {
         "||": 2,
         "??": 1.5,
 
-        "=": 1
+        "=": 1,
+        "+=": 1,
+        "-=": 1,
+        "*=": 1,
+        "/=": 1,
+        "%=": 1
     };
 
     const UNARY_PRECEDENCE = 30;
@@ -301,7 +306,7 @@ function parser(tokens) {
                     loc: { line: token.line, column: token.column }
                 };
             }
-            
+
             const prop = consume();
 
             if (prop.type !== "IDENT") {
@@ -348,16 +353,22 @@ function parser(tokens) {
         }
 
         // Assignment (right-associative)
-        if (token.value === "=") {
+        if (token.value === "=" ||
+            token.value === "+=" ||
+            token.value === "-=" ||
+            token.value === "*=" ||
+            token.value === "/=" ||
+            token.value === "%="
+        ) {
             if (left.type !== "Identifier" && left.type !== "IndexExpression") {
                 throw new Error(`Invalid assignment target, at line: ${left.loc?.line} and column: ${left.loc?.column}`);
             }
 
             return {
                 type: "AssignmentExpression",
-                operator: "=",
+                operator: token.value,
                 left,
-                right: parseExpression(PRECEDENCE["="] - 1)
+                right: parseExpression(PRECEDENCE[token.value] - 1)
             };
         }
 

@@ -107,6 +107,11 @@ function lexer(input) {
                 (input[i] === "?" || input[i] === "." || input[i] === "[")
             ) {
                 op += input[i++];
+            } else if (
+                (op === "+" || op === "-" || op === "*" || op === "/" || op === "%") && 
+                input[i] === "="
+            ) {
+                op += input[i++];
             }
 
             tokens.push({
@@ -171,7 +176,12 @@ function lexer(input) {
                         text += '\'';
                         i += 2;
                         continue;
+                    } else if (next === "t") {
+                        text += '\t';
+                        i += 2;
+                        continue;
                     }
+
                     text += next;
                     i += 2;
                     continue;
@@ -211,6 +221,14 @@ function lexer(input) {
                         continue;
                     } else if (next === '"') {
                         str += "\"";
+                        i += 2;
+                        continue;
+                    }  else if (next === 't') {
+                        str += "\t";
+                        i += 2;
+                        continue;
+                    }  else if (next === '\\') {
+                        str += "\\";
                         i += 2;
                         continue;
                     }

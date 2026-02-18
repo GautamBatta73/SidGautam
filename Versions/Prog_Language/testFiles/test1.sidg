@@ -22,18 +22,18 @@ print(!a && b == 3 || c < 10);
 
 x = 5; # inline comment
 a = b = c;
-x = x + 1;
+x += 1;
 print(x = 10);
 
 unless (x > 0) {
-  print(x);
+    print(x);
 } orElse {
-  print(-x);
+    print(-x);
 }
 
 though (x >= 15) {
-  errPrint(x);
-  x = x + 1;
+    errPrint(x);
+    x = x + 1;
 }
 
 var add = (a, b) -> a + b;
@@ -61,8 +61,8 @@ func testFunc () {
     print("test");
 }
 
-until(var i = 0, i < 10, i = i + 2) {
-		print("I Like Turtles!");
+until(var i = 0, i < 10, i += 2) {
+    print("I Like Turtles!");
 }
 
 var nums = {1, 2 + 3, x * y};
@@ -72,7 +72,7 @@ nums[1] = 99;
 print(nums);
 
 var obj = {
-    a: () -> 5, 
+    a: () -> 5,
     b: 20
 };
 

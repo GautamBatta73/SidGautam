@@ -7,7 +7,7 @@ const exePath = __dirname || path.dirname(process.execPath);
 const ProgressBar = require("progress");
 const Zip = require("adm-zip");
 const compile = require("./src/compiler.js");
-const VERSION = "2.7.0";
+const VERSION = "2.7.5";
 
 const originalError = console.error;
 console.error = (...args) => {

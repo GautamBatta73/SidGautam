@@ -236,7 +236,11 @@ function runChunk(chunk, env, func = false) {
                 let [{ __SCRIPT_DIR, ...tempVars }, tempLibs, tempProto] = [libEnv.vars, libEnv.libraries, libEnv.prototypes];
                 Object.assign(env.vars, tempVars);
                 Object.assign(env.libraries, tempLibs);
-                Object.assign(env.prototypes, tempProto);
+                
+                Object.assign(env.prototypes["Number"], tempProto["Number"]);
+                Object.assign(env.prototypes["String"], tempProto["String"]);
+                Object.assign(env.prototypes["List"], tempProto["List"]);
+                Object.assign(env.prototypes["Object"], tempProto["Object"]);
                 break;
             }
 
@@ -322,23 +326,103 @@ function runChunk(chunk, env, func = false) {
                 stack.pop();
                 break;
 
-            case Op.ADD: case Op.SUB: case Op.MUL: case Op.DIV: case Op.MOD:
+            case Op.MOD: case Op.DIV: {
                 let b = getPrintable(stack.pop());
                 let a = getPrintable(stack.pop());
 
-                if (b === 0 && instr.op === Op.DIV) {
+                if (b === 0 || b === false) {
                     stack.push(null);
+                    break;
+                } else if ((typeof a !== "number" || typeof b !== "number") &&
+                    (typeof a !== "boolean" || typeof b !== "boolean")) {
+                    if (((typeof a === "string" ^ typeof b === "string") &&
+                        (typeof a === "number" ^ typeof b === "number")) && 
+                        (instr.op === Op.DIV)) {
+                        let newStr = "";
+                        if (typeof a === "string") {
+                            if (b <= 0) newStr = a;
+                            else newStr = a.slice(a.length / b, a.length);
+                        } else {
+                            if (a <= 0) newStr = b;
+                            else newStr = b.slice(0, b.length / a);
+                        }
+                        stack.push(newStr);
+                    } else {
+                        stack.push(null);
+                    }
                     break;
                 }
 
                 stack.push(
-                    (instr.op === Op.ADD ? a + b :
-                        instr.op === Op.SUB ? a - b :
-                            instr.op === Op.MUL ? a * b :
-                                instr.op === Op.MOD ? a % b :
-                                    a / b) || 0
+                    (instr.op === Op.MOD ?
+                        a % b :
+                        a / b
+                    ) || 0
                 );
                 break;
+            }
+
+            case Op.MUL: {
+                let b = getPrintable(stack.pop());
+                let a = getPrintable(stack.pop());
+
+                if ((typeof a !== "number" || typeof b !== "number") &&
+                    (typeof a !== "boolean" || typeof b !== "boolean")) {
+                    if ((typeof a === "string" ^ typeof b === "string") &&
+                        (typeof a === "number" ^ typeof b === "number")) {
+                        let num = (typeof a === "number") ? a : b;
+                        let str = (typeof a === "string") ? a : b;
+                        let newStr = "";
+
+                        if (num > 0) newStr = str.repeat(num);
+                        stack.push(newStr);
+                    } else {
+                        stack.push(null);
+                    }
+                    break;
+                }
+
+                stack.push((a * b) || 0);
+                break;
+            }
+
+            case Op.ADD: case Op.SUB: {
+                let b = getPrintable(stack.pop());
+                let a = getPrintable(stack.pop());
+
+                if ((typeof a !== "number" || typeof b !== "number") &&
+                    (typeof a !== "boolean" || typeof b !== "boolean")) {
+                    if (typeof a === "string" && typeof b === "string") {
+                        if (instr.op === Op.ADD) stack.push(`${a}${b}`);
+                    } else if ((typeof a === "string" ^ typeof b === "string") &&
+                        (typeof a === "number" ^ typeof b === "number")) {
+                        let newStr = "";
+                        if (instr.op === Op.ADD) {
+                            newStr = `${a}${b}`;
+                        } else {
+                            if (typeof a === "string") {
+                                if (b <= 0) newStr = a;
+                                else newStr = a.slice(0, -b);
+                            } else {
+                                if (a <= 0) newStr = b;
+                                else newStr = b.slice(a);
+                            }
+                        }
+                        stack.push(newStr);
+                    } else {
+                        stack.push(null);
+                    }
+                    break;
+                }
+
+                stack.push(
+                    (instr.op === Op.ADD ?
+                        a + b :
+                        a - b
+                    ) || 0
+                );
+                break;
+            }
 
             case Op.RETURN:
                 if (func) return (stack.pop() ?? null);
