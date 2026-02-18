@@ -573,16 +573,36 @@ null
 ## Expressions and Operators
 ### Assignment Expression
 This is how one instantiates/assigns a value to a variable.
-
 <br>
-Incrementing a value:
+
+#### Simple Operator ( = )
+Assigning/Instantiating a value:
  
- ```python
+```python
 var x = 0; # Declare and instantiate x to 0
 
 print(x); # Prints the value of x
 
-x = x + 1; # Increments the value of x by 1
+x = NULL; # Assigns the value of null to x
+
+print(x); # Prints the value of x
+```
+```javascript
+0
+null
+```
+
+<br>
+
+#### Addition Operator ( += )
+Incrementing a variable:
+ 
+```python
+var x = 0; # Declare and instantiate x to 0
+
+print(x); # Prints the value of x
+
+x += 1; # Increments the value of x by 1
 
 print(x); # Prints the value of x
 ```
@@ -592,20 +612,79 @@ print(x); # Prints the value of x
 ```
 
 <br>
-Decrementing a value:
+
+#### Subtraction Operator ( -= )
+Decrementing a variable:
  
- ```python
-var x = 1; # Declare and instantiate x to 0
+```python
+var x = 1; # Declare and instantiate x to 1
 
 print(x); # Prints the value of x
 
-x = x - 1; # Decrements the value of x by 1
+x -= 1; # Decrements the value of x by 1
 
 print(x); # Prints the value of x
 ```
 ```javascript
 1
 0
+```
+
+<br>
+
+#### Multiplication Operator ( *= )
+Multiplying a variable:
+ 
+```python
+var x = 2; # Declare and instantiate x to 2
+
+print(x); # Prints the value of x
+
+x *= 2; # Multiplies the value of x by 2 (doubles it)
+
+print(x); # Prints the value of x
+```
+```javascript
+2
+4
+```
+
+<br>
+
+#### Division Operator ( /= )
+Divides a variable:
+ 
+```python
+var x = 4; # Declare and instantiate x to 4
+
+print(x); # Prints the value of x
+
+x /= 2; # Divides the value of x by 2 (halves it)
+
+print(x); # Prints the value of x
+```
+```javascript
+4
+2
+```
+
+<br>
+
+#### Modulus Operator ( %= )
+Assigning the remainder of division to a variable:
+ 
+```python
+var x = 5; # Declare and instantiate x to 5
+
+print(x); # Prints the value of x
+
+x %= 2; # Divides the value of x by 2 then assigns the remainder (1) to x
+
+print(x); # Prints the value of x
+```
+```javascript
+5
+1
 ```
 
 <br>
@@ -996,10 +1075,11 @@ print(test3(8)); # Prints the function with a parameter
 <br>
 
 ### String Operator
-This is how one combines other values with strings.
-
+This is how one performs operations with strings.
 <br>
-Adding two or more strings:
+
+#### Addition Operator ( + )
+Concatenating strings:
 
 ```python
 print("Hello" + "World"); # Prints the concatenated string
@@ -1012,7 +1092,6 @@ print("Hello" + "World" + "!"); # Prints the concatenated string
 ```
 
 <br>
-Adding other datatypes to strings:
 
 ```python
 print("Number: " + 1); # Prints the concatenated string
@@ -1021,7 +1100,7 @@ print("Number: " + (1 + 1)); # Prints the concatenated string
 
 print("Numbers: " + {1, 2, 3}); # Prints the concatenated string
 
-print("Null: " + NULL); # Prints the concatenated string
+print("Null: " + NULL); # Prints null, as adding null results in null
 ```
 ```javascript
 "Number: 1"
@@ -1031,7 +1110,117 @@ print("Null: " + NULL); # Prints the concatenated string
   2,
   3
 ]"
-"Null: null"
+null
+```
+
+<br>
+
+#### Subtraction Operator ( - )
+Subtracting chars from strings:
+
+```python
+print("Hello" - 2); # Prints the string with the last 2 characters removed
+
+print(2 - "Hello"); # Prints the string with the first 2 characters removed
+
+print(10 - "Hello"); # Prints empty string, as subtracting more characters than the string length results in an empty string 
+```
+```javascript
+"Hel"
+"llo"
+""
+```
+
+<br>
+
+```python
+print("Test" - 0); # Prints the original string, as subtracting 0 does not change the string
+
+print("Test" - (1 - 5)); # Prints the original string, as subtracting < 0 does not change the string
+
+print("Null" - {1, 2, 3}); # Prints null, as subtracting a non-number results in null
+
+print("Null " - "Test"); # Prints null, as subtracting a non-number results in null
+```
+```javascript
+"Test"
+"Test"
+null
+null
+```
+
+<br>
+
+#### Multiplication Operator ( * )
+Duplicating strings:
+
+```python
+print("Hello" * 2); # Prints the string duplicated 2 times
+
+print("Hello" * 1); # Prints the original string, as multiplying by 1 does not change the string
+
+print(0 * "Hello"); # Prints empty string, as multiplying by 0 results in an empty string
+```
+```javascript
+"HelloHello"
+"Hello"
+""
+```
+
+<br>
+
+```python
+print("Test" * 1.5); # Prints the original string, as it ignores the decimal part and multiplies by 1
+
+print("Test" * (1 - 5)); # Prints an empty string, as multiplying by a negative number results in an empty string
+
+print("Null" * {1, 2, 3}); # Prints null, as multiplying a non-number results in null
+
+print("Null " * "Test"); # Prints null, as multiplying a non-number results in null
+```
+```javascript
+"Test"
+""
+null
+null
+```
+
+<br>
+
+#### Division Operator ( / )
+Dividing strings:
+
+```python
+print("Test" / 2); # Prints the right-half of the string, as dividing by 2 splits the string into 2 parts and returns the second part
+
+print(2 / "Test"); # Prints the left-half of the string, as dividing by 2 splits the string into 2 parts and returns the first part
+
+print(0 / "Hello"); # Prints the original string, as dividing from 0 does not change the string
+```
+```javascript
+"st"
+"Te"
+"Hello"
+```
+
+<br>
+
+```python
+print("Test" / 1); # Prints an empty string, as dividing by 1 results in an empty string
+
+print(1 / "Test"); # Prints the original string, as dividing from 1 does not change the string
+
+print("Test" / (1 - 5)); # Prints the original string, as dividing by a negative number does not change the string
+
+print("Null" / {1, 2, 3}); # Prints null, as dividing by a non-number results in null
+
+print("Null " / "Test"); # Prints null, as dividing by a non-number results in null
+```
+```javascript
+"Test"
+"Test"
+null
+null
 ```
 
 <br>
@@ -2352,7 +2541,7 @@ print(err); # Print the error catch object
 print(x); # Print the value of x after the operation
 ```
 ```javascript
-Error: Dividing by zero?, at line: 3, column: 10
+Dividing by zero/false?, at line: 3, column: 10
 ```
 
 <br>
@@ -2518,6 +2707,7 @@ final Dog = (nameAttr) -> {
 ```
 
 <br>
+
 
 
 
