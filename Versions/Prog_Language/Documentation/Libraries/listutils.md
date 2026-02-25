@@ -174,3 +174,28 @@ print("Cloned List: " + clone); # Prints the cloned list
 ```
 
 <br>
+
+### List.Prototype.deleteIndex(index)
+This method of List instances returns a new list with the element at the specified index removed.
+
+```python
+import "ListUtils";
+
+var arr = {1, 2, 3, 4, 5};
+
+var indexToRemove = 2;
+
+var newArr = arr.deleteIndex(indexToRemove); # Returns the new list with the element at index removed
+
+print(newArr); # Prints the new list
+```
+```javascript
+[
+  1,
+  2,
+  4,
+  5
+]
+```
+
+<br>
