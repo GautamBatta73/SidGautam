@@ -208,3 +208,32 @@ print(parsedObj); # Prints the object
 ```
 
 <br>
+
+### Object.Prototype.deleteKey(key)
+This method of Object instances returns a new object with the specified key removed.
+
+```python
+import "ObjectUtils";
+
+var obj = {
+        name: "Gautam",
+        age: 21,
+        greeting: "Yo, what's up?",
+        birthday: "04/04/05"
+};
+
+var keyToRemove = "greeting";
+
+var newObj = obj.deleteKey(keyToRemove); # Returns the new object with the key removed
+
+print(newObj); # Prints the new object
+```
+```javascript
+{
+  "name": "Gautam",
+  "age": 21,
+  "birthday": "04/04/05"
+}
+```
+
+<br>
