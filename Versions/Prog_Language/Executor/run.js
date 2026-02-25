@@ -2,13 +2,13 @@ const { program } = require("commander");
 let libraryCache = new Map();
 let filePath = "";
 const Chunk = require("./src/chunk");
-const { ProgramExit } = require("./src/ScriptErrors");
+const { ProgramExit, ThrownError } = require("./src/ScriptErrors");
 const fs = require("fs");
 const path = require("path");
 const exePath = __dirname || path.dirname(process.execPath);
 const chalk = require("chalk").default;
 const run = require("./src/vm");
-const VERSION = "2.7.5";
+const VERSION = "2.7.7";
 
 const originalError = console.error;
 console.error = (...args) => {
@@ -62,7 +62,14 @@ program
                     if (error instanceof ProgramExit) {
                         process.exit(error.code);
                     }
-                    console.error(error.message);
+                    console.error(
+                        (
+                            (error instanceof ThrownError) ?
+                                "" :
+                                "Error: "
+                        )
+                        + error.message
+                    );
                 }
             } else {
                 console.error("Error: This command can only run .sidgc files.");
@@ -97,7 +104,7 @@ function loadLibrary(filename, scriptPath) {
             let libPath = path.dirname(fullPath.toLowerCase());
 
             if (libraryCache.has(libName)) {
-                return {libName, libPath, importedChunk: libraryCache.get(libName)["importedChunk"]};
+                return { libName, libPath, importedChunk: libraryCache.get(libName)["importedChunk"] };
             }
 
             let compiledCode = fs.readFileSync(filename, "utf8");

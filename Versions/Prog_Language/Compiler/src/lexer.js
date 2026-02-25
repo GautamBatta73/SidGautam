@@ -130,7 +130,7 @@ function lexer(input) {
             while (i < input.length) {
                 if (input[i] === "'") {
                     if (text) {
-                        parts.push({ type: "text", value: text });
+                        parts.push({ type: "text", value: text, line, column });
                     }
                     i++; // skip closing '
                     break;
@@ -139,7 +139,7 @@ function lexer(input) {
                 // Expression start
                 if (input[i] === "{") {
                     if (text) {
-                        parts.push({ type: "text", value: text });
+                        parts.push({ type: "text", value: text, line, column });
                         text = "";
                     }
 
@@ -161,7 +161,7 @@ function lexer(input) {
 
                     // Re-lex the expression
                     const exprTokens = lexer(expr + ";");
-                    parts.push({ type: "expr", tokens: exprTokens });
+                    parts.push({ type: "expr", tokens: exprTokens, line, column });
                     continue;
                 }
 

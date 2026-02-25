@@ -176,7 +176,7 @@ function compile(node, chunk) {
 
             // Emit runtime import
             const constIdx = chunk.addConst(path);
-            chunk.emit(Op.IMPORT, constIdx);
+            chunk.emit(Op.IMPORT, constIdx, node.loc);
             break;
         }
 
@@ -391,7 +391,7 @@ function compile(node, chunk) {
         case "ReturnStatement": {
             // Compile the return value expression
             compile(node.argument, chunk);
-            chunk.emit(Op.RETURN);
+            chunk.emit(Op.RETURN, null, node.loc);
             break;
         }
 
@@ -435,17 +435,17 @@ function compile(node, chunk) {
 
             for (const part of node.parts) {
                 if (part.type === "StringLiteral") {
-                    chunk.emit(Op.PUSH_CONST, chunk.addConst(part.value));
+                    chunk.emit(Op.PUSH_CONST, chunk.addConst(part.value), part.loc);
                 } else {
                     compile(part.expression, chunk);
                     if (part.expression.type !== "StringLiteral") {
-                        chunk.emit(Op.LOAD, "str");
-                        chunk.emit(Op.CALL, 1);
+                        chunk.emit(Op.LOAD, "str", part.loc);
+                        chunk.emit(Op.CALL, 1, part.loc);
                     }
                 }
 
                 if (!first) {
-                    chunk.emit(Op.ADD);
+                    chunk.emit(Op.ADD, null, part.loc);
                 }
                 first = false;
             }

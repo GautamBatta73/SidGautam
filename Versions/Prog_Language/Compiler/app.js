@@ -7,7 +7,8 @@ const exePath = __dirname || path.dirname(process.execPath);
 const ProgressBar = require("progress");
 const Zip = require("adm-zip");
 const compile = require("./src/compiler.js");
-const VERSION = "2.7.5";
+let libCache = [];
+const VERSION = "2.7.7";
 
 const originalError = console.error;
 console.error = (...args) => {
@@ -58,7 +59,7 @@ program
                     fs.writeFileSync(path.join(filePath, compileFile), compiledCode, 'utf8');
                     if (!args.silent) console.log("Compiled!");
                 } catch (error) {
-                    if (!args.silent) console.error(error.message);
+                    if (!args.silent) console.error(`Error: ${error.message}`);
                 }
             } else {
                 if (!args.silent) console.error("Error: This command can only compile .sidg files.");
@@ -79,10 +80,12 @@ program
             for (let i = 0; i < cmd.length; i++) {
                 const el = cmd[i];
                 if (!el || el.trim().length === 0) throw new Error("Error: Empty Arg Found");
+                if (libCache.includes(el)) continue;
 
                 try {
                     const installDir = (!args.global ? process.cwd() : exePath);
                     await installLibraries(el, installDir);
+                    libCache.push(el);
                     if (!args.silent) console.log(`Installed '${el}' library!\n`);
                 } catch (error) {
                     if (!args.silent) {
@@ -114,6 +117,18 @@ async function installLibraries(libName, installDir) {
 
     const libInfo = await fetch(url + "info.json").then(res => res.json());
 
+    if (libInfo.dependencies && libInfo.dependencies.length > 0) {
+        console.log(`Installing '${libName}' dependencies...`);
+        for (let i = 0; i < libInfo.dependencies.length; i++) {
+            const dep = libInfo.dependencies[i];
+            if (libCache.includes(dep)) continue;
+            
+            await installLibraries(dep, installDir);
+            libCache.push(dep);
+        }
+        console.log();
+    }
+
     const totalLength = parseInt((libInfo?.size ?? 0), 10);
     const progressBar = new ProgressBar(`> ${libName} [:bar] :percent`, {
         width: 40,
@@ -138,7 +153,7 @@ async function installLibraries(libName, installDir) {
 
             zipped.extractAllTo(newFilePath, true);
             fs.rmSync(zipFilePath);
-            progressBar.tick(totalLength * 0.1)
+            progressBar.tick(totalLength * 0.1);
             resolve();
         });
         fileStream.on('error', reject);

@@ -219,29 +219,33 @@ function runChunk(chunk, env, func = false) {
         const instr = chunk.code[ip++];
         switch (instr.op) {
             case Op.IMPORT: {
-                const path = chunk.constants[instr.arg];
-                const { libName, libPath, importedChunk } = loadLibrary(path, envGet(env, "__SCRIPT_DIR")?.value);
+                try {
+                    const path = chunk.constants[instr.arg];
+                    const { libName, libPath, importedChunk } = loadLibrary(path, envGet(env, "__SCRIPT_DIR")?.value);
 
-                if (envGet(env, libName, true)) {
+                    if (envGet(env, libName, true)) {
+                        break;
+                    } else {
+                        env.libraries.push(libName);
+                    }
+
+                    const libEnv = createEnv(env);
+                    libEnv.vars.__SCRIPT_DIR = { value: libPath, constant: true };
+
+                    runChunk(importedChunk, libEnv);
+
+                    let [{ __SCRIPT_DIR, ...tempVars }, tempLibs, tempProto] = [libEnv.vars, libEnv.libraries, libEnv.prototypes];
+                    Object.assign(env.vars, tempVars);
+                    Object.assign(env.libraries, tempLibs);
+
+                    Object.assign(env.prototypes["Number"], tempProto["Number"]);
+                    Object.assign(env.prototypes["String"], tempProto["String"]);
+                    Object.assign(env.prototypes["List"], tempProto["List"]);
+                    Object.assign(env.prototypes["Object"], tempProto["Object"]);
                     break;
-                } else {
-                    env.libraries.push(libName);
+                } catch (error) {
+                    throw new Error(`${error.message}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`)
                 }
-
-                const libEnv = createEnv(env);
-                libEnv.vars.__SCRIPT_DIR = { value: libPath, constant: true };
-
-                runChunk(importedChunk, libEnv);
-
-                let [{ __SCRIPT_DIR, ...tempVars }, tempLibs, tempProto] = [libEnv.vars, libEnv.libraries, libEnv.prototypes];
-                Object.assign(env.vars, tempVars);
-                Object.assign(env.libraries, tempLibs);
-                
-                Object.assign(env.prototypes["Number"], tempProto["Number"]);
-                Object.assign(env.prototypes["String"], tempProto["String"]);
-                Object.assign(env.prototypes["List"], tempProto["List"]);
-                Object.assign(env.prototypes["Object"], tempProto["Object"]);
-                break;
             }
 
             case Op.DUP: {
@@ -300,14 +304,18 @@ function runChunk(chunk, env, func = false) {
                 const value = stack.pop();
 
                 const existing = envGet(env, instr.arg);
+                let oldVal = existing ? existing.value : null;
                 if (existing?.constant) {
                     throw new Error(`Cannot reassign constant '${instr.arg}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                 }
                 try {
                     envSet(env, instr.arg, value);
                 } catch (error) {
-                    throw new Error(`${error.message}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`)
+                    throw new Error(`${error.message}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                 }
+
+                // Assignment expression returns the old value
+                stack.push(oldVal);
                 break;
             }
 
@@ -336,7 +344,7 @@ function runChunk(chunk, env, func = false) {
                 } else if ((typeof a !== "number" || typeof b !== "number") &&
                     (typeof a !== "boolean" || typeof b !== "boolean")) {
                     if (((typeof a === "string" ^ typeof b === "string") &&
-                        (typeof a === "number" ^ typeof b === "number")) && 
+                        (typeof a === "number" ^ typeof b === "number")) &&
                         (instr.op === Op.DIV)) {
                         let newStr = "";
                         if (typeof a === "string") {
@@ -744,10 +752,11 @@ function runChunk(chunk, env, func = false) {
                     throw new Error(`Index assignment only valid on lists, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                 }
 
+                let oldVal = obj[index] ?? null;
                 obj[index] = value;
 
-                // Assignment expression returns the assigned value
-                stack.push(value);
+                // Assignment expression returns the old value
+                stack.push(oldVal);
                 break;
             }
         }

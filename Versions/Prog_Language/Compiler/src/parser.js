@@ -241,7 +241,8 @@ function parser(tokens) {
                     if (part.type === "text") {
                         return {
                             type: "StringLiteral",
-                            value: part.value
+                            value: part.value,
+                            loc: { line: part.line, column: part.column }
                         };
                     }
 
@@ -256,7 +257,8 @@ function parser(tokens) {
 
                     return {
                         type: "TemplateExpression",
-                        expression: ast.body[0].expression
+                        expression: ast.body[0].expression,
+                        loc: { line: part.line, column: part.column }
                     };
                 });
 
@@ -485,12 +487,13 @@ function parser(tokens) {
     }
 
     function parseReturnStatement() {
-        consume(); // 'return'
+        const keyword = consume(); // 'return'
         const argument = parseExpression();
         expect(";");
         return {
             type: "ReturnStatement",
-            argument
+            argument,
+            loc: { line: keyword.line, column: keyword.column }
         };
     }
 
@@ -568,7 +571,8 @@ function parser(tokens) {
 
         return {
             type: "ImportDeclaration",
-            source: tok.value
+            source: tok.value,
+            loc: { line: tok.line, column: tok.column }
         };
     }
 
