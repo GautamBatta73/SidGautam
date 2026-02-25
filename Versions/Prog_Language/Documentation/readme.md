@@ -163,7 +163,7 @@ print(string); # Prints the template literal, with the boolean embedded
 ### Numbers
 The Number datatype is used to represent numeric data. There can be double (floating point) and integer numbers
 
-[Extra Importable Math Properties](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/math.md)
+[Extra Importable Math Properties](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Native_Libraries/math.md)
 
 [Built-in Function to Convert to Integer](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/readme.md#intobj)
 
@@ -236,7 +236,7 @@ Lists are zero-indexed: the first element of a list is at index 0, the second is
 <br>
 List elements cannot be accessed using arbitrary strings as indices, but must be accessed using non-negative integers as indices.
 
-[Extra Importable List Utilities](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/listutils.md)
+[Extra Importable List Utilities](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Native_Libraries/listutils.md)
 
 <br>
 List Example:
@@ -328,7 +328,7 @@ Any datatype can be a value in the object. Including functions.
 
 **Lists, Functions, and Objects are passed by reference. All other datatypes are passed as value.**<br>
 
-[Extra Importable Object Utilities](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Libraries/objutils.md)
+[Extra Importable Object Utilities](https://github.com/GautamBatta73/SidGautam/blob/main/Versions/Prog_Language/Documentation/Native_Libraries/objutils.md)
 
 <br>
 Example:
@@ -1543,7 +1543,7 @@ import "./Test/lib.sidgc";
 
 <br>
 
-[More Info on Built-in Libraries](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/Prog_Language/Documentation/Libraries)
+[More Info on Built-in Libraries](https://github.com/GautamBatta73/SidGautam/tree/main/Versions/Prog_Language/Documentation/Native_Libraries)
 
 <br>
 
