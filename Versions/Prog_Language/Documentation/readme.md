@@ -2708,6 +2708,66 @@ final Dog = (nameAttr) -> {
 
 <br>
 
+### Storing Value Before Reassignment
+When you want to store the current value of a variable before reassigning it, you can simply assign the assignment expression to a variable.
 
+<br>
+Example:
 
+```python
+var x = 10;
+var oldValue = x = 20; # oldValue will store the value of x before reassignment
 
+print(oldValue); # Prints 10
+print(x); # Prints 20
+```
+```javascript
+10
+20
+```
+
+<br>
+This goes for list element and object properties too:
+
+```python
+var arr = {1, 2, 3};
+var oldValue = arr[0] = 10; # oldValue will store the value of the element before reassignment
+
+print(oldValue); # Prints 1
+print(arr[0]); # Prints 10
+```
+```javascript
+1
+10
+```
+
+<br>
+
+```python
+var obj = {a: 1, b: 2, c: 3};
+var oldValue = obj["a"] = 10; # oldValue will store the value of the property before reassignment
+
+print(oldValue); # Prints 1
+print(obj.a); # Prints 10
+```
+```javascript
+1
+10
+```
+
+<br>
+This goes for all assignment operators too:
+
+```python
+var x = 10;
+var oldValue = x += 5; # oldValue will store the value of x before reassignment
+
+print(oldValue); # Prints 10
+print(x); # Prints 15
+```
+```javascript
+10
+15
+```
+
+<br>
