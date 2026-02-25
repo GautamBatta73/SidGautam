@@ -1,8 +1,8 @@
-# SidGautamScript Libraries
+# SidGautamScript Native Libraries
 
 This folder contains information on the functions and variables that I packaged with the compiler and runtime environment, which are built-in libraries/packages.
 
-## How to import libraries
+## How to import native libraries
 
 <br>
 The following snippet imports the Math library.
