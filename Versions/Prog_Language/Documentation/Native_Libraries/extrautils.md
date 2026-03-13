@@ -112,7 +112,7 @@ If I am not in the script's directory, I can leverage the FileUtils' currentDir 
 import "FileUtils";
 import "ExtraUtils";
 
-var cmd = exec("dir", {"/B", File.currentDir}); # Executes "dir /B .\testFiles\" in a terminal and returns the result
+var cmd = exec("dir", {"/B", File.execDir}); # Executes "dir /B .\testFiles\" in a terminal and returns the result
 
 print("Directory listing:");
 print(cmd); # Prints the result
@@ -161,6 +161,7 @@ print(getOS()); # Prints the operating system name
 ```javascript
 "Windows"
 ```
+
 
 
 
