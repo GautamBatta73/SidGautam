@@ -139,7 +139,7 @@ print("Directory listing:");
 print(cmd); # Will not print as error was thrown
 ```
 ```javascript
-'ls' is not recognized as an internal or external command,
+Error: 'ls' is not recognized as an internal or external command,
 operable program or batch file., at line: 16 and column: 12
 ```
 
@@ -161,6 +161,7 @@ print(getOS()); # Prints the operating system name
 ```javascript
 "Windows"
 ```
+
 
 
 
