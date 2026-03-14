@@ -8,7 +8,7 @@ const ProgressBar = require("progress");
 const Zip = require("adm-zip");
 const compile = require("./src/compiler.js");
 let libCache = [];
-const VERSION = "2.7.7";
+const VERSION = "2.8.0";
 
 const originalError = console.error;
 console.error = (...args) => {

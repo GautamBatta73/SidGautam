@@ -8,7 +8,7 @@ const path = require("path");
 const exePath = __dirname || path.dirname(process.execPath);
 const chalk = require("chalk").default;
 const run = require("./src/vm");
-const VERSION = "2.7.7";
+const VERSION = "2.8.0";
 
 const originalError = console.error;
 console.error = (...args) => {
@@ -48,15 +48,16 @@ program
         if (file) {
             if (fileName.endsWith(".sidgc")) {
                 try {
+                    const env = require("./src/progEnv");
                     filePath = path.dirname(fileName)
                     let compiledCode = fs.readFileSync(fileName, "utf8");
                     let decompiledCode = JSON.parse(compiledCode);
                     let decompiledChunk = Object.assign(new Chunk(), decompiledCode);
 
-                    process.env.EXE_PATH = exePath;
-                    process.env.ARGS = args.join("\n") || "";
-                    process.env.MODULE_PATH = path.join(exePath, "modules/");
-                    process.env.RUN_PATH = path.resolve(filePath);
+                    env.EXE_PATH = exePath;
+                    env.ARGS = args.join("\n") || "";
+                    env.MODULE_PATH = path.join(exePath, "modules/");
+                    env.RUN_PATH = path.resolve(filePath);
                     run(decompiledChunk);
                 } catch (error) {
                     if (error instanceof ProgramExit) {

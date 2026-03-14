@@ -6,6 +6,9 @@ function fold(node) {
             const left = fold(node.left);
             const right = fold(node.right);
 
+            if (node.operator === "==" || node.operator === "!=" || node.operator === "&&" || node.operator === "||") {
+                return { ...node, left, right };
+            }
             // Fold numeric + string ops
             if ((right.value === 0 || right.name === "false") && node.operator === "/") {
                 throw new Error(`Dividing by zero/false?, at line: ${node.loc?.line}, column: ${node.loc?.column}`);
@@ -21,6 +24,7 @@ function fold(node) {
                     value
                 };
             }
+
             if (
                 left.type === "NumberLiteral" &&
                 right.type === "NumberLiteral"

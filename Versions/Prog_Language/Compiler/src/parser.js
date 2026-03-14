@@ -11,7 +11,10 @@ function parser(tokens) {
 
     function expect(value) {
         const token = consume();
-        if (!token || token.value !== value) {
+        if (!token) {
+            const lastToken = tokens[tokens.length - 1];
+            throw new Error(`Expected '${value ?? ""}'\nat line: ${lastToken?.line + 1} and column: 1`);
+        } else if (token?.value !== value) {
             throw new Error(`Expected '${value ?? ""}'\nGot '${token?.value}', at line: ${token?.line} and column: ${token?.column}`);
         }
     }

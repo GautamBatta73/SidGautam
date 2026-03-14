@@ -41,11 +41,12 @@ function NativeFunction(args, fn, name = null) {
 }
 
 function addNativeFunctions(globalEnv) {
+    const env = require("./progEnv");
     globalEnv.true = { value: true, constant: true };
     globalEnv.false = { value: false, constant: true };
     globalEnv.NULL = { value: null, constant: true };
-    globalEnv.__ARGS = { value: (process.env.ARGS ? process.env.ARGS.split("\n") : []), constant: true };
-    globalEnv.__SCRIPT_DIR = { value: process.env.RUN_PATH, constant: true };
+    globalEnv.__ARGS = { value: (env.ARGS ? env.ARGS.split("\n") : []), constant: true };
+    globalEnv.__SCRIPT_DIR = { value: env.RUN_PATH, constant: true };
     globalEnv.dataType = {
         value: NativeFunction(["obj"], (args) => getDataType(args[0])),
         constant: true
