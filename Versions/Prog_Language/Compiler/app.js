@@ -8,7 +8,7 @@ const ProgressBar = require("progress");
 const Zip = require("adm-zip");
 const compile = require("./src/compiler.js");
 let libCache = [];
-const VERSION = "2.8.0";
+const VERSION = "2.8.2";
 
 const originalError = console.error;
 console.error = (...args) => {
@@ -58,6 +58,7 @@ program
                     let compileFile = path.basename(fileName, path.extname(fileName)) + ".sidgc"
                     fs.writeFileSync(path.join(filePath, compileFile), compiledCode, 'utf8');
                     if (!args.silent) console.log("Compiled!");
+                    process.exit();
                 } catch (error) {
                     if (!args.silent) console.error(`Error: ${error.message}`);
                 }
@@ -67,7 +68,7 @@ program
         } else {
             if (!args.silent) console.error("Error: Parameter must be a .sidg file.")
         }
-        process.exit(0);
+        process.exit(1);
     });
 
 program
@@ -97,10 +98,11 @@ program
                     }
                 }
             }
+            process.exit();
         } catch (error) {
             console.error(error.message);
         }
-        process.exit(0);
+        process.exit(1);
     });
 
 async function installLibraries(libName, installDir) {
@@ -122,7 +124,7 @@ async function installLibraries(libName, installDir) {
         for (let i = 0; i < libInfo.dependencies.length; i++) {
             const dep = libInfo.dependencies[i];
             if (libCache.includes(dep)) continue;
-            
+
             await installLibraries(dep, installDir);
             libCache.push(dep);
         }

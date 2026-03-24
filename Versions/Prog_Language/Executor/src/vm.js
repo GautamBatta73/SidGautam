@@ -1,6 +1,7 @@
 const Op = require("./bytecode");
 const { ProgramExit, ThrownError } = require("./ScriptErrors");
 const { Prototypes, definePrototype } = require("./prototypes.js");
+const evalJS = require("./evaljs");
 let loadLibrary = undefined;
 
 function runFunction(chunk, params, args, parentEnv, thisObj = null) {
@@ -245,7 +246,10 @@ function runChunk(chunk, env, func = false) {
                     Object.assign(env.prototypes["Object"], tempProto["Object"]);
                     break;
                 } catch (error) {
-                    throw new Error(`${error.message}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`)
+                    if (error instanceof ProgramExit || error instanceof ThrownError) {
+                            throw error;
+                    }
+                    throw new Error(`${error.message ?? String(error).trimEnd()}, at line: ${instr.loc?.line} and column: ${instr.loc?.column}`)
                 }
             }
 
@@ -680,6 +684,15 @@ function runChunk(chunk, env, func = false) {
                     const method = prototypesGet(env, "String", index);
                     if (!method) {
                         throw new Error(`String has no method '${index}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
+                    }
+
+                    method.self = obj;
+                    stack.push(method);
+                    break;
+                } else if (typeof obj === "number") {// Numbers
+                    const method = prototypesGet(env, "Number", index);
+                    if (!method) {
+                        throw new Error(`Number has no method '${index}', at line: ${instr.loc?.line} and column: ${instr.loc?.column}`);
                     }
 
                     method.self = obj;
