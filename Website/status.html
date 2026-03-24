@@ -8,6 +8,7 @@
             "overall": 'O',
             "js": 'O',
             "ai": 'D',
+            "sg-script": 'O'
         };
     </script>
     <meta charset="UTF-8">
@@ -59,11 +60,13 @@
     <ul>
         <li>SidGautamJS: <span id="js-status">❌</span></li>
         <li>SidGautamAI: <span id="ai-status">❌</span></li>
+        <li>SGScript Online: <span id="sgScript-status">❌</span></li>
     </ul>
     <script>
         const statusElement = document.querySelector('h1');
         const jsStatusElement = document.getElementById('js-status');
-        const aiStatusElement = document.getElementById('ai-status');
+        const aiStatusElement = document.getElementById('ai-status');        
+        const sgScriptStatusElement = document.getElementById('sgScript-status');
         switch (status.overall) {
             case 'M':
                 statusElement.textContent = 'In Maintenance';
@@ -114,54 +117,23 @@
                 default:
                     aiStatusElement.textContent = 'Unknown';
             }
+
+            switch (status["sg-script"]) {
+                case 'M':
+                    sgScriptStatusElement.textContent = '⚠️';
+                    break;
+                case 'O':
+                    sgScriptStatusElement.textContent = '✔️';
+                    break;
+                case 'D':
+                    sgScriptStatusElement.textContent = '❌';
+                    break;
+                default:
+                    sgScriptStatusElement.textContent = 'Unknown';
+            }
         }
 
     </script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
