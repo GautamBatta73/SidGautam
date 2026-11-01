@@ -10,6 +10,7 @@ const menuDialog = getEl("#menuDialog");
 const menuCloseBtn = getEl("#btnCloseMenu");
 const disableDiv = getEl("#disabledDiv");
 const aiModel = getEl("#modelSelect");
+const webSearch = getEl("#webSearch");
 
 window.whenOn('load', () => {
 	if (localStorage.getItem("chat"))
@@ -144,41 +145,44 @@ form.whenOn(`submit`, (e) => {
 	e.preventDefault();
 	let uPrompt = getVal(userPrompt).trim();
 	let rModel = getVal(aiModel);
+	let wSearch = getVal(webSearch);
 
 	unless(!(uPrompt.length > 1), () => {
 		const count = uPrompt.split(/\s+/).length;
 
-		unless((count > 1500), () => {
+		unless((count > 1500), async () => {
 			let AIRes = setupConvo(uPrompt);
 			disableDiv.css('display', 'flex');
 			sendBtn.addAttr("disabled");
 			let obj = {
 				messages: getMessages(uPrompt),
 				model: `${rModel}`,
+				webSearch: `${wSearch}`,
 			};
 
 			let stat = 500;
-			let postAI = fetch(`/api`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				mode: "same-origin",
-				credentials: "same-origin",
-				body: JSON.stringify(obj)
-			}).then(response => {
-				stat = response.status;
-				return response.text();
-			}).then(text => {
-				unless((stat == 200), () => {
-					throw new Error(text);
+			try {
+				let postAI = await fetch(`api`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					mode: "same-origin",
+					credentials: "same-origin",
+					body: JSON.stringify(obj)
 				});
-				sendConvo(AIRes, text);
-			}).catch(error => {
+				stat = postAI.status;
+				unless((stat == 200), () => {
+					throw new Error(data);
+				});
+
+				const reader = postAI.body.getReader();
+				await sendConvo(AIRes, reader);
+			} catch (error) {
 				printErr('Error:', error.message);
 				AIRes.addClass(`aiError`);
 				sendConvo(AIRes, `${stat == 400 ? error.message : "Internal Server Error"}`);
-			});
+			};
 			//print(postAI);
 		}, () => alert("Prompt too long. Must be 1500 words or less!"));
 	});
@@ -267,19 +271,41 @@ function setupConvo(prompt) {
 	return aiEl;
 }
 
-function sendConvo(AIRes, text) {
-	let parseText = parseThink(text);
-
-	AIRes.setText(`${parseText.thoughts}`, true);
-
-	AIRes.appendText(`${marked.parse(parseText.cleanedText)}`, true);
+async function sendConvo(AIRes, data) {
 	getChildEl('.delConvo', AIRes.parentElement).css('display', 'block');
-	AIRes.css('display', 'block');;
+	AIRes.css('display', 'block');
 	disableDiv.css('display', 'none');
-	sendBtn.delAttr('disabled');
 	AIRes.scrollIntoView({
 		behavior: "smooth"
 	});
+	if (typeof data === 'string') {
+		AIRes.setText(`${data}`, true);
+	} else {
+		const decoder = new TextDecoder();
+		while (true) {
+			const { value, done } = await data.read();
+			if (done) break;
+
+			const chunk = decoder.decode(value, { stream: true });
+
+			const lines = chunk.split('\n\n');
+			for (const line of lines) {
+				if (line.startsWith('data: ')) {
+					const jsonStr = line.replace('data: ', '');
+					try {
+						const parsed = JSON.parse(jsonStr);
+						if (parsed.text) {
+							AIRes.appendText(`${parsed.text}`);
+						}
+					} catch (e) {
+						throw e;
+					}
+				}
+			}
+		}
+	}	
+	sendBtn.delAttr('disabled');
+	AIRes.setText(`${marked.parse(getText(AIRes))}`, true);
 	localStorage.setItem("chat", getText(chatBox, true));
 }
 
