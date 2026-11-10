@@ -151,7 +151,6 @@ app.route("/api").post(async (req, res) => {
       }
     }
     prompts[1] = answer;
-    return res.end();
   } catch (error) {
     console.error("Server Error:", error.message);
     res.status(500).send("Internal Server Error.");
@@ -160,6 +159,7 @@ app.route("/api").post(async (req, res) => {
 
   prompts[1] = prompts[1] ?? "Error";
   await log(prompts);
+  return res.end();
 });
 
 // app.route("*name").get((req, res) => {
